@@ -21,5 +21,16 @@ reports/
 # test build
 dist/
 
+# React build artifacts
+react/dist/
+react/node_modules/
+react/.pnp.*
+react/.yarn/*
+!react/.yarn/patches
+!react/.yarn/plugins
+!react/.yarn/releases
+!react/.yarn/sdks
+!react/.yarn/versions
+
 ### Git Version file ###
 client/version/version.json

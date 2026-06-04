@@ -34,21 +34,21 @@ manageiq-ui-service/
 ## Phase 1: Platform Foundation (Weeks 1-2)
 
 ### 1.1 Project Setup & Configuration
-- [ ] Create React project directory structure (`src/`, `src/api/`, `src/components/`, `src/features/`, `src/hooks/`, `src/store/`, `src/utils/`, `src/types/`, `src/i18n/`)
-- [ ] Add `tsconfig.json`, `.eslintrc.js`, `.prettierrc` configuration files
-- [ ] Update `.gitignore` for React build artifacts (ensure `react/dist/` is ignored)
-- [ ] Install React core dependencies (react, react-dom, react-router-dom)
-- [ ] Install Redux Toolkit and React Redux
-- [ ] Install Carbon Design System (@carbon/react, @carbon/icons-react, @carbon/charts)
-- [ ] Install utility libraries (axios, lodash, date-fns, numeral, classnames)
-- [ ] Install i18n dependencies (ttag, ttag-cli, gettext-parser, babel-plugin-ttag)
-- [ ] Install TypeScript and type definitions
-- [ ] Install Webpack, loaders, and Babel
-- [ ] Install testing dependencies (Jest, React Testing Library, MSW)
-- [ ] Create Webpack configurations (common, dev, prod)
-- [ ] Create Babel and Jest configurations
-- [ ] Add npm scripts to `package.json` (start, build, test, lint, format, type-check)
-- [ ] Create `src/index.html` template
+- [x] Create React project directory structure (`src/`, `src/api/`, `src/components/`, `src/features/`, `src/hooks/`, `src/store/`, `src/utils/`, `src/types/`, `src/i18n/`)
+- [x] Add `tsconfig.json`, `.eslintrc.js`, `.prettierrc` configuration files
+- [x] Update `.gitignore` for React build artifacts (ensure `react/dist/` is ignored)
+- [x] Install React core dependencies (react, react-dom, react-router-dom)
+- [x] Install Redux Toolkit and React Redux
+- [x] Install Carbon Design System (@carbon/react, @carbon/icons-react, @carbon/charts)
+- [x] Install utility libraries (axios, lodash, date-fns, numeral, classnames)
+- [x] Install i18n dependencies (ttag, ttag-cli, gettext-parser, babel-plugin-ttag)
+- [x] Install TypeScript and type definitions
+- [x] Install Webpack, loaders, and Babel
+- [x] Install testing dependencies (Jest, React Testing Library, MSW)
+- [x] Create Webpack configurations (common, dev, prod)
+- [x] Create Babel and Jest configurations
+- [x] Add npm scripts to `package.json` (start, build, test, lint, format, type-check)
+- [x] Create `public/index.html` template
 
 ### 1.2 API Client Layer
 - [ ] Create `src/api/client.ts` with Axios client and interceptors (X-Auth-Token, 401 handling)
