@@ -51,14 +51,14 @@ manageiq-ui-service/
 - [x] Create `public/index.html` template
 
 ### 1.2 API Client Layer
-- [ ] Create `src/api/client.ts` with Axios client and interceptors (X-Auth-Token, 401 handling)
-- [ ] Create `src/api/types.ts` for common API types
-- [ ] Create `src/api/auth.ts` for authentication endpoints
-- [ ] Create `src/api/services.ts` for services endpoints
-- [ ] Create `src/api/catalogs.ts` for catalog endpoints
-- [ ] Create `src/api/orders.ts` for orders endpoints
-- [ ] Create `src/api/vms.ts` for VM endpoints
-- [ ] Create `src/api/index.ts` to export all API modules
+- [x] Create `src/api/client.ts` with Axios client and interceptors (X-Auth-Token, 401 handling)
+- [x] Create `src/api/types.ts` for common API types
+- [x] Create `src/api/auth.ts` for authentication endpoints
+- [x] Create `src/api/services.ts` for services endpoints
+- [x] Create `src/api/catalogs.ts` for catalog endpoints
+- [x] Create `src/api/orders.ts` for orders endpoints
+- [x] Create `src/api/vms.ts` for VM endpoints
+- [x] Create `src/api/index.ts` to export all API modules
 
 ### 1.3 Authentication & RBAC
 - [ ] Create `src/features/auth/types.ts` for auth types
