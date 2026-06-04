@@ -1870,66 +1870,16 @@ yarn add -D ttag-cli gettext-parser babel-plugin-ttag
 
 **Note**: The `babel-plugin-ttag` is required for compile-time translation extraction and should be added to your Babel configuration.
 
-## Appendix C: Migration Checklist
+## Appendix C: Implementation Checklist
 
-### C.1 Pre-Migration Checklist
+**Note:** A detailed, commit-ready implementation checklist has been created in [`IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md). This file contains granular tasks organized by phase, with each task designed to be completed independently and committed as a discrete unit of work.
 
-- [ ] Stakeholder approval obtained
-- [ ] Development environment set up (Node.js 22.22.0, Yarn 4.14.1)
-- [ ] Yarn Berry configured and tested
-- [ ] API documentation reviewed
-- [ ] Feature inventory completed
-- [ ] IBM Carbon adoption confirmed as the target design system
-- [ ] Data Driven Forms strategy confirmed for schema-driven dialogs
-- [ ] Testing strategy defined
-- [ ] Local test commands defined for the React application
-- [ ] Pull request CI plan defined for `.github/workflows/ci.yaml`
-- [ ] Deployment and rollback plan approved
-- [ ] AI agent execution plan confirmed
-
-### C.2 Platform and Architecture Checklist
-
-- [ ] React, TypeScript, Webpack, Babel, and Yarn foundation complete
-- [ ] Gettext-compatible i18n implemented with `ttag`
-- [ ] Existing `.po` / `.pot` workflow preserved or intentionally relocated
-- [ ] Auth, session, and RBAC primitives implemented
-- [ ] Feature, grouped-permission, and role-based authorization patterns implemented
-- [ ] Automated test framework configured for local development
-- [ ] `.github/workflows/ci.yaml` runs linting and tests on pull requests
-- [ ] Carbon application shell and shared primitives complete
-- [ ] Data Driven Forms with Carbon mapper integrated
-- [ ] Schema normalization strategy documented for dynamic dialogs
-
-### C.3 Feature Migration Checklist
-
-- [ ] Dashboard migrated
-- [ ] Profile features migrated
-- [ ] Catalogs module migrated
-- [ ] Provisioning dialogs migrated through the selected forms strategy
-- [ ] Services list and filtering migrated
-- [ ] Service details and related resources migrated
-- [ ] Service actions, custom buttons, and permission-aware menus migrated
-- [ ] Orders module migrated
-- [ ] VM-specific gaps migrated or explicitly closed
-
-### C.4 Quality and Cutover Checklist
-
-- [ ] All unit tests passing
-- [ ] All integration tests passing
-- [ ] E2E tests passing
-- [ ] Pull request CI passing in GitHub Actions
-- [ ] Accessibility audit passed
-- [ ] Performance benchmarks met
-- [ ] Security audit passed
-- [ ] Documentation updated
-- [ ] Feature parity sign-off completed
-- [ ] Rollback plan tested
-- [ ] Production deployment successful
-- [ ] Monitoring in place
-- [ ] User feedback collected
-- [ ] Known issues documented
-- [ ] Migration retrospective completed
-- [ ] Lessons learned documented
+Refer to [`IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) for:
+- Step-by-step implementation tasks
+- Commit-ready task descriptions
+- Task dependencies and sequencing
+- Testing requirements for each component
+- Completion criteria
 
 ---
 
