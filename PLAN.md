@@ -460,22 +460,30 @@ The migration should be executed as dependency-aware workstreams rather than as 
    - Create API endpoint modules
    - Define TypeScript interfaces for API responses
 
-3. **Testing Framework & CI**
+3. **Core Infrastructure**
+   - Redux store setup with Redux Toolkit
+   - Router configuration with React Router
+   - Error boundary implementation
+   - Loading state management
+   - Toast / notification system
+   - Polling and refresh primitives for long-running operations
+
+4. **Testing Framework & CI**
    - Establish the automated test framework during initial setup, not as a later hardening task
    - Configure Jest and React Testing Library
    - Set up Mock Service Worker (MSW) for API mocking
-   - Create test utilities and helpers
+   - Create test utilities and helpers (including renderWithProviders that uses Redux/Router from #3)
    - Ensure tests can be run locally with stable developer commands
    - Add `.github/workflows/ci.yaml` to run linting and tests on pull requests
    - Make GitHub Actions CI a required validation path for the new React application
 
-4. **API Client Layer Tests**
+5. **API Client Layer Tests**
    - Write comprehensive tests for API client (interceptors, error handling, 401 handling)
    - Write tests for all API endpoint modules (auth, services, catalogs, orders, vms)
    - Verify API error handling and retry logic
    - Ensure all API tests pass locally and in CI
 
-5. **Authentication, Session, and RBAC**
+6. **Authentication, Session, and RBAC**
    - Implement login/logout flows
    - Integrate OIDC and session lifecycle handling
    - Implement session management with Redux Toolkit
@@ -486,14 +494,6 @@ The migration should be executed as dependency-aware workstreams rather than as 
      - grouped permission checks (`hasAny`)
      - role checks (`hasRole`)
    - Create route-, component-, action-, and menu-level authorization utilities
-
-6. **Core Infrastructure**
-   - Redux store setup with Redux Toolkit
-   - Router configuration with React Router
-   - Error boundary implementation
-   - Loading state management
-   - Toast / notification system
-   - Polling and refresh primitives for long-running operations
 
 7. **i18n Setup**
    - Configure `ttag` for gettext-based i18n

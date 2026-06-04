@@ -60,7 +60,17 @@ manageiq-ui-service/
 - [x] Create `src/api/vms.ts` for VM endpoints
 - [x] Create `src/api/index.ts` to export all API modules
 
-### 1.3 Testing Framework & CI
+### 1.3 Redux Store & Routing
+- [ ] Create `src/store/rootReducer.ts` combining all feature slices
+- [ ] Create `src/store/index.ts` with store configuration
+- [ ] Create `src/store/hooks.ts` with typed hooks (useAppDispatch, useAppSelector)
+- [ ] Create `src/store/uiSlice.ts` for UI state (notifications, loading, modals)
+- [ ] Create `src/routes/index.tsx` with route configuration
+- [ ] Create `src/routes/PrivateRoutes.tsx` wrapper
+- [ ] Create `src/App.tsx` with router and error boundary
+- [ ] Create `src/index.tsx` as application entry point
+
+### 1.4 Testing Framework & CI
 - [ ] Create `src/test/testUtils.tsx` with renderWithProviders
 - [ ] Create `src/test/mocks/handlers.ts` for MSW
 - [ ] Create `src/test/mocks/server.ts` for MSW setup
@@ -70,7 +80,7 @@ manageiq-ui-service/
 - [ ] Test CI workflow with sample PR
 - [ ] Add CI status badge to README
 
-### 1.4 API Client Layer Tests
+### 1.5 API Client Layer Tests
 - [ ] Write tests for `src/api/client.ts` (interceptors, error handling, 401 handling)
 - [ ] Write tests for `src/api/auth.ts` endpoints
 - [ ] Write tests for `src/api/services.ts` endpoints
@@ -79,7 +89,7 @@ manageiq-ui-service/
 - [ ] Write tests for `src/api/vms.ts` endpoints
 - [ ] Verify all API tests pass locally and in CI
 
-### 1.5 Authentication & RBAC
+### 1.6 Authentication & RBAC
 - [ ] Create `src/features/auth/types.ts` for auth types
 - [ ] Create `src/features/auth/store/authSlice.ts` with login/logout/refresh thunks
 - [ ] Create `src/features/auth/hooks/useAuth.ts` hook
@@ -88,16 +98,6 @@ manageiq-ui-service/
 - [ ] Create `src/features/auth/components/ProtectedRoute.tsx`
 - [ ] Create `src/features/auth/components/PermissionGate.tsx`
 - [ ] Write tests for authSlice and usePermissions
-
-### 1.6 Redux Store & Routing
-- [ ] Create `src/store/rootReducer.ts` combining all feature slices
-- [ ] Create `src/store/index.ts` with store configuration
-- [ ] Create `src/store/hooks.ts` with typed hooks (useAppDispatch, useAppSelector)
-- [ ] Create `src/store/uiSlice.ts` for UI state (notifications, loading, modals)
-- [ ] Create `src/routes/index.tsx` with route configuration
-- [ ] Create `src/routes/PrivateRoutes.tsx` wrapper
-- [ ] Create `src/App.tsx` with router and error boundary
-- [ ] Create `src/index.tsx` as application entry point
 
 ### 1.7 Internationalization
 - [ ] Create `src/i18n/index.ts` with ttag compatibility layer (__, N_, ngettext_)
