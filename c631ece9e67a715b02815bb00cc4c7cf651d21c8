@@ -1,0 +1,14 @@
+{"id":"29baa1ca-8661-4e57-aec0-833cafd125c5","ts":"2026-06-04T22:45:44.105Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/tsconfig.json","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"ed3d50f2-49b4-41a4-9e02-24ca46dace14","ts":"2026-06-04T22:45:50.114Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/.eslintrc.js","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"6d9e6315-cb6c-468f-82c3-3ed1394d13ee","ts":"2026-06-04T22:45:54.328Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/.prettierrc","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"bac867e2-4b38-4766-835f-4a08a7f1c0b4","ts":"2026-06-04T22:46:04.308Z","path":"/Users/jfrey/dev/manageiq-ui-service/.gitignore","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"9b05bc5e-761c-45d5-9b48-22b567829ce8","ts":"2026-06-04T22:48:44.421Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/config/webpack.common.js","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"9e3e6c67-7add-44c7-bd71-54ba90c1346f","ts":"2026-06-04T22:48:49.340Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/config/webpack.dev.js","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"b925c03d-d5a7-4e6f-981a-b100116cc125","ts":"2026-06-04T22:48:55.104Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/config/webpack.prod.js","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"cee785da-98bf-4752-a687-eb6cabc59328","ts":"2026-06-04T22:49:10.540Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/.babelrc","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"bf9dc869-2567-4d50-8664-1bd56405d04f","ts":"2026-06-04T22:49:26.802Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/jest.config.js","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"d7745048-89e1-487b-a1ee-a88c353173f0","ts":"2026-06-04T22:49:40.675Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/test/setup.ts","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"f910713f-43a4-46f1-aab7-d0ebe286c539","ts":"2026-06-04T22:49:43.524Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/test/mocks/fileMock.js","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"7adf6314-3faf-46e1-91fc-ceb5f1729ae7","ts":"2026-06-04T22:50:04.100Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/package.json","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"9bacb25b-f672-40b5-8331-b3cb7bc2afcb","ts":"2026-06-04T22:50:10.934Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/public/index.html","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
+{"id":"120ca294-fc00-47cd-bff1-482dac520eb7","ts":"2026-06-04T22:50:36.714Z","path":"/Users/jfrey/dev/manageiq-ui-service/IMPLEMENTATION_PLAN.md","version":"1.0.0","taskID":"7ea6f9bb-b340-4e9e-931f-318afdd4cab8"}
