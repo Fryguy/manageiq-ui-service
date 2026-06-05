@@ -1,12 +1,21 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import { ApiClient } from './client';
 
 // Mock axios
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
+type RequestInterceptor = (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig;
+type ResponseInterceptor = {
+  onFulfilled: (value: unknown) => unknown;
+  onRejected: (error: unknown) => Promise<never>;
+};
+
 describe('API Client', () => {
-  let mockAxiosInstance: jest.Mocked<AxiosInstance>;
+  let mockAxiosInstance: jest.Mocked<AxiosInstance> & {
+    _requestInterceptor?: RequestInterceptor;
+    _responseInterceptor?: ResponseInterceptor;
+  };
   let apiClient: ApiClient;
   let mockGetToken: jest.Mock;
   let mockOnUnauthorized: jest.Mock;
@@ -31,27 +40,28 @@ describe('API Client', () => {
       options: jest.fn(),
       interceptors: {
         request: {
-          use: jest.fn((onFulfilled) => {
-            // Store the interceptor for testing
-            (mockAxiosInstance as any)._requestInterceptor = onFulfilled;
+          use: jest.fn((onFulfilled: RequestInterceptor) => {
+            mockAxiosInstance._requestInterceptor = onFulfilled;
             return 0;
           }),
           eject: jest.fn(),
           clear: jest.fn(),
         },
         response: {
-          use: jest.fn((onFulfilled, onRejected) => {
-            // Store the interceptor for testing
-            (mockAxiosInstance as any)._responseInterceptor = { onFulfilled, onRejected };
+          use: jest.fn((onFulfilled: (value: unknown) => unknown, onRejected: (error: unknown) => Promise<never>) => {
+            mockAxiosInstance._responseInterceptor = { onFulfilled, onRejected };
             return 0;
           }),
           eject: jest.fn(),
           clear: jest.fn(),
         },
       },
-      defaults: {} as any,
+      defaults: {} as AxiosInstance['defaults'],
       getUri: jest.fn(),
-    } as any;
+    } as jest.Mocked<AxiosInstance> & {
+      _requestInterceptor?: RequestInterceptor;
+      _responseInterceptor?: ResponseInterceptor;
+    };
 
     mockedAxios.create.mockReturnValue(mockAxiosInstance);
 
@@ -86,8 +96,10 @@ describe('API Client', () => {
     it('adds X-Auth-Token header when token is present', () => {
       mockGetToken.mockReturnValue('test-token-123');
 
-      const config = { headers: {} } as any;
-      const interceptor = (mockAxiosInstance as any)._requestInterceptor;
+      const config = {
+        headers: {},
+      } as InternalAxiosRequestConfig;
+      const interceptor = mockAxiosInstance._requestInterceptor as RequestInterceptor;
       const result = interceptor(config);
 
       expect(result.headers['X-Auth-Token']).toBe('test-token-123');
@@ -96,8 +108,10 @@ describe('API Client', () => {
     it('does not add X-Auth-Token header when token is null', () => {
       mockGetToken.mockReturnValue(null);
 
-      const config = { headers: {} } as any;
-      const interceptor = (mockAxiosInstance as any)._requestInterceptor;
+      const config = {
+        headers: {},
+      } as InternalAxiosRequestConfig;
+      const interceptor = mockAxiosInstance._requestInterceptor as RequestInterceptor;
       const result = interceptor(config);
 
       expect(result.headers['X-Auth-Token']).toBeUndefined();
@@ -113,13 +127,9 @@ describe('API Client', () => {
         },
       };
 
-      const interceptor = (mockAxiosInstance as any)._responseInterceptor;
-      
-      try {
-        await interceptor.onRejected(error);
-      } catch (e) {
-        // Expected to throw
-      }
+      const interceptor = mockAxiosInstance._responseInterceptor as ResponseInterceptor;
+
+      await expect(interceptor.onRejected(error)).rejects.toEqual(error);
 
       expect(mockOnUnauthorized).toHaveBeenCalled();
     });
@@ -132,13 +142,9 @@ describe('API Client', () => {
         },
       };
 
-      const interceptor = (mockAxiosInstance as any)._responseInterceptor;
-      
-      try {
-        await interceptor.onRejected(error);
-      } catch (e) {
-        // Expected to throw
-      }
+      const interceptor = mockAxiosInstance._responseInterceptor as ResponseInterceptor;
+
+      await expect(interceptor.onRejected(error)).rejects.toEqual(error);
 
       expect(mockOnUnauthorized).not.toHaveBeenCalled();
     });
@@ -147,7 +153,7 @@ describe('API Client', () => {
   describe('HTTP Methods', () => {
     it('performs GET requests', async () => {
       const mockData = { resources: [{ id: '1', name: 'Service 1' }] };
-      mockAxiosInstance.get.mockResolvedValue({ data: mockData } as any);
+      mockAxiosInstance.get.mockResolvedValue({ data: mockData });
 
       const response = await apiClient.get('/services');
 
@@ -158,7 +164,7 @@ describe('API Client', () => {
     it('performs GET requests with params', async () => {
       const mockData = { resources: [] };
       const params = { expand: 'resources', filter: 'name=test' };
-      mockAxiosInstance.get.mockResolvedValue({ data: mockData } as any);
+      mockAxiosInstance.get.mockResolvedValue({ data: mockData });
 
       const response = await apiClient.get('/services', { params });
 
@@ -169,7 +175,7 @@ describe('API Client', () => {
     it('performs POST requests', async () => {
       const requestData = { action: 'start' };
       const responseData = { success: true, task_id: 'task-123' };
-      mockAxiosInstance.post.mockResolvedValue({ data: responseData } as any);
+      mockAxiosInstance.post.mockResolvedValue({ data: responseData });
 
       const response = await apiClient.post('/services/1', requestData);
 
@@ -180,7 +186,7 @@ describe('API Client', () => {
     it('performs PUT requests', async () => {
       const requestData = { name: 'Updated Service' };
       const responseData = { id: '1', name: 'Updated Service' };
-      mockAxiosInstance.put.mockResolvedValue({ data: responseData } as any);
+      mockAxiosInstance.put.mockResolvedValue({ data: responseData });
 
       const response = await apiClient.put('/services/1', requestData);
 
@@ -191,7 +197,7 @@ describe('API Client', () => {
     it('performs PATCH requests', async () => {
       const requestData = { description: 'Updated description' };
       const responseData = { id: '1', description: 'Updated description' };
-      mockAxiosInstance.patch.mockResolvedValue({ data: responseData } as any);
+      mockAxiosInstance.patch.mockResolvedValue({ data: responseData });
 
       const response = await apiClient.patch('/services/1', requestData);
 
@@ -201,7 +207,7 @@ describe('API Client', () => {
 
     it('performs DELETE requests', async () => {
       const responseData = { success: true };
-      mockAxiosInstance.delete.mockResolvedValue({ data: responseData } as any);
+      mockAxiosInstance.delete.mockResolvedValue({ data: responseData });
 
       const response = await apiClient.delete('/services/1');
 

@@ -71,23 +71,23 @@ manageiq-ui-service/
 - [x] Create `src/index.tsx` as application entry point
 
 ### 1.4 Testing Framework & CI
-- [ ] Create `src/test/testUtils.tsx` with renderWithProviders
-- [ ] Create `src/test/mocks/handlers.ts` for MSW
-- [ ] Create `src/test/mocks/server.ts` for MSW setup
-- [ ] Write sample test for API client
-- [ ] Verify tests run locally with `yarn test`
-- [ ] Create `.github/workflows/ci.yaml` for linting, type-check, and tests
+- [x] Create `src/test/testUtils.tsx` with renderWithProviders
+- [x] Create `src/test/mocks/handlers.ts` for MSW
+- [x] Create `src/test/mocks/server.ts` for MSW setup
+- [x] Write sample test for API client
+- [x] Verify tests run locally with `yarn test`
+- [x] Create `.github/workflows/ci.yaml` for linting, type-check, and tests
 - [ ] Test CI workflow with sample PR
 - [ ] Add CI status badge to README
 
 ### 1.5 API Client Layer Tests
-- [ ] Write tests for `src/api/client.ts` (interceptors, error handling, 401 handling)
-- [ ] Write tests for `src/api/auth.ts` endpoints
-- [ ] Write tests for `src/api/services.ts` endpoints
-- [ ] Write tests for `src/api/catalogs.ts` endpoints
-- [ ] Write tests for `src/api/orders.ts` endpoints
-- [ ] Write tests for `src/api/vms.ts` endpoints
-- [ ] Verify all API tests pass locally and in CI
+- [x] Write tests for `src/api/client.ts` (interceptors, error handling, 401 handling)
+- [x] Write tests for `src/api/auth.ts` endpoints
+- [x] Write tests for `src/api/services.ts` endpoints
+- [x] Write tests for `src/api/catalogs.ts` endpoints
+- [x] Write tests for `src/api/orders.ts` endpoints
+- [x] Write tests for `src/api/vms.ts` endpoints
+- [x] Verify all API tests pass locally and in CI
 
 ### 1.6 Authentication & RBAC
 - [ ] Create `src/features/auth/types.ts` for auth types
