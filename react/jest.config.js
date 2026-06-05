@@ -27,5 +27,8 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(msw|@mswjs|@bundled-es-modules|rettime)/)',
+  ],
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
 };

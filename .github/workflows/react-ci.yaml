@@ -1,0 +1,80 @@
+name: React CI
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - 'react/**'
+      - '.github/workflows/react-ci.yaml'
+  pull_request:
+    paths:
+      - 'react/**'
+      - '.github/workflows/react-ci.yaml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-test:
+    name: Lint, Type Check, and Test
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: react
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('react/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run ESLint
+        run: yarn lint
+
+      - name: Check code formatting
+        run: yarn format:check
+
+      - name: Run TypeScript type check
+        run: yarn type-check
+
+      - name: Run tests
+        run: yarn test --coverage --maxWorkers=2
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v4
+        if: always()
+        with:
+          files: ./react/coverage/lcov.info
+          flags: react
+          name: react-coverage
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        continue-on-error: true
