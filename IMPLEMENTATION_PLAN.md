@@ -61,14 +61,14 @@ manageiq-ui-service/
 - [x] Create `src/api/index.ts` to export all API modules
 
 ### 1.3 Redux Store & Routing
-- [ ] Create `src/store/rootReducer.ts` combining all feature slices
-- [ ] Create `src/store/index.ts` with store configuration
-- [ ] Create `src/store/hooks.ts` with typed hooks (useAppDispatch, useAppSelector)
-- [ ] Create `src/store/uiSlice.ts` for UI state (notifications, loading, modals)
-- [ ] Create `src/routes/index.tsx` with route configuration
-- [ ] Create `src/routes/PrivateRoutes.tsx` wrapper
-- [ ] Create `src/App.tsx` with router and error boundary
-- [ ] Create `src/index.tsx` as application entry point
+- [x] Create `src/store/rootReducer.ts` combining all feature slices
+- [x] Create `src/store/index.ts` with store configuration
+- [x] Create `src/store/hooks.ts` with typed hooks (useAppDispatch, useAppSelector)
+- [x] Create `src/store/uiSlice.ts` for UI state (notifications, loading, modals)
+- [x] Create `src/routes/index.tsx` with route configuration
+- [x] Create `src/routes/PrivateRoutes.tsx` wrapper
+- [x] Create `src/App.tsx` with router and error boundary
+- [x] Create `src/index.tsx` as application entry point
 
 ### 1.4 Testing Framework & CI
 - [ ] Create `src/test/testUtils.tsx` with renderWithProviders
