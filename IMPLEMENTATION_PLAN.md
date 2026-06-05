@@ -90,14 +90,14 @@ manageiq-ui-service/
 - [x] Verify all API tests pass locally and in CI
 
 ### 1.6 Authentication & RBAC
-- [ ] Create `src/features/auth/types.ts` for auth types
-- [ ] Create `src/features/auth/store/authSlice.ts` with login/logout/refresh thunks
-- [ ] Create `src/features/auth/hooks/useAuth.ts` hook
-- [ ] Create `src/features/auth/hooks/usePermissions.ts` for RBAC (has, hasAny, hasRole)
-- [ ] Create `src/features/auth/components/LoginPage.tsx`
-- [ ] Create `src/features/auth/components/ProtectedRoute.tsx`
-- [ ] Create `src/features/auth/components/PermissionGate.tsx`
-- [ ] Write tests for authSlice and usePermissions
+- [x] Create `src/features/auth/types.ts` for auth types
+- [x] Create `src/features/auth/store/authSlice.ts` with login/logout/refresh thunks
+- [x] Create `src/features/auth/hooks/useAuth.ts` hook
+- [x] Create `src/features/auth/hooks/usePermissions.ts` for RBAC (has, hasAny, hasRole)
+- [x] Create `src/features/auth/components/LoginPage.tsx`
+- [x] Create `src/features/auth/components/ProtectedRoute.tsx`
+- [x] Create `src/features/auth/components/PermissionGate.tsx`
+- [x] Write tests for authSlice and usePermissions
 
 ### 1.7 Internationalization
 - [ ] Create `src/i18n/index.ts` with ttag compatibility layer (__, N_, ngettext_)
