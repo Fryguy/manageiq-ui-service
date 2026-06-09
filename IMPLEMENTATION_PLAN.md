@@ -107,7 +107,7 @@ manageiq-ui-service/
 - [ ] Test i18n extraction workflow with sample strings
 
 ### 1.8 Core Infrastructure
-- [ ] Create `src/components/common/ErrorBoundary.tsx`
+- [x] Create `src/components/common/ErrorBoundary.tsx`
 - [ ] Create `src/components/common/LoadingSpinner.tsx`
 - [ ] Create `src/hooks/useNotifications.ts` for toast notifications
 - [ ] Create `src/hooks/usePolling.ts` for long-running operations
