@@ -204,10 +204,10 @@ cd react && yarn type-check
 - [x] Write tests for action components
 
 ### 2.5 Accessibility
-- [ ] Document Carbon usage guidelines in `docs/carbon-guidelines.md`
-- [ ] Document keyboard interaction patterns in `docs/accessibility.md`
-- [ ] Implement focus management utilities in `src/utils/focus.ts`
-- [ ] Run accessibility audit on shared components with axe DevTools
+- [x] Document Carbon usage guidelines in `docs/carbon-guidelines.md`
+- [x] Document keyboard interaction patterns in `docs/accessibility.md`
+- [x] Implement focus management utilities in `src/utils/focus.ts`
+- [x] Run accessibility audit on shared components with axe DevTools
 
 ---
 
