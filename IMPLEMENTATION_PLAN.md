@@ -211,40 +211,9 @@ cd react && yarn type-check
 
 ---
 
-## Phase 3: Forms & Dialog Platform (Weeks 3-4)
+## Phase 3: Dashboard & Profile Features (Weeks 3-4)
 
-### 3.1 Data Driven Forms Integration
-- [ ] Install Data Driven Forms dependencies (@data-driven-forms/react-form-renderer, @data-driven-forms/carbon-component-mapper)
-- [ ] Create `src/features/forms/types.ts` for form types
-- [ ] Create `src/features/forms/components/FormRenderer.tsx` with Carbon mapper
-- [ ] Verify Carbon mapper compatibility with sample schema
-
-### 3.2 Schema Normalization
-- [ ] Create `src/features/forms/utils/schemaNormalizer.ts` for ManageIQ dialog → DDF conversion
-- [ ] Create `src/features/forms/utils/fieldAdapters.ts` for field metadata, validation, visibility
-- [ ] Document schema normalization in `docs/forms-schema.md`
-- [ ] Write tests for schema normalization
-
-### 3.3 Custom Field Adapters
-- [ ] Create `src/features/forms/components/fields/` directory
-- [ ] Create custom field adapters for ManageIQ-specific widgets
-- [ ] Create `src/features/forms/utils/submissionTransformer.ts`
-- [ ] Create `src/features/forms/utils/validation.ts`
-- [ ] Write tests for custom field adapters
-
-### 3.4 Dialog Runtime
-- [ ] Create `src/features/forms/components/DialogModal.tsx`
-- [ ] Create `src/features/forms/components/DialogPage.tsx`
-- [ ] Create `src/features/forms/hooks/useDialogForm.ts` for async fields and dependencies
-- [ ] Create `src/features/forms/utils/errorHandling.ts` for form errors
-- [ ] Write integration tests for dialog runtime
-- [ ] Create `src/features/forms/test/DialogTestHarness.tsx`
-
----
-
-## Phase 4: Dashboard & Profile Features (Weeks 4-5)
-
-### 4.1 Dashboard
+### 3.1 Dashboard
 - [ ] Create `src/features/dashboard/types.ts`
 - [ ] Create `src/features/dashboard/store/dashboardSlice.ts`
 - [ ] Create `src/features/dashboard/components/DashboardGrid.tsx`
@@ -256,7 +225,7 @@ cd react && yarn type-check
 - [ ] Write tests for dashboard components
 - [ ] Write integration test for dashboard page
 
-### 4.2 User Profile & Settings
+### 3.2 User Profile & Settings
 - [ ] Create `src/features/profile/types.ts`
 - [ ] Create `src/features/profile/store/profileSlice.ts`
 - [ ] Create `src/features/profile/components/ProfileInfo.tsx`
@@ -266,12 +235,43 @@ cd react && yarn type-check
 - [ ] Create `src/features/profile/pages/ProfilePage.tsx`
 - [ ] Write tests for profile components
 
-### 4.3 About Page
+### 3.3 About Page
 - [ ] Create `src/features/about/components/VersionInfo.tsx`
 - [ ] Create `src/features/about/components/LicenseInfo.tsx`
 - [ ] Create `src/features/about/components/HelpResources.tsx`
 - [ ] Create `src/features/about/pages/AboutPage.tsx`
 - [ ] Write tests for about page
+
+---
+
+## Phase 4: Forms & Dialog Platform (Weeks 4-5)
+
+### 4.1 Data Driven Forms Integration
+- [ ] Install Data Driven Forms dependencies (@data-driven-forms/react-form-renderer, @data-driven-forms/carbon-component-mapper)
+- [ ] Create `src/features/forms/types.ts` for form types
+- [ ] Create `src/features/forms/components/FormRenderer.tsx` with Carbon mapper
+- [ ] Verify Carbon mapper compatibility with sample schema
+
+### 4.2 Schema Normalization
+- [ ] Create `src/features/forms/utils/schemaNormalizer.ts` for ManageIQ dialog → DDF conversion
+- [ ] Create `src/features/forms/utils/fieldAdapters.ts` for field metadata, validation, visibility
+- [ ] Document schema normalization in `docs/forms-schema.md`
+- [ ] Write tests for schema normalization
+
+### 4.3 Custom Field Adapters
+- [ ] Create `src/features/forms/components/fields/` directory
+- [ ] Create custom field adapters for ManageIQ-specific widgets
+- [ ] Create `src/features/forms/utils/submissionTransformer.ts`
+- [ ] Create `src/features/forms/utils/validation.ts`
+- [ ] Write tests for custom field adapters
+
+### 4.4 Dialog Runtime
+- [ ] Create `src/features/forms/components/DialogModal.tsx`
+- [ ] Create `src/features/forms/components/DialogPage.tsx`
+- [ ] Create `src/features/forms/hooks/useDialogForm.ts` for async fields and dependencies
+- [ ] Create `src/features/forms/utils/errorHandling.ts` for form errors
+- [ ] Write integration tests for dialog runtime
+- [ ] Create `src/features/forms/test/DialogTestHarness.tsx`
 
 ---
 
