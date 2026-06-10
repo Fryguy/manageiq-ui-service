@@ -22,9 +22,9 @@ describe('Orders API', () => {
       get: jest.fn(),
       post: jest.fn(),
       delete: jest.fn(),
-    };
+    } as unknown as ApiClient;
 
-    mockGetApiClient.mockReturnValue(mockClient as any);
+    mockGetApiClient.mockReturnValue(mockClient);
   });
 
   describe('getOrders', () => {

@@ -93,7 +93,7 @@ export function isValidLocale(locale: string): boolean {
  * @param locale - Locale code to load
  * @returns Promise resolving to translation data
  */
-export async function loadTranslations(locale: LocaleCode): Promise<Record<string, any>> {
+export async function loadTranslations(locale: LocaleCode): Promise<Record<string, unknown>> {
   // For English, no translations needed (source language)
   if (locale === 'en') {
     return {};

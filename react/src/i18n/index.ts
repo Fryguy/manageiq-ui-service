@@ -87,7 +87,7 @@ export function ngettext_(singular: string, plural: string, count: number): stri
  * import deTranslations from './locales/de.json';
  * loadLocale('de', deTranslations);
  */
-export function loadLocale(locale: string, translations: Record<string, any>): void {
+export function loadLocale(locale: string, translations: Record<string, unknown>): void {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   addLocale(locale, translations as any);
   // Note: This is ttag's useLocale function, not a React hook

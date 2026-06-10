@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import {
   parseError,
   formatErrorMessage,
@@ -27,7 +27,7 @@ describe('errorHandling', () => {
           },
           statusText: 'Not Found',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -82,7 +82,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Internal Server Error',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -118,7 +118,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Not Found',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -139,7 +139,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Unauthorized',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -154,7 +154,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Forbidden',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -171,7 +171,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Forbidden',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -186,7 +186,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Not Found',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -203,7 +203,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Not Found',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -218,7 +218,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Internal Server Error',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -235,7 +235,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Internal Server Error',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -250,7 +250,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Not Found',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -278,7 +278,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Unauthorized',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -295,7 +295,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Forbidden',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -312,7 +312,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Not Found',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -329,7 +329,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Internal Server Error',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 
@@ -401,7 +401,7 @@ describe('errorHandling', () => {
           data: {},
           statusText: 'Unauthorized',
           headers: {},
-          config: {} as any,
+          config: {} as unknown as InternalAxiosRequestConfig,
         },
       };
 

@@ -1,5 +1,5 @@
 import { authApi } from './auth';
-import { getApiClient } from './client';
+import { getApiClient, ApiClient } from './client';
 import { ActionResponse } from './types';
 
 // Mock the API client
@@ -13,7 +13,7 @@ describe('Auth API', () => {
     delete: jest.Mock;
     getAxiosInstance: jest.Mock;
   };
-  
+
   let mockAxiosInstance: {
     get: jest.Mock;
     post: jest.Mock;
@@ -36,10 +36,10 @@ describe('Auth API', () => {
       post: jest.fn(),
       delete: jest.fn(),
       getAxiosInstance: jest.fn().mockReturnValue(mockAxiosInstance),
-    };
+    } as unknown as ApiClient;
 
     // Mock getApiClient to return our mock client
-    mockGetApiClient.mockReturnValue(mockClient as any);
+    mockGetApiClient.mockReturnValue(mockClient);
   });
 
   describe('login', () => {

@@ -19,9 +19,9 @@ describe('Catalogs API', () => {
     mockClient = {
       get: jest.fn(),
       post: jest.fn(),
-    };
+    } as unknown as ApiClient;
 
-    mockGetApiClient.mockReturnValue(mockClient as any);
+    mockGetApiClient.mockReturnValue(mockClient);
   });
 
   describe('getServiceCatalogs', () => {
