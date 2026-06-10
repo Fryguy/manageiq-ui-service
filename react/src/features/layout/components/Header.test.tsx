@@ -27,9 +27,10 @@ const createMockStore = (authState = {}) => {
           token: 'test-token',
           identity: { name: 'Test User', role: 'user' },
           features: {},
-          loading: false,
-          error: null,
         },
+        loading: false,
+        error: null,
+        isAuthenticated: true,
         ...authState,
       },
     },
@@ -62,16 +63,16 @@ describe('Header', () => {
   it('calls onMenuClick when menu button is clicked', () => {
     const onMenuClick = jest.fn();
     renderHeader({ onMenuClick });
-    
+
     const menuButton = screen.getByLabelText(/menu/i);
     fireEvent.click(menuButton);
-    
+
     expect(onMenuClick).toHaveBeenCalledTimes(1);
   });
 
   it('renders global action buttons', () => {
     renderHeader();
-    
+
     expect(screen.getByLabelText('Notifications')).toBeInTheDocument();
     expect(screen.getByLabelText('Language')).toBeInTheDocument();
     expect(screen.getByLabelText('User Profile')).toBeInTheDocument();
@@ -79,37 +80,37 @@ describe('Header', () => {
 
   it('shows language switcher when language button is clicked', () => {
     renderHeader();
-    
+
     const languageButton = screen.getByLabelText('Language');
     fireEvent.click(languageButton);
-    
+
     expect(screen.getByTestId('language-switcher')).toBeInTheDocument();
   });
 
   it('hides language switcher when closed', () => {
     renderHeader();
-    
+
     const languageButton = screen.getByLabelText('Language');
     fireEvent.click(languageButton);
-    
+
     expect(screen.getByTestId('language-switcher')).toBeInTheDocument();
-    
+
     const closeButton = screen.getByText('Close');
     fireEvent.click(closeButton);
-    
+
     expect(screen.queryByTestId('language-switcher')).not.toBeInTheDocument();
   });
 
   it('applies active state to menu button when expanded', () => {
     renderHeader({ isSideNavExpanded: true });
-    
+
     const menuButton = screen.getByLabelText(/close menu/i);
     expect(menuButton).toBeInTheDocument();
   });
 
   it('applies inactive state to menu button when collapsed', () => {
     renderHeader({ isSideNavExpanded: false });
-    
+
     const menuButton = screen.getByLabelText(/open menu/i);
     expect(menuButton).toBeInTheDocument();
   });

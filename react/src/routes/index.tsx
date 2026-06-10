@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, RouteObject } from 'react-router-dom';
 import PrivateRoutes from './PrivateRoutes';
 import { LoginPage } from '../features/auth/components/LoginPage';
 import { useAuth } from '../features/auth/hooks/useAuth';
@@ -20,7 +20,7 @@ function DashboardPage() {
   };
 
   const featureCount = Object.keys(features).length;
-  const userLanguage = user?.language;
+  const userLanguage = user?.language as string | undefined;
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
@@ -28,7 +28,7 @@ function DashboardPage() {
       {user && (
         <div style={{ marginBottom: '20px' }}>
           <p style={{ fontSize: '18px', marginBottom: '10px' }}>
-            Welcome, {user.name || user.userid || 'User'}!
+            Welcome, {(user.name as string) || (user.userid as string) || 'User'}!
           </p>
           {userLanguage && (
             <p style={{ color: '#666', marginBottom: '5px' }}>
@@ -37,8 +37,8 @@ function DashboardPage() {
           )}
         </div>
       )}
-      
-      <button 
+
+      <button
         onClick={handleLogout}
         style={{
           padding: '10px 20px',
@@ -54,10 +54,10 @@ function DashboardPage() {
         Logout
       </button>
 
-      <div style={{ 
-        marginTop: '30px', 
-        padding: '20px', 
-        backgroundColor: '#f4f4f4', 
+      <div style={{
+        marginTop: '30px',
+        padding: '20px',
+        backgroundColor: '#f4f4f4',
         borderRadius: '4px',
         border: '1px solid #ddd'
       }}>
@@ -77,9 +77,9 @@ function DashboardPage() {
           <summary style={{ cursor: 'pointer', fontWeight: 'bold', marginBottom: '10px' }}>
             View All Features ({featureCount})
           </summary>
-          <pre style={{ 
-            backgroundColor: '#fff', 
-            padding: '10px', 
+          <pre style={{
+            backgroundColor: '#fff',
+            padding: '10px',
             borderRadius: '4px',
             overflow: 'auto',
             maxHeight: '400px',

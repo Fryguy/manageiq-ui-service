@@ -41,9 +41,10 @@ const createMockStore = () => {
           token: 'test-token',
           identity: { name: 'Test User', role: 'user' },
           features: {},
-          loading: false,
-          error: null,
         },
+        loading: false,
+        error: null,
+        isAuthenticated: true,
       },
     },
   });
@@ -63,7 +64,7 @@ const renderAppLayout = (children?: React.ReactNode) => {
 describe('AppLayout', () => {
   it('renders all layout components', () => {
     renderAppLayout();
-    
+
     expect(screen.getByTestId('header')).toBeInTheDocument();
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();
     expect(screen.getByTestId('breadcrumbs')).toBeInTheDocument();
@@ -72,14 +73,14 @@ describe('AppLayout', () => {
 
   it('renders children when provided', () => {
     renderAppLayout(<div data-testid="test-content">Test Content</div>);
-    
+
     expect(screen.getByTestId('test-content')).toBeInTheDocument();
     expect(screen.getByText('Test Content')).toBeInTheDocument();
   });
 
   it('applies correct CSS classes', () => {
     const { container } = renderAppLayout();
-    
+
     expect(container.querySelector('.app-layout')).toBeInTheDocument();
     expect(container.querySelector('.app-layout__content')).toBeInTheDocument();
     expect(container.querySelector('.app-layout__breadcrumbs')).toBeInTheDocument();
@@ -88,7 +89,7 @@ describe('AppLayout', () => {
 
   it('renders with Carbon Theme wrapper', () => {
     const { container } = renderAppLayout();
-    
+
     // Carbon Theme component should be present
     expect(container.querySelector('[class*="cds--"]')).toBeInTheDocument();
   });

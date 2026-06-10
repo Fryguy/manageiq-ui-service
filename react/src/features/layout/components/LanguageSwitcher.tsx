@@ -23,9 +23,19 @@ interface LanguageSwitcherProps {
   onLocaleChange?: (locale: LocaleCode) => void;
 
   /**
+   * Optional callback when the switcher should close
+   */
+  onClose?: () => void;
+
+  /**
    * Optional CSS class name
    */
   className?: string;
+}
+
+interface DropdownItem {
+  id: string;
+  text: string;
 }
 
 /**
@@ -39,7 +49,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   const [isChanging, setIsChanging] = useState(false);
 
   // Prepare dropdown items
-  const items = AVAILABLE_LOCALES.map(locale => ({
+  const items: DropdownItem[] = AVAILABLE_LOCALES.map(locale => ({
     id: locale.code,
     text: locale.name,
   }));
@@ -75,7 +85,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
       titleText={__('Language')}
       label={getLocaleName(currentLocale)}
       items={items}
-      itemToString={(item) => item?.text || ''}
+      itemToString={(item) => (item as DropdownItem | null)?.text || ''}
       onChange={handleLocaleChange}
       disabled={isChanging}
       className={className}

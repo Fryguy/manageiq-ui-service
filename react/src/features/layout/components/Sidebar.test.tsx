@@ -16,9 +16,10 @@ const createMockStore = (features = {}) => {
           token: 'test-token',
           identity: { name: 'Test User', role: 'user' },
           features,
-          loading: false,
-          error: null,
         },
+        loading: false,
+        error: null,
+        isAuthenticated: true,
       },
     },
   });

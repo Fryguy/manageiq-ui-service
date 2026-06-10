@@ -27,7 +27,7 @@ describe('PrivateRoutes', () => {
       <Provider store={store}>
         <MemoryRouter initialEntries={['/']}>
           <Routes>
-            <Route element={<PrivateRoutes isAuthenticated />}>
+            <Route element={<PrivateRoutes />}>
               <Route element={<div>Protected content</div>} path="/" />
             </Route>
             <Route element={<div>Login page</div>} path="/login" />
@@ -60,7 +60,7 @@ describe('PrivateRoutes', () => {
       <Provider store={store}>
         <MemoryRouter initialEntries={['/']}>
           <Routes>
-            <Route element={<PrivateRoutes isAuthenticated={false} />}>
+            <Route element={<PrivateRoutes />}>
               <Route element={<div>Protected content</div>} path="/" />
             </Route>
             <Route element={<div>Login page</div>} path="/login" />
