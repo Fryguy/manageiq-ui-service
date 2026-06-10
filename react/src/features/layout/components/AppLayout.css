@@ -1,0 +1,38 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--cds-background, #ffffff);
+}
+
+.app-layout__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 3rem; /* Height of Carbon header */
+  min-height: calc(100vh - 3rem);
+}
+
+.app-layout__breadcrumbs {
+  padding: 1rem 2rem;
+  background-color: var(--cds-layer-01, #f4f4f4);
+  border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+}
+
+.app-layout__main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1584px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 672px) {
+  .app-layout__main {
+    padding: 1rem;
+  }
+
+  .app-layout__breadcrumbs {
+    padding: 0.75rem 1rem;
+  }
+}

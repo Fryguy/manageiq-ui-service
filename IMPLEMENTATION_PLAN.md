@@ -121,12 +121,12 @@ manageiq-ui-service/
 ## Phase 2: Carbon Design System & Shared Primitives (Weeks 2-3)
 
 ### 2.1 Application Shell
-- [ ] Create `src/features/layout/components/Header.tsx` with Carbon components
-- [ ] Create `src/features/layout/components/Sidebar.tsx` with RBAC-aware navigation
-- [ ] Create `src/features/layout/components/Footer.tsx`
-- [ ] Create `src/features/layout/components/Breadcrumbs.tsx`
-- [ ] Create `src/features/layout/components/AppLayout.tsx` composing all layout components
-- [ ] Write tests for layout components
+- [x] Create `src/features/layout/components/Header.tsx` with Carbon components
+- [x] Create `src/features/layout/components/Sidebar.tsx` with RBAC-aware navigation
+- [x] Create `src/features/layout/components/Footer.tsx`
+- [x] Create `src/features/layout/components/Breadcrumbs.tsx`
+- [x] Create `src/features/layout/components/AppLayout.tsx` composing all layout components
+- [x] Write tests for layout components
 
 ### 2.2 Common UI Components
 - [ ] Create `src/components/common/DataTable.tsx` with sorting/filtering/pagination
