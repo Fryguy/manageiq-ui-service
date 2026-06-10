@@ -41,8 +41,8 @@ export const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [validationError, setValidationError] = useState<string | null>(null);
 
-  // Get the redirect path from location state, default to dashboard
-  const from = (location.state as any)?.from?.pathname || '/dashboard';
+  // Get the redirect path from location state, default to root
+  const from = (location.state as any)?.from?.pathname || '/';
 
   /**
    * Redirect to intended destination if already authenticated
