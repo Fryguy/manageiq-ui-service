@@ -177,11 +177,11 @@ cd react && yarn type-check
 - [x] Write tests for data display components
 
 ### 2.4 Action Components
-- [ ] Create `src/components/common/ActionButton.tsx` with permission checking
-- [ ] Create `src/components/common/ActionMenu.tsx` with RBAC integration
-- [ ] Create `src/components/common/Toolbar.tsx`
-- [ ] Create `src/components/common/ActionButtonGroup.tsx` with permission filtering
-- [ ] Write tests for action components
+- [x] Create `src/components/common/ActionButton.tsx` with permission checking
+- [x] Create `src/components/common/ActionMenu.tsx` with RBAC integration
+- [x] Create `src/components/common/Toolbar.tsx`
+- [x] Create `src/components/common/ActionButtonGroup.tsx` with permission filtering
+- [x] Write tests for action components
 
 ### 2.5 Accessibility
 - [ ] Document Carbon usage guidelines in `docs/carbon-guidelines.md`

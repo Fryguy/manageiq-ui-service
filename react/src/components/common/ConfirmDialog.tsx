@@ -3,12 +3,16 @@ import { Modal } from './Modal';
 
 export interface ConfirmDialogProps {
   open: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   onConfirm: () => void;
+  onCancel?: () => void;
   title: string;
   message: string | React.ReactNode;
+  confirmText?: string;
+  cancelText?: string;
   confirmButtonText?: string;
   cancelButtonText?: string;
+  confirmKind?: 'primary' | 'danger' | 'secondary' | 'tertiary' | 'ghost';
   danger?: boolean;
   loading?: boolean;
 }
@@ -17,10 +21,14 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   open,
   onClose,
   onConfirm,
+  onCancel,
   title,
   message,
-  confirmButtonText = 'Confirm',
-  cancelButtonText = 'Cancel',
+  confirmText,
+  cancelText,
+  confirmButtonText,
+  cancelButtonText,
+  confirmKind,
   danger = false,
   loading = false,
 }) => {
@@ -28,16 +36,29 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
     onConfirm();
   };
 
+  const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+    } else if (onClose) {
+      onClose();
+    }
+  };
+
+  // Support both old and new prop names
+  const confirmLabel = confirmText || confirmButtonText || 'Confirm';
+  const cancelLabel = cancelText || cancelButtonText || 'Cancel';
+  const isDanger = danger || confirmKind === 'danger';
+
   return (
     <Modal
       open={open}
-      onClose={onClose}
+      onClose={onClose || handleCancel}
       title={title}
-      primaryButtonText={confirmButtonText}
-      secondaryButtonText={cancelButtonText}
+      primaryButtonText={confirmLabel}
+      secondaryButtonText={cancelLabel}
       onPrimaryClick={handleConfirm}
-      onSecondaryClick={onClose}
-      danger={danger}
+      onSecondaryClick={handleCancel}
+      danger={isDanger}
       size="sm"
       loading={loading}
       passiveModal={false}

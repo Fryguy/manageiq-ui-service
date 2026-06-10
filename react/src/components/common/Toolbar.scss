@@ -1,0 +1,65 @@
+/**
+ * Toolbar Component Styles
+ */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 3rem;
+  background-color: var(--cds-layer-01, #f4f4f4);
+
+  &--bordered {
+    border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  }
+
+  &--padded {
+    padding: 0.5rem 1rem;
+  }
+
+  &__section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &--left {
+      justify-content: flex-start;
+      flex: 1;
+    }
+
+    &--center {
+      justify-content: center;
+      flex: 0 1 auto;
+    }
+
+    &--right {
+      justify-content: flex-end;
+      flex: 1;
+    }
+  }
+
+  &__group {
+    display: flex;
+    align-items: center;
+
+    &--gap-sm {
+      gap: 0.25rem;
+    }
+
+    &--gap-md {
+      gap: 0.5rem;
+    }
+
+    &--gap-lg {
+      gap: 1rem;
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    height: 1.5rem;
+    background-color: var(--cds-border-subtle-01, #e0e0e0);
+    margin: 0 0.5rem;
+  }
+}
