@@ -236,11 +236,11 @@ cd react && yarn type-check
 - [x] Write tests for profile components
 
 ### 3.3 About Page
-- [ ] Create `src/features/about/components/VersionInfo.tsx`
-- [ ] Create `src/features/about/components/LicenseInfo.tsx`
-- [ ] Create `src/features/about/components/HelpResources.tsx`
-- [ ] Create `src/features/about/pages/AboutPage.tsx`
-- [ ] Write tests for about page
+- [x] Create `src/features/about/components/VersionInfo.tsx`
+- [x] Create `src/features/about/components/LicenseInfo.tsx`
+- [x] Create `src/features/about/components/HelpResources.tsx`
+- [x] Create `src/features/about/pages/AboutPage.tsx`
+- [x] Write tests for about page
 
 ---
 
