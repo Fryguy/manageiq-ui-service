@@ -168,15 +168,15 @@ cd react && yarn type-check
 - [x] Write tests for layout components
 
 ### 2.2 Common UI Components
-- [ ] Create `src/components/common/DataTable.tsx` with sorting/filtering/pagination
-- [ ] Create `src/components/common/Pagination.tsx`
-- [ ] Create `src/components/common/SearchBar.tsx`
-- [ ] Create `src/components/common/FilterBar.tsx`
-- [ ] Create `src/components/common/Modal.tsx`
-- [ ] Create `src/components/common/ConfirmDialog.tsx`
-- [ ] Create `src/components/common/EmptyState.tsx`
-- [ ] Create `src/components/common/ErrorState.tsx`
-- [ ] Write tests for common UI components
+- [x] Create `src/components/common/DataTable.tsx` with sorting/filtering/pagination
+- [x] Create `src/components/common/Pagination.tsx`
+- [x] Create `src/components/common/SearchBar.tsx`
+- [x] Create `src/components/common/FilterBar.tsx`
+- [x] Create `src/components/common/Modal.tsx`
+- [x] Create `src/components/common/ConfirmDialog.tsx`
+- [x] Create `src/components/common/EmptyState.tsx`
+- [x] Create `src/components/common/ErrorState.tsx`
+- [x] Write tests for common UI components
 
 ### 2.3 Data Display Components
 - [ ] Create `src/components/common/Card.tsx`
