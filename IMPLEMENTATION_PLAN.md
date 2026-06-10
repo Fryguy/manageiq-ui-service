@@ -42,7 +42,27 @@ cd react && yarn lint
 cd react && yarn type-check
 ```
 
-**NOTE** Code changes to fix one command may affect another command. You MUST run ALL three commands each time any changes are made to ensure they all pass with clean console output.
+## MANDATORY TESTING WORKFLOW
+
+**YOU MUST FOLLOW THIS EXACT SEQUENCE - NO EXCEPTIONS:**
+
+1. **Make your code changes**
+2. **Run ALL THREE commands in sequence:**
+   ```bash
+   cd react && yarn test && yarn lint && yarn type-check
+   ```
+3. **If ANY command fails:**
+   - Fix the issue
+   - **RESTART from step 2** - run ALL THREE commands again
+   - **NEVER assume** that fixing one command didn't break another
+4. **Only when ALL THREE commands pass together:**
+   - Proceed to commit
+   - Amend the commit if requested
+
+**COMMON MISTAKE TO AVOID:**
+- ❌ Running `yarn type-check`, fixing errors, then committing without re-running `yarn test` and `yarn lint`
+- ❌ Running commands individually and assuming they're all still passing
+- ✅ Always run all three commands together as a single validation step
 
 **Clean output means:**
 - All tests pass (no failures)
