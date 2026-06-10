@@ -110,11 +110,11 @@ manageiq-ui-service/
 
 ### 1.8 Core Infrastructure
 - [x] Create `src/components/common/ErrorBoundary.tsx`
-- [ ] Create `src/components/common/LoadingSpinner.tsx`
-- [ ] Create `src/hooks/useNotifications.ts` for toast notifications
-- [ ] Create `src/hooks/usePolling.ts` for long-running operations
-- [ ] Create `src/utils/errorHandling.ts` utilities
-- [ ] Create `src/utils/dateFormatting.ts` utilities
+- [x] Create `src/components/common/LoadingSpinner.tsx`
+- [x] Create `src/hooks/useNotifications.ts` for toast notifications
+- [x] Create `src/hooks/usePolling.ts` for long-running operations
+- [x] Create `src/utils/errorHandling.ts` utilities
+- [x] Create `src/utils/dateFormatting.ts` utilities
 
 ---
 
