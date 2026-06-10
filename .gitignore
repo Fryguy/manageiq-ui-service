@@ -34,3 +34,5 @@ react/.yarn/*
 
 ### Git Version file ###
 client/version/version.json
+
+PROMPT.md
