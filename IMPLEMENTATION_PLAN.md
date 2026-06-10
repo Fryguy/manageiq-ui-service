@@ -5,9 +5,10 @@ This is a detailed, commit-ready implementation checklist for the Angular to Rea
 **Instructions for Agents:**
 1. Work through tasks sequentially within each phase
 2. Complete the task fully before checking the box
-3. Commit your changes after checking the box
-4. Update this file as part of your commit
-5. Dependencies between tasks are noted where applicable
+3. **BEFORE COMMITTING:** Verify Testing Requirements (see section below) are met
+4. Commit your changes after checking the box and verifying tests
+5. Update this file as part of your commit
+6. Dependencies between tasks are noted where applicable
 
 **Working Directory:** All React application work is done in the `react/` subdirectory of this repository. This is an in-repo incubation directory as described in PLAN.md Section 10.2-10.3.
 
@@ -33,42 +34,29 @@ manageiq-ui-service/
 
 ## Testing Requirements
 
-**CRITICAL:** All tests MUST pass for the implementation to be considered complete.
+**CRITICAL:** Before committing ANY changes, you MUST verify that ALL three commands pass with clean console output:
 
-### Test Execution Standards
-1. **All tests must pass**: Unit tests, integration tests, and E2E tests must pass both locally and in CI
-2. **Clean console output**: Test runs must be free of `console.error` or `console.warning` output
-3. **Coverage requirements** (see PLAN.md Section 9.2):
-   - Components: 80%+
-   - Hooks: 90%+
-   - Utilities: 95%+
-   - Redux slices: 90%+
-
-### Testing Strategy
-- **Unit tests**: Write tests alongside feature implementation, not as a separate phase
-- **Integration tests**: Required for all major feature flows (see Phase 9.2)
-- **E2E tests**: Required for critical user paths (see Phase 9.3)
-- **Accessibility tests**: Required for WCAG 2.1 AA compliance (see Phase 9.3)
-
-### Verification Commands
 ```bash
-# Run all tests locally
 cd react && yarn test
-
-# Run tests with coverage
-cd react && yarn test --coverage
-
-# Run linting
 cd react && yarn lint
-
-# Run type checking
 cd react && yarn type-check
 ```
 
-### CI Requirements
-- All PR checks must pass before merging
-- CI workflow runs: linting, type-check, and all tests
-- No warnings or errors in test output
+**NOTE** Code changes to fix one command may affect another command. You MUST run ALL three commands each time any changes are made to ensure they all pass with clean console output.
+
+**Clean output means:**
+- All tests pass (no failures)
+- No `console.error` or `console.warning` messages
+- No linting errors or warnings
+- No TypeScript errors or warnings
+
+**Coverage requirements** (see PLAN.md Section 9.2):
+- Components: 80%+ | Hooks: 90%+ | Utilities: 95%+ | Redux slices: 90%+
+
+**Testing strategy:**
+- Write tests alongside feature implementation, not as a separate phase
+- Integration tests required for all major feature flows (Phase 9.2)
+- E2E tests required for critical user paths (Phase 9.3)
 
 ---
 
@@ -179,14 +167,14 @@ cd react && yarn type-check
 - [x] Write tests for common UI components
 
 ### 2.3 Data Display Components
-- [ ] Create `src/components/common/Card.tsx`
-- [ ] Create `src/components/common/List.tsx`
-- [ ] Create `src/components/common/DetailView.tsx`
-- [ ] Create `src/components/common/StatusIndicator.tsx`
-- [ ] Create `src/components/common/IconDisplay.tsx`
-- [ ] Create `src/components/common/Timeline.tsx`
-- [ ] Create `src/components/common/TagDisplay.tsx`
-- [ ] Write tests for data display components
+- [x] Create `src/components/common/Card.tsx`
+- [x] Create `src/components/common/List.tsx`
+- [x] Create `src/components/common/DetailView.tsx`
+- [x] Create `src/components/common/StatusIndicator.tsx`
+- [x] Create `src/components/common/IconDisplay.tsx`
+- [x] Create `src/components/common/Timeline.tsx`
+- [x] Create `src/components/common/TagDisplay.tsx`
+- [x] Write tests for data display components
 
 ### 2.4 Action Components
 - [ ] Create `src/components/common/ActionButton.tsx` with permission checking

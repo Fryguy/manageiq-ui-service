@@ -1,0 +1,54 @@
+.miq-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+  &--clickable {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &--selected {
+    border: 2px solid var(--cds-interactive-01);
+    box-shadow: 0 0 0 2px var(--cds-focus);
+  }
+
+  &__header {
+    margin-bottom: var(--cds-spacing-05);
+  }
+
+  &__title {
+    font-size: var(--cds-heading-03-font-size);
+    font-weight: var(--cds-heading-03-font-weight);
+    line-height: var(--cds-heading-03-line-height);
+    margin: 0 0 var(--cds-spacing-02) 0;
+    color: var(--cds-text-01);
+  }
+
+  &__subtitle {
+    font-size: var(--cds-body-short-01-font-size);
+    line-height: var(--cds-body-short-01-line-height);
+    margin: 0;
+    color: var(--cds-text-02);
+  }
+
+  &__content {
+    flex: 1;
+    overflow: auto;
+  }
+
+  &__footer {
+    margin-top: var(--cds-spacing-05);
+    padding-top: var(--cds-spacing-05);
+    border-top: 1px solid var(--cds-ui-03);
+  }
+}

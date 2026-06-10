@@ -1,0 +1,30 @@
+.miq-icon-display {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  // Color variants
+  &--primary {
+    fill: var(--cds-interactive-01);
+  }
+
+  &--secondary {
+    fill: var(--cds-text-02);
+  }
+
+  &--success {
+    fill: var(--cds-support-success);
+  }
+
+  &--error {
+    fill: var(--cds-support-error);
+  }
+
+  &--warning {
+    fill: var(--cds-support-warning);
+  }
+
+  &--info {
+    fill: var(--cds-support-info);
+  }
+}
