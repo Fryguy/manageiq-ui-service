@@ -204,3 +204,9 @@ export const formatFormDate = (date: string | Date | null | undefined): string =
 export const formatFormDateTime = (date: string | Date | null | undefined): string => {
   return formatDate(date, "yyyy-MM-dd'T'HH:mm");
 };
+
+/**
+ * Alias for formatRelativeTime - formats a date as relative time (e.g., "2 hours ago")
+ * This is commonly used in UI components to show "time ago" format
+ */
+export const formatDistanceToNow = formatRelativeTime;

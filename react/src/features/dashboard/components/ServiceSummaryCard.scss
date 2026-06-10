@@ -1,0 +1,116 @@
+/**
+ * Service summary card styles
+ */
+
+.service-summary-card {
+  height: 100%;
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--cds-text-primary);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__total {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--cds-layer-01);
+    border-radius: 4px;
+  }
+
+  &__total-count {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--cds-text-primary);
+    line-height: 1;
+  }
+
+  &__total-label {
+    font-size: 0.875rem;
+    color: var(--cds-text-secondary);
+    margin-top: 0.5rem;
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: var(--cds-layer-01);
+    border-radius: 4px;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    &--success {
+      background-color: var(--cds-support-success);
+      color: var(--cds-text-on-color);
+    }
+
+    &--error {
+      background-color: var(--cds-support-error);
+      color: var(--cds-text-on-color);
+    }
+
+    &--warning {
+      background-color: var(--cds-support-warning);
+      color: var(--cds-text-on-color);
+    }
+
+    &--disabled {
+      background-color: var(--cds-layer-02);
+      color: var(--cds-text-secondary);
+    }
+  }
+
+  &__details {
+    flex: 1;
+  }
+
+  &__count {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--cds-text-primary);
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    color: var(--cds-text-secondary);
+    margin-top: 0.25rem;
+  }
+
+  &--loading {
+    .service-summary-card__content {
+      padding: 1rem 0;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .service-summary-card {
+    &__items {
+      grid-template-columns: 1fr;
+    }
+  }
+}

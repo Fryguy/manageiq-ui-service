@@ -141,7 +141,7 @@ export interface BaseResource {
   id: string;
   href: string;
   name?: string;
-  created_on?: string;
-  updated_on?: string;
+  created_at?: string;
+  updated_at?: string;
   tags?: Tag[];
 }

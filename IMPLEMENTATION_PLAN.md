@@ -214,16 +214,16 @@ cd react && yarn type-check
 ## Phase 3: Dashboard & Profile Features (Weeks 3-4)
 
 ### 3.1 Dashboard
-- [ ] Create `src/features/dashboard/types.ts`
-- [ ] Create `src/features/dashboard/store/dashboardSlice.ts`
-- [ ] Create `src/features/dashboard/components/DashboardGrid.tsx`
-- [ ] Create `src/features/dashboard/components/ServiceSummaryCard.tsx`
-- [ ] Create `src/features/dashboard/components/RecentServicesWidget.tsx`
-- [ ] Create `src/features/dashboard/components/RecentOrdersWidget.tsx`
-- [ ] Create `src/features/dashboard/components/QuickActionsWidget.tsx` with RBAC
-- [ ] Create `src/features/dashboard/pages/DashboardPage.tsx`
-- [ ] Write tests for dashboard components
-- [ ] Write integration test for dashboard page
+- [x] Create `src/features/dashboard/types.ts`
+- [x] Create `src/features/dashboard/store/dashboardSlice.ts`
+- [x] Create `src/features/dashboard/components/DashboardGrid.tsx`
+- [x] Create `src/features/dashboard/components/ServiceSummaryCard.tsx`
+- [x] Create `src/features/dashboard/components/RecentServicesWidget.tsx`
+- [x] Create `src/features/dashboard/components/RecentOrdersWidget.tsx`
+- [x] Create `src/features/dashboard/components/QuickActionsWidget.tsx` with RBAC
+- [x] Create `src/features/dashboard/pages/DashboardPage.tsx`
+- [x] Write tests for dashboard components
+- [x] Write integration test for dashboard page
 
 ### 3.2 User Profile & Settings
 - [ ] Create `src/features/profile/types.ts`

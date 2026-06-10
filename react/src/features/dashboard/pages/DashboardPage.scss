@@ -1,0 +1,31 @@
+/**
+ * Dashboard page styles
+ */
+
+.dashboard-page {
+  padding: 1.5rem;
+  max-width: 1600px;
+  margin: 0 auto;
+
+  &__header {
+    margin-bottom: 1.5rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--cds-text-primary);
+    margin: 0;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .dashboard-page {
+    padding: 1rem;
+
+    &__title {
+      font-size: 1.5rem;
+    }
+  }
+}

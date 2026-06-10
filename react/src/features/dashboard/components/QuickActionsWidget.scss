@@ -1,0 +1,46 @@
+/**
+ * Quick actions widget styles
+ */
+
+.quick-actions-widget {
+  height: 100%;
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--cds-text-primary);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  &__button {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 1.5rem 1rem;
+    height: auto;
+    min-height: 80px;
+
+    .cds--btn__icon {
+      margin-right: 0.75rem;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .quick-actions-widget {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
