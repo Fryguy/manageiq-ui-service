@@ -247,10 +247,10 @@ cd react && yarn type-check
 ## Phase 4: Layout & Navigation Integration (Week 4)
 
 ### 4.1 Integrate AppLayout into Routing
-- [ ] Modify `src/routes/PrivateRoutes.tsx` to wrap `<Outlet />` with `<AppLayout>`
-- [ ] Verify Carbon Theme context is established
-- [ ] Test that Header, Sidebar, Footer appear on authenticated pages
-- [ ] Write tests for layout integration
+- [x] Modify `src/routes/PrivateRoutes.tsx` to wrap `<Outlet />` with `<AppLayout>`
+- [x] Verify Carbon Theme context is established
+- [x] Test that Header, Sidebar, Footer appear on authenticated pages
+- [x] Write tests for layout integration
 
 ### 4.2 Add Missing Routes
 - [ ] Add `/profile` route to `src/routes/index.tsx` pointing to `ProfilePage`
