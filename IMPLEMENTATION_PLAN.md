@@ -31,6 +31,45 @@ manageiq-ui-service/
 
 **NOTE** Skipped steps are marked with [-], indicating they are not possible and may need to be returned to later, perhaps manually.
 
+## Testing Requirements
+
+**CRITICAL:** All tests MUST pass for the implementation to be considered complete.
+
+### Test Execution Standards
+1. **All tests must pass**: Unit tests, integration tests, and E2E tests must pass both locally and in CI
+2. **Clean console output**: Test runs must be free of `console.error` or `console.warning` output
+3. **Coverage requirements** (see PLAN.md Section 9.2):
+   - Components: 80%+
+   - Hooks: 90%+
+   - Utilities: 95%+
+   - Redux slices: 90%+
+
+### Testing Strategy
+- **Unit tests**: Write tests alongside feature implementation, not as a separate phase
+- **Integration tests**: Required for all major feature flows (see Phase 9.2)
+- **E2E tests**: Required for critical user paths (see Phase 9.3)
+- **Accessibility tests**: Required for WCAG 2.1 AA compliance (see Phase 9.3)
+
+### Verification Commands
+```bash
+# Run all tests locally
+cd react && yarn test
+
+# Run tests with coverage
+cd react && yarn test --coverage
+
+# Run linting
+cd react && yarn lint
+
+# Run type checking
+cd react && yarn type-check
+```
+
+### CI Requirements
+- All PR checks must pass before merging
+- CI workflow runs: linting, type-check, and all tests
+- No warnings or errors in test output
+
 ---
 
 ## Phase 1: Platform Foundation (Weeks 1-2)

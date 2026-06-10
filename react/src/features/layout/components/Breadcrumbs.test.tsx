@@ -34,14 +34,14 @@ describe('Breadcrumbs', () => {
 
   it('renders breadcrumbs for single level path', () => {
     renderBreadcrumbs('/dashboard');
-    
+
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
   });
 
   it('renders breadcrumbs for multi-level path', () => {
     renderBreadcrumbs('/services/123/details');
-    
+
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('My Services')).toBeInTheDocument();
     expect(screen.getAllByText('Details')).toHaveLength(2); // One for ID, one for details
@@ -49,31 +49,30 @@ describe('Breadcrumbs', () => {
 
   it('marks current page as non-clickable', () => {
     renderBreadcrumbs('/services/details');
-    
-    const breadcrumbItems = screen.getAllByRole('listitem');
-    const lastItem = breadcrumbItems[breadcrumbItems.length - 1];
-    
-    expect(lastItem).toHaveAttribute('aria-current', 'page');
+
+    const detailsLink = screen.getByText('Details');
+
+    expect(detailsLink).toHaveAttribute('aria-current', 'page');
   });
 
   it('navigates when clicking non-current breadcrumb', () => {
     renderBreadcrumbs('/services/123/details');
-    
+
     const homeLink = screen.getByText('Home');
     fireEvent.click(homeLink);
-    
+
     expect(mockNavigate).toHaveBeenCalledWith('/');
   });
 
   it('uses route labels for known segments', () => {
     renderBreadcrumbs('/catalogs');
-    
+
     expect(screen.getByText('Service Catalog')).toBeInTheDocument();
   });
 
   it('handles ID segments by showing generic label', () => {
     renderBreadcrumbs('/services/abc-123-def');
-    
+
     expect(screen.getByText('My Services')).toBeInTheDocument();
     expect(screen.getByText('Details')).toBeInTheDocument();
   });
@@ -84,7 +83,10 @@ describe('Breadcrumbs', () => {
         <Breadcrumbs className="custom-class" />
       </MemoryRouter>
     );
-    
-    expect(container.querySelector('.cds--breadcrumb')).toHaveClass('custom-class');
+
+    // The custom className is applied to the wrapper div
+    const wrapper = container.querySelector('.custom-class');
+    expect(wrapper).toBeInTheDocument();
+    expect(wrapper?.querySelector('.cds--breadcrumb')).toBeInTheDocument();
   });
 });

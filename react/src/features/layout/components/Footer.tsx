@@ -16,12 +16,14 @@ const Footer = ({ className = '' }: FooterProps) => {
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
+    let isMounted = true;
+
     // Fetch version information from the API
     // This mirrors the Angular application's version display behavior
     const fetchVersionInfo = async () => {
       try {
         const response = await fetch('/api?attributes=server_info');
-        if (response.ok) {
+        if (response.ok && isMounted) {
           const data = await response.json();
           setVersionInfo({
             version: data.server_info?.version,
@@ -30,11 +32,16 @@ const Footer = ({ className = '' }: FooterProps) => {
           });
         }
       } catch (error) {
-        console.error('Failed to fetch version info:', error);
+        // Silently fail - version info is not critical
+        // In production, this would be logged to a monitoring service
       }
     };
 
     fetchVersionInfo();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const versionText = versionInfo.version

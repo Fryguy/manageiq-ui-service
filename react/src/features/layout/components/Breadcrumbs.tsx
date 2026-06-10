@@ -14,7 +14,7 @@ interface BreadcrumbsProps {
 /**
  * Breadcrumbs component that automatically generates breadcrumb navigation
  * based on the current route path.
- * 
+ *
  * Maps route segments to human-readable labels and provides navigation.
  */
 const Breadcrumbs = ({ className = '' }: BreadcrumbsProps) => {
@@ -56,10 +56,10 @@ const Breadcrumbs = ({ className = '' }: BreadcrumbsProps) => {
     let currentPath = '';
     pathSegments.forEach((segment, index) => {
       currentPath += `/${segment}`;
-      
+
       // Try to get a human-readable label, fallback to segment itself
       const label = routeLabels[segment] || segment;
-      
+
       // For ID segments (numeric or UUID-like), use a generic label
       const isId = /^[0-9a-f-]+$/i.test(segment);
       const displayLabel = isId ? 'Details' : label;
@@ -86,21 +86,24 @@ const Breadcrumbs = ({ className = '' }: BreadcrumbsProps) => {
   }
 
   return (
-    <Breadcrumb className={className} noTrailingSlash>
-      {breadcrumbs.map((crumb, index) => {
-        const isCurrentPage = index === breadcrumbs.length - 1;
+    <div className={className}>
+      <Breadcrumb noTrailingSlash aria-label="Breadcrumb navigation">
+        {breadcrumbs.map((crumb, index) => {
+          const isCurrentPage = index === breadcrumbs.length - 1;
 
-        return (
-          <BreadcrumbItem
-            key={crumb.path}
-            isCurrentPage={isCurrentPage}
-            onClick={() => !isCurrentPage && handleClick(crumb.path)}
-          >
-            {crumb.label}
-          </BreadcrumbItem>
-        );
-      })}
-    </Breadcrumb>
+          return (
+            <BreadcrumbItem
+              key={crumb.path}
+              isCurrentPage={isCurrentPage}
+              onClick={() => !isCurrentPage && handleClick(crumb.path)}
+              aria-current={isCurrentPage ? 'page' : undefined}
+            >
+              {crumb.label}
+            </BreadcrumbItem>
+          );
+        })}
+      </Breadcrumb>
+    </div>
   );
 };
 
