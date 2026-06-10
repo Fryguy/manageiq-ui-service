@@ -29,6 +29,8 @@ manageiq-ui-service/
 
 **Reference:** See [PLAN.md](./PLAN.md) for detailed architecture and design decisions.
 
+**NOTE** Skipped steps are marked with [-], indicating they are not possible and may need to be returned to later, perhaps manually.
+
 ---
 
 ## Phase 1: Platform Foundation (Weeks 1-2)
@@ -77,8 +79,8 @@ manageiq-ui-service/
 - [x] Write sample test for API client
 - [x] Verify tests run locally with `yarn test`
 - [x] Create `.github/workflows/ci.yaml` for linting, type-check, and tests
-- [ ] Test CI workflow with sample PR
-- [ ] Add CI status badge to README
+- [-] Test CI workflow with sample PR
+- [-] Add CI status badge to README
 
 ### 1.5 API Client Layer Tests
 - [x] Write tests for `src/api/client.ts` (interceptors, error handling, 401 handling)
