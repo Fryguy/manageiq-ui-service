@@ -567,41 +567,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 3: Forms and Dialog Platform (Weeks 3-4)
-
-**Goal**: Establish a reusable strategy for schema-driven dialogs and provisioning workflows.
-
-#### Tasks:
-1. **Data Driven Forms Integration**
-   - Add Data Driven Forms and Carbon component mapper
-   - Validate mapper compatibility with the selected Carbon version
-   - Establish form renderer composition patterns
-
-2. **Schema Normalization**
-   - Define how ManageIQ dialog payloads map to Data Driven Forms schema
-   - Create adapters for field metadata, validation, and conditional visibility
-   - Document unsupported or custom field types
-
-3. **Custom Field Adapters**
-   - Implement adapters for ManageIQ-specific widgets
-   - Standardize submission payload transformation
-   - Centralize validation and conditional logic
-
-4. **Dialog Runtime**
-   - Modal and full-page dialog rendering patterns
-   - Async field loading and dependent field updates
-   - Error handling and retry behavior
-   - Test harnesses for schema-driven forms
-
-**Deliverables**:
-- Data Driven Forms platform ready for feature use
-- Carbon mapper integrated
-- Schema normalization strategy documented
-- Reusable dialog runtime and tests
-
----
-
-### Phase 4: Dashboard and Profile Features (Weeks 4-5)
+### Phase 3: Dashboard and Profile Features (Weeks 3-4)
 
 **Goal**: Migrate lower-complexity user-facing features to validate the platform.
 
@@ -635,7 +601,80 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 5: Catalogs and Ordering (Weeks 5-7)
+### Phase 4: Layout & Navigation Integration (Week 4)
+
+**Goal**: Integrate the application layout and navigation system into the routing infrastructure.
+
+#### Tasks:
+1. **Integrate AppLayout into Routing**
+   - Modify routing to wrap authenticated routes with AppLayout
+   - Establish Carbon Theme context
+   - Verify layout components render on all authenticated pages
+
+2. **Add Missing Routes**
+   - Register `/profile` route for ProfilePage
+   - Register `/about` route for AboutPage
+   - Verify authentication protection on new routes
+
+3. **Connect Sidebar Navigation**
+   - Ensure navigation items use React Router Link
+   - Apply RBAC checks to navigation items
+   - Test navigation between all pages
+
+4. **Verify Carbon Styling**
+   - Confirm Carbon theme applied to all pages
+   - Verify consistent component rendering
+   - Test responsive layout behavior
+
+5. **Integration Testing**
+   - Test complete navigation flows
+   - Verify breadcrumb updates
+   - Ensure no console errors or warnings
+
+**Deliverables**:
+- All authenticated pages render within AppLayout
+- Profile and About pages accessible via routes
+- Functional sidebar navigation with RBAC
+- Carbon styling applied consistently
+- Complete integration test coverage
+
+---
+
+### Phase 5: Forms and Dialog Platform (Weeks 5-6)
+
+**Goal**: Establish a reusable strategy for schema-driven dialogs and provisioning workflows.
+
+#### Tasks:
+1. **Data Driven Forms Integration**
+   - Add Data Driven Forms and Carbon component mapper
+   - Validate mapper compatibility with the selected Carbon version
+   - Establish form renderer composition patterns
+
+2. **Schema Normalization**
+   - Define how ManageIQ dialog payloads map to Data Driven Forms schema
+   - Create adapters for field metadata, validation, and conditional visibility
+   - Document unsupported or custom field types
+
+3. **Custom Field Adapters**
+   - Implement adapters for ManageIQ-specific widgets
+   - Standardize submission payload transformation
+   - Centralize validation and conditional logic
+
+4. **Dialog Runtime**
+   - Modal and full-page dialog rendering patterns
+   - Async field loading and dependent field updates
+   - Error handling and retry behavior
+   - Test harnesses for schema-driven forms
+
+**Deliverables**:
+- Data Driven Forms platform ready for feature use
+- Carbon mapper integrated
+- Schema normalization strategy documented
+- Reusable dialog runtime and tests
+
+---
+
+### Phase 6: Catalogs and Ordering (Weeks 6-8)
 
 **Goal**: Migrate catalog browsing, ordering, and provisioning workflows.
 
@@ -676,7 +715,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 6: Services Domain Migration (Weeks 7-10)
+### Phase 7: Services Domain Migration (Weeks 8-11)
 
 **Goal**: Migrate the most complex domain in smaller, testable work packages.
 
@@ -737,7 +776,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 7: Orders and Approval Workflows (Weeks 10-11)
+### Phase 8: Orders and Approval Workflows (Weeks 11-12)
 
 **Goal**: Migrate order tracking, request visibility, and approval flows.
 
@@ -771,7 +810,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 8: VM-Specific Gap Closure (Weeks 11-12)
+### Phase 9: VM-Specific Gap Closure (Weeks 12-13)
 
 **Goal**: Close any VM-specific gaps that are not already satisfied through the Services domain.
 
@@ -800,7 +839,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 9: Quality, Accessibility, and Performance (Weeks 12-13)
+### Phase 10: Quality, Accessibility, and Performance (Weeks 13-14)
 
 **Goal**: Validate the migrated application against functional, accessibility, and performance gates.
 
@@ -839,7 +878,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 10: Deployment, Cutover, and Documentation (Weeks 13-14)
+### Phase 11: Deployment, Cutover, and Documentation (Weeks 14-15)
 
 **Goal**: Prepare for staged rollout, validate rollback, and complete repository transition planning.
 
@@ -1620,14 +1659,15 @@ The original 10-week estimate is aggressive for a migration of this scope, espec
 |-----------|------|-------------|
 | M1: Platform Foundation Complete | 2 | Auth, API client, routing, RBAC, i18n, testing framework working |
 | M2: Carbon Primitives Complete | 3 | Shared shell and common components ready |
-| M3: Forms Platform Complete | 4 | Data Driven Forms and Carbon mapper operational |
-| M4: Dashboard and Profile Live | 5 | Dashboard, profile, and settings functional |
-| M5: Catalogs Complete | 7 | Full catalog browsing and ordering |
-| M6: Services Complete | 10 | Service management, actions, and custom buttons functional |
-| M7: Orders Complete | 11 | Order tracking and approval workflows functional |
-| M8: VM Gap Closure Complete | 12 | Remaining VM-specific features migrated |
-| M9: Quality Gates Complete | 13 | Tests, accessibility, performance, and security gates passed |
-| M10: Production Ready | 14 | Deployment and cutover readiness approved |
+| M3: Dashboard and Profile Live | 4 | Dashboard, profile, and settings functional |
+| M4: Layout & Navigation Complete | 4 | AppLayout integrated, routes connected, navigation functional |
+| M5: Forms Platform Complete | 6 | Data Driven Forms and Carbon mapper operational |
+| M6: Catalogs Complete | 8 | Full catalog browsing and ordering |
+| M7: Services Complete | 11 | Service management, actions, and custom buttons functional |
+| M8: Orders Complete | 12 | Order tracking and approval workflows functional |
+| M9: VM Gap Closure Complete | 13 | Remaining VM-specific features migrated |
+| M10: Quality Gates Complete | 14 | Tests, accessibility, performance, and security gates passed |
+| M11: Production Ready | 15 | Deployment and cutover readiness approved |
 
 ### 12.3 Dependencies
 

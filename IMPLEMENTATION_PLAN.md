@@ -244,28 +244,79 @@ cd react && yarn type-check
 
 ---
 
-## Phase 4: Forms & Dialog Platform (Weeks 4-5)
+## Phase 4: Layout & Navigation Integration (Week 4)
 
-### 4.1 Data Driven Forms Integration
+### 4.1 Integrate AppLayout into Routing
+- [ ] Modify `src/routes/PrivateRoutes.tsx` to wrap `<Outlet />` with `<AppLayout>`
+- [ ] Verify Carbon Theme context is established
+- [ ] Test that Header, Sidebar, Footer appear on authenticated pages
+- [ ] Write tests for layout integration
+
+### 4.2 Add Missing Routes
+- [ ] Add `/profile` route to `src/routes/index.tsx` pointing to `ProfilePage`
+- [ ] Add `/about` route to `src/routes/index.tsx` pointing to `AboutPage`
+- [ ] Verify routes are protected by authentication
+- [ ] Test direct URL access to `/profile` and `/about`
+- [ ] Write tests for new routes
+
+### 4.3 Connect Sidebar Navigation
+- [ ] Review `src/features/layout/components/Sidebar.tsx` navigation items
+- [ ] Ensure navigation items use React Router `Link` or `useNavigate`
+- [ ] Verify RBAC checks are applied to navigation items
+- [ ] Test navigation between Dashboard, Profile, and About
+- [ ] Write tests for navigation functionality
+
+### 4.4 Verify Carbon Styling
+- [ ] Confirm Carbon theme is applied to all pages
+- [ ] Verify Carbon components render correctly
+- [ ] Check that Header, Sidebar, Footer styling is consistent
+- [ ] Test responsive behavior of layout
+- [ ] Run visual regression tests if available
+
+### 4.5 Integration Testing
+- [ ] Write integration test: Login → Dashboard (with layout)
+- [ ] Write integration test: Dashboard → Profile (via sidebar)
+- [ ] Write integration test: Dashboard → About (via sidebar or footer)
+- [ ] Write integration test: Breadcrumbs update correctly
+- [ ] Write integration test: Logout from any page
+- [ ] Verify all tests pass with `yarn test && yarn lint && yarn type-check`
+
+### 4.6 Acceptance Criteria Verification
+- [ ] All authenticated pages render within AppLayout
+- [ ] Header, Sidebar, Footer visible on Dashboard, Profile, About
+- [ ] Profile page accessible via `/profile` route
+- [ ] About page accessible via `/about` route
+- [ ] Sidebar navigation links work correctly
+- [ ] Carbon styling applied consistently
+- [ ] Breadcrumbs reflect current location
+- [ ] RBAC checks applied to navigation items
+- [ ] All tests pass (unit, integration, type-check, lint)
+- [ ] No console errors or warnings
+
+---
+
+## Phase 5: Forms & Dialog Platform (Weeks 5-6)
+
+### 5.1 Data Driven Forms Integration
 - [ ] Install Data Driven Forms dependencies (@data-driven-forms/react-form-renderer, @data-driven-forms/carbon-component-mapper)
 - [ ] Create `src/features/forms/types.ts` for form types
 - [ ] Create `src/features/forms/components/FormRenderer.tsx` with Carbon mapper
 - [ ] Verify Carbon mapper compatibility with sample schema
 
-### 4.2 Schema Normalization
+### 5.2 Schema Normalization
 - [ ] Create `src/features/forms/utils/schemaNormalizer.ts` for ManageIQ dialog → DDF conversion
 - [ ] Create `src/features/forms/utils/fieldAdapters.ts` for field metadata, validation, visibility
 - [ ] Document schema normalization in `docs/forms-schema.md`
 - [ ] Write tests for schema normalization
 
-### 4.3 Custom Field Adapters
+### 5.3 Custom Field Adapters
 - [ ] Create `src/features/forms/components/fields/` directory
 - [ ] Create custom field adapters for ManageIQ-specific widgets
 - [ ] Create `src/features/forms/utils/submissionTransformer.ts`
 - [ ] Create `src/features/forms/utils/validation.ts`
 - [ ] Write tests for custom field adapters
 
-### 4.4 Dialog Runtime
+### 5.4 Dialog Runtime
 - [ ] Create `src/features/forms/components/DialogModal.tsx`
 - [ ] Create `src/features/forms/components/DialogPage.tsx`
 - [ ] Create `src/features/forms/hooks/useDialogForm.ts` for async fields and dependencies
@@ -275,9 +326,9 @@ cd react && yarn type-check
 
 ---
 
-## Phase 5: Catalogs & Ordering (Weeks 5-7)
+## Phase 6: Catalogs & Ordering (Weeks 6-8)
 
-### 5.1 Catalog Explorer
+### 6.1 Catalog Explorer
 - [ ] Create `src/features/catalogs/types.ts`
 - [ ] Create `src/features/catalogs/store/catalogsSlice.ts`
 - [ ] Create `src/features/catalogs/components/CatalogList.tsx`
@@ -288,7 +339,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/catalogs/pages/CatalogExplorerPage.tsx`
 - [ ] Write tests for catalog explorer
 
-### 5.2 Catalog Item Details
+### 6.2 Catalog Item Details
 - [ ] Create `src/features/catalogs/components/ServiceTemplateDetails.tsx`
 - [ ] Create `src/features/catalogs/components/TemplateInfo.tsx`
 - [ ] Create `src/features/catalogs/components/ProvisioningDialog.tsx` using Data Driven Forms
@@ -296,7 +347,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/catalogs/pages/ServiceTemplatePage.tsx`
 - [ ] Write tests for catalog item details
 
-### 5.3 Shopping Cart
+### 6.3 Shopping Cart
 - [ ] Create `src/features/catalogs/store/cartSlice.ts` with persistence
 - [ ] Create `src/features/catalogs/components/CartButton.tsx`
 - [ ] Create `src/features/catalogs/components/CartDrawer.tsx`
@@ -307,15 +358,15 @@ cd react && yarn type-check
 - [ ] Implement cart persistence in localStorage
 - [ ] Write tests for shopping cart
 
-### 5.4 Integration Tests
+### 6.4 Integration Tests
 - [ ] Write integration test for catalog browsing flow (browse → details → add to cart)
 - [ ] Write integration test for order submission flow (cart → checkout → confirmation)
 
 ---
 
-## Phase 6: Services Domain Migration (Weeks 7-10)
+## Phase 7: Services Domain Migration (Weeks 8-11)
 
-### 6.1 Services List & Filtering
+### 7.1 Services List & Filtering
 - [ ] Create `src/features/services/types.ts`
 - [ ] Create `src/features/services/store/servicesSlice.ts`
 - [ ] Create `src/features/services/components/ServiceList.tsx`
@@ -327,7 +378,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/pages/ServiceExplorerPage.tsx`
 - [ ] Write tests for services list and filtering
 
-### 6.2 Service Details & Resources
+### 7.2 Service Details & Resources
 - [ ] Create `src/features/services/components/ServiceDetails.tsx`
 - [ ] Create `src/features/services/components/ServiceInfo.tsx`
 - [ ] Create `src/features/services/components/ServiceResources.tsx`
@@ -337,7 +388,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/pages/ServiceDetailsPage.tsx`
 - [ ] Write tests for service details
 
-### 6.3 Permission-Aware Service Actions
+### 7.3 Permission-Aware Service Actions
 - [ ] Create `src/features/services/components/ServiceActions.tsx` with permission filtering
 - [ ] Create `src/features/services/components/PowerOperations.tsx` (start, stop, suspend)
 - [ ] Create `src/features/services/components/RetireService.tsx`
@@ -347,14 +398,14 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/components/ConfirmActionDialog.tsx`
 - [ ] Write tests for service actions with permission scenarios
 
-### 6.4 Custom Buttons & Dialog-Backed Actions
+### 7.4 Custom Buttons & Dialog-Backed Actions
 - [ ] Create `src/features/services/components/CustomButtonGroup.tsx` with role filtering
 - [ ] Create `src/features/services/components/CustomButton.tsx`
 - [ ] Create `src/features/services/hooks/useCustomButtonAction.ts`
 - [ ] Create `src/features/services/components/CustomButtonDialog.tsx` using Data Driven Forms
 - [ ] Write tests for custom buttons
 
-### 6.5 VM & Console Capabilities
+### 7.5 VM & Console Capabilities
 - [ ] Create `src/features/services/components/VMDetails.tsx`
 - [ ] Create `src/features/services/components/ConsoleAccess.tsx` (noVNC, SPICE, WebMKS)
 - [ ] Create `src/features/services/components/SnapshotList.tsx`
@@ -362,27 +413,27 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/components/StorageDetails.tsx` (if in scope)
 - [ ] Write tests for VM and console capabilities
 
-### 6.6 Ansible & Orchestration
+### 7.6 Ansible & Orchestration
 - [ ] Create `src/features/services/components/AnsiblePlaybook.tsx`
 - [ ] Create `src/features/services/components/PlaybookExecution.tsx`
 - [ ] Create `src/features/services/components/PlaybookOutput.tsx`
 - [ ] Write tests for Ansible views
 
-### 6.7 Service State Management
+### 7.7 Service State Management
 - [ ] Implement polling mechanism in servicesSlice for long-running operations
 - [ ] Create `src/features/services/hooks/useServicePolling.ts`
 - [ ] Write tests for service state management and polling
 
-### 6.8 Integration Tests
+### 7.8 Integration Tests
 - [ ] Write integration test for service browsing flow (list → details → actions)
 - [ ] Write integration test for service power operations
 - [ ] Write integration test for custom button execution
 
 ---
 
-## Phase 7: Orders & Approval Workflows (Weeks 10-11)
+## Phase 8: Orders & Approval Workflows (Weeks 11-12)
 
-### 7.1 Order Explorer
+### 8.1 Order Explorer
 - [ ] Create `src/features/orders/types.ts`
 - [ ] Create `src/features/orders/store/ordersSlice.ts`
 - [ ] Create `src/features/orders/components/OrderList.tsx`
@@ -392,7 +443,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/orders/pages/OrderExplorerPage.tsx`
 - [ ] Write tests for order explorer
 
-### 7.2 Order Details
+### 8.2 Order Details
 - [ ] Create `src/features/orders/components/OrderDetails.tsx`
 - [ ] Create `src/features/orders/components/OrderTimeline.tsx`
 - [ ] Create `src/features/orders/components/ApprovalWorkflow.tsx`
@@ -400,27 +451,27 @@ cd react && yarn type-check
 - [ ] Create `src/features/orders/pages/OrderDetailsPage.tsx`
 - [ ] Write tests for order details
 
-### 7.3 Order Operations
+### 8.3 Order Operations
 - [ ] Create `src/features/orders/components/ApproveOrderButton.tsx`
 - [ ] Create `src/features/orders/components/DenyOrderButton.tsx`
 - [ ] Create `src/features/orders/components/CancelOrderButton.tsx`
 - [ ] Create `src/features/orders/components/ResubmitOrderButton.tsx`
 - [ ] Write tests for order operations
 
-### 7.4 Order State Management
+### 8.4 Order State Management
 - [ ] Implement order status polling in ordersSlice
 - [ ] Create `src/features/orders/hooks/useOrderPolling.ts`
 - [ ] Write tests for order state management
 
-### 7.5 Integration Tests
+### 8.5 Integration Tests
 - [ ] Write integration test for order approval workflow
 - [ ] Write integration test for order tracking
 
 ---
 
-## Phase 8: VM-Specific Gap Closure (Weeks 11-12)
+## Phase 9: VM-Specific Gap Closure (Weeks 12-13)
 
-### 8.1 VM Details
+### 9.1 VM Details
 - [ ] Create `src/features/vms/types.ts`
 - [ ] Create `src/features/vms/store/vmsSlice.ts`
 - [ ] Create `src/features/vms/components/VMInfo.tsx`
@@ -429,28 +480,28 @@ cd react && yarn type-check
 - [ ] Create `src/features/vms/pages/VMDetailsPage.tsx`
 - [ ] Write tests for VM details
 
-### 8.2 VM Snapshots
+### 9.2 VM Snapshots
 - [ ] Create `src/features/vms/components/SnapshotList.tsx`
 - [ ] Create `src/features/vms/components/CreateSnapshotDialog.tsx`
 - [ ] Create `src/features/vms/components/RevertSnapshotDialog.tsx`
 - [ ] Create `src/features/vms/components/DeleteSnapshotDialog.tsx`
 - [ ] Write tests for snapshot management
 
-### 8.3 VM Operations
+### 9.3 VM Operations
 - [ ] Create `src/features/vms/components/VMPowerOperations.tsx`
 - [ ] Create `src/features/vms/components/VMConsoleAccess.tsx`
 - [ ] Create `src/features/vms/components/RetireVMDialog.tsx`
 - [ ] Write tests for VM operations
 
-### 8.4 Gap Analysis
+### 9.4 Gap Analysis
 - [ ] Document any remaining VM gaps not covered by Services domain
 - [ ] Confirm no VM-specific features are missing
 
 ---
 
-## Phase 9: Quality, Accessibility & Performance (Weeks 12-13)
+## Phase 10: Quality, Accessibility & Performance (Weeks 13-14)
 
-### 9.1 Unit Testing
+### 10.1 Unit Testing
 - [ ] Ensure all components have unit tests
 - [ ] Ensure all hooks have unit tests
 - [ ] Ensure all utility functions have tests
@@ -458,26 +509,26 @@ cd react && yarn type-check
 - [ ] Verify reliable local test execution
 - [ ] Verify CI test execution
 
-### 9.2 Integration Testing
+### 10.2 Integration Testing
 - [ ] Write integration tests for all major feature flows
 - [ ] Write API integration tests
 - [ ] Write user flow tests
 - [ ] Ensure PR CI coverage meets requirements
 
-### 9.3 End-to-End Testing
+### 10.3 End-to-End Testing
 - [ ] Write E2E tests for critical paths
 - [ ] Perform cross-browser testing
 - [ ] Run accessibility testing with axe DevTools
 - [ ] Run performance testing with Lighthouse
 
-### 9.4 Bug Fixes & Hardening
+### 10.4 Bug Fixes & Hardening
 - [ ] Address all test failures
 - [ ] Fix identified bugs
 - [ ] Optimize performance bottlenecks
 - [ ] Fix accessibility issues
 - [ ] Complete security review
 
-### 9.5 Quality Gates
+### 10.5 Quality Gates
 - [ ] Verify all unit tests passing
 - [ ] Verify all integration tests passing
 - [ ] Verify E2E tests passing
@@ -487,23 +538,23 @@ cd react && yarn type-check
 
 ---
 
-## Phase 10: Deployment, Cutover & Documentation (Weeks 13-14)
+## Phase 11: Deployment, Cutover & Documentation (Weeks 14-15)
 
-### 10.1 Documentation
+### 11.1 Documentation
 - [ ] Update `README.md` with React setup instructions
 - [ ] Create migration guide in `docs/migration-guide.md`
 - [ ] Update API documentation
 - [ ] Document deployment process in `docs/deployment.md`
 - [ ] Document rollback procedures in `docs/rollback.md`
 
-### 10.2 Deployment Preparation
+### 11.2 Deployment Preparation
 - [ ] Optimize production build configuration
 - [ ] Optimize assets (images, fonts, etc.)
 - [ ] Run bundle size analysis with webpack-bundle-analyzer
 - [ ] Complete security audit
 - [ ] Perform performance tuning
 
-### 10.3 Cutover Planning
+### 11.3 Cutover Planning
 - [ ] Deploy to staging environment
 - [ ] Conduct user acceptance testing (UAT)
 - [ ] Create production deployment plan
@@ -511,13 +562,13 @@ cd react && yarn type-check
 - [ ] Set up monitoring and alerting
 - [ ] Obtain feature parity sign-off from stakeholders
 
-### 10.4 User & Support Resources
+### 11.4 User & Support Resources
 - [ ] Create user documentation
 - [ ] Create support documentation
 - [ ] Document known limitations
 - [ ] Create follow-up backlog for post-migration improvements
 
-### 10.5 Production Deployment
+### 11.5 Production Deployment
 - [ ] Execute production deployment
 - [ ] Verify application functionality in production
 - [ ] Monitor for errors and performance issues
@@ -528,7 +579,7 @@ cd react && yarn type-check
 ## Completion Criteria
 
 The migration is complete when:
-- [ ] All phases 1-10 tasks are checked off
+- [ ] All phases 1-11 tasks are checked off
 - [ ] All tests are passing (unit, integration, E2E)
 - [ ] CI/CD pipeline is green
 - [ ] Accessibility audit passed
