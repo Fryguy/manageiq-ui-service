@@ -102,11 +102,11 @@ manageiq-ui-service/
 - [x] Write tests for authSlice and usePermissions
 
 ### 1.7 Internationalization
-- [ ] Create `src/i18n/index.ts` with ttag compatibility layer (__, N_, ngettext_)
-- [ ] Create `src/i18n/config.ts` for locale loading
-- [ ] Add i18n scripts to `package.json` (extract, update, compile)
-- [ ] Create `src/features/layout/components/LanguageSwitcher.tsx`
-- [ ] Test i18n extraction workflow with sample strings
+- [x] Create `src/i18n/index.ts` with ttag compatibility layer (__, N_, ngettext_)
+- [x] Create `src/i18n/config.ts` for locale loading
+- [x] Add i18n scripts to `package.json` (extract, update, compile)
+- [x] Create `src/features/layout/components/LanguageSwitcher.tsx`
+- [x] Test i18n extraction workflow with sample strings
 
 ### 1.8 Core Infrastructure
 - [x] Create `src/components/common/ErrorBoundary.tsx`
