@@ -203,28 +203,45 @@ describe('authSlice', () => {
   });
 
   describe('login', () => {
-    it('should handle successful login', async () => {
-      const mockResponse = {
+    it('should handle successful login with two-step process', async () => {
+      const mockLoginResponse = {
         auth_token: 'test-token',
-        identity: { id: '1', name: 'Test User', role: 'admin' },
-        authorization: {
-          identity: { id: '1', name: 'Test User', role: 'admin' },
-          product_features: { service_edit: true },
-        },
         expires_on: '2026-12-31T23:59:59Z',
       };
 
-      (authApi.login as jest.Mock).mockResolvedValue(mockResponse);
+      const mockAuthResponse = {
+        identity: {
+          userid: 'testuser',
+          name: 'Test User',
+          user_href: '/api/users/1',
+          group: 'EvmGroup-super_administrator',
+          group_href: '/api/groups/1',
+          role: 'EvmRole-super_administrator',
+          role_href: '/api/roles/1',
+          tenant: 'My Company',
+          groups: ['EvmGroup-super_administrator'],
+        },
+        authorization: {
+          product_features: { service_edit: {}, service_view: {} },
+        },
+      };
+
+      (authApi.login as jest.Mock).mockResolvedValue(mockLoginResponse);
+      (authApi.getAuthorization as jest.Mock).mockResolvedValue(mockAuthResponse);
 
       await store.dispatch(login({ username: 'testuser', password: 'password' }));
 
       const state = store.getState().auth;
       expect(state.session.token).toBe('test-token');
-      expect(state.session.identity).toEqual(mockResponse.identity);
-      expect(state.session.features).toEqual(mockResponse.authorization.product_features);
+      expect(state.session.identity).toEqual(mockAuthResponse.identity);
+      expect(state.session.features).toEqual(mockAuthResponse.authorization.product_features);
       expect(state.isAuthenticated).toBe(true);
       expect(state.loading).toBe(false);
       expect(state.error).toBeNull();
+
+      // Verify both API calls were made
+      expect(authApi.login).toHaveBeenCalledWith({ username: 'testuser', password: 'password' });
+      expect(authApi.getAuthorization).toHaveBeenCalled();
 
       // Verify localStorage was updated
       const stored = JSON.parse(localStorageMock.getItem('manageiq_session') || '{}');
@@ -246,8 +263,30 @@ describe('authSlice', () => {
       expect(state.error).toBe(errorMessage);
     });
 
+    it('should handle authorization fetch failure after successful login', async () => {
+      const mockLoginResponse = {
+        auth_token: 'test-token',
+        expires_on: '2026-12-31T23:59:59Z',
+      };
+
+      (authApi.login as jest.Mock).mockResolvedValue(mockLoginResponse);
+      (authApi.getAuthorization as jest.Mock).mockRejectedValue({
+        response: { data: { error: 'Authorization failed' } },
+      });
+
+      await store.dispatch(login({ username: 'testuser', password: 'password' }));
+
+      const state = store.getState().auth;
+      expect(state.session.token).toBeNull();
+      expect(state.isAuthenticated).toBe(false);
+      expect(state.error).toBe('Authorization failed');
+    });
+
     it('should set loading state during login', () => {
       (authApi.login as jest.Mock).mockImplementation(
+        () => new Promise((resolve) => setTimeout(resolve, 100))
+      );
+      (authApi.getAuthorization as jest.Mock).mockImplementation(
         () => new Promise((resolve) => setTimeout(resolve, 100))
       );
 
@@ -359,8 +398,20 @@ describe('authSlice', () => {
   describe('refreshAuthorization', () => {
     it('should update authorization data', async () => {
       const mockAuth = {
-        identity: { id: '1', name: 'Updated User', role: 'admin' },
-        product_features: { service_edit: true, service_delete: true },
+        identity: {
+          userid: 'admin',
+          name: 'Updated User',
+          user_href: '/api/users/1',
+          group: 'EvmGroup-super_administrator',
+          group_href: '/api/groups/1',
+          role: 'EvmRole-super_administrator',
+          role_href: '/api/roles/1',
+          tenant: 'My Company',
+          groups: ['EvmGroup-super_administrator'],
+        },
+        authorization: {
+          product_features: { service_edit: {}, service_delete: {} },
+        },
       };
 
       (authApi.getAuthorization as jest.Mock).mockResolvedValue(mockAuth);
@@ -369,7 +420,7 @@ describe('authSlice', () => {
 
       const state = store.getState().auth;
       expect(state.session.identity).toEqual(mockAuth.identity);
-      expect(state.session.features).toEqual(mockAuth.product_features);
+      expect(state.session.features).toEqual(mockAuth.authorization.product_features);
     });
 
     it('should handle refresh failure', async () => {

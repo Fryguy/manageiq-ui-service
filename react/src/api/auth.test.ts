@@ -1,6 +1,6 @@
 import { authApi } from './auth';
 import { getApiClient } from './client';
-import { Authorization, ActionResponse } from './types';
+import { ActionResponse } from './types';
 
 // Mock the API client
 jest.mock('./client');
@@ -11,16 +11,31 @@ describe('Auth API', () => {
     get: jest.Mock;
     post: jest.Mock;
     delete: jest.Mock;
+    getAxiosInstance: jest.Mock;
+  };
+  
+  let mockAxiosInstance: {
+    get: jest.Mock;
+    post: jest.Mock;
+    delete: jest.Mock;
   };
 
   beforeEach(() => {
     jest.clearAllMocks();
+
+    // Create mock axios instance
+    mockAxiosInstance = {
+      get: jest.fn(),
+      post: jest.fn(),
+      delete: jest.fn(),
+    };
 
     // Create mock client methods
     mockClient = {
       get: jest.fn(),
       post: jest.fn(),
       delete: jest.fn(),
+      getAxiosInstance: jest.fn().mockReturnValue(mockAxiosInstance),
     };
 
     // Mock getApiClient to return our mock client
@@ -28,31 +43,41 @@ describe('Auth API', () => {
   });
 
   describe('login', () => {
-    it('sends login credentials to /auth endpoint', async () => {
+    it('sends login credentials with Basic Auth header', async () => {
       const credentials = {
-        user: 'admin',
+        username: 'admin',
         password: 'password123',
       };
 
       const mockResponse = {
-        auth_token: 'token-abc-123',
-        token_ttl: 3600,
-        expires_on: '2026-06-05T02:40:00Z',
+        data: {
+          auth_token: 'token-abc-123',
+          token_ttl: 3600,
+          expires_on: '2026-06-05T02:40:00Z',
+        },
       };
 
-      mockClient.post.mockResolvedValue(mockResponse);
+      mockAxiosInstance.get.mockResolvedValue(mockResponse);
 
       const result = await authApi.login(credentials);
 
-      expect(mockClient.post).toHaveBeenCalledWith('/auth', {
-        auth: credentials,
+      expect(mockClient.getAxiosInstance).toHaveBeenCalled();
+      expect(mockAxiosInstance.get).toHaveBeenCalledWith('/auth', {
+        params: {
+          requester_type: 'ui',
+        },
+        headers: {
+          'Authorization': 'Basic YWRtaW46cGFzc3dvcmQxMjM=', // base64(admin:password123)
+          'X-Auth-Token': undefined,
+          'X-Requested-With': 'XMLHttpRequest',
+        },
       });
-      expect(result).toEqual(mockResponse);
+      expect(result).toEqual(mockResponse.data);
     });
 
     it('handles login errors', async () => {
       const credentials = {
-        user: 'admin',
+        username: 'admin',
         password: 'wrongpassword',
       };
 
@@ -63,7 +88,7 @@ describe('Auth API', () => {
         },
       };
 
-      mockClient.post.mockRejectedValue(mockError);
+      mockAxiosInstance.get.mockRejectedValue(mockError);
 
       await expect(authApi.login(credentials)).rejects.toEqual(mockError);
     });
@@ -93,40 +118,46 @@ describe('Auth API', () => {
   });
 
   describe('getAuthorization', () => {
-    it('fetches authorization data with correct params', async () => {
-      const mockAuthorization: Authorization = {
-        product_features: {
-          'service_view': {},
-          'service_edit': {},
-          'catalog_items_view': {},
-        },
-        identity: {
-          userid: 'admin',
-          name: 'Administrator',
-          user_href: '/api/users/1',
-          group: 'EvmGroup-super_administrator',
-          group_href: '/api/groups/1',
-          role: 'EvmRole-super_administrator',
-          role_href: '/api/roles/1',
-          tenant: 'My Company',
-        },
-      };
-
+    it('fetches authorization data with correct params and headers', async () => {
       const mockResponse = {
-        authorization: mockAuthorization,
+        data: {
+          identity: {
+            userid: 'admin',
+            name: 'Administrator',
+            user_href: '/api/users/1',
+            group: 'EvmGroup-super_administrator',
+            group_href: '/api/groups/1',
+            role: 'EvmRole-super_administrator',
+            role_href: '/api/roles/1',
+            tenant: 'My Company',
+            groups: ['EvmGroup-super_administrator'],
+          },
+          authorization: {
+            product_features: {
+              'service_view': {},
+              'service_edit': {},
+              'catalog_items_view': {},
+            },
+          },
+        },
       };
 
-      mockClient.get.mockResolvedValue(mockResponse);
+      mockAxiosInstance.get.mockResolvedValue(mockResponse);
 
       const result = await authApi.getAuthorization();
 
-      expect(mockClient.get).toHaveBeenCalledWith('/', {
+      expect(mockClient.getAxiosInstance).toHaveBeenCalled();
+      expect(mockAxiosInstance.get).toHaveBeenCalledWith('/', {
         params: {
           attributes: 'authorization',
         },
+        headers: {
+          'X-Auth-Skip-Token-Renewal': 'true',
+        },
       });
-      expect(result).toEqual(mockResponse);
-      expect(result.authorization).toEqual(mockAuthorization);
+      expect(result).toEqual(mockResponse.data);
+      expect(result.identity.userid).toBe('admin');
+      expect(result.authorization.product_features).toBeDefined();
     });
 
     it('handles authorization fetch errors', async () => {
@@ -137,7 +168,7 @@ describe('Auth API', () => {
         },
       };
 
-      mockClient.get.mockRejectedValue(mockError);
+      mockAxiosInstance.get.mockRejectedValue(mockError);
 
       await expect(authApi.getAuthorization()).rejects.toEqual(mockError);
     });

@@ -10,7 +10,7 @@ import { Authorization, SessionData, ActionResponse } from './types';
  */
 
 export interface LoginCredentials {
-  user: string;
+  username: string;
   password: string;
 }
 
@@ -21,7 +21,20 @@ export interface LoginResponse {
 }
 
 export interface AuthorizationResponse {
-  authorization: Authorization;
+  identity: {
+    userid: string;
+    name: string;
+    user_href: string;
+    group: string;
+    group_href: string;
+    role: string;
+    role_href: string;
+    tenant: string;
+    groups: string[];
+  };
+  authorization: {
+    product_features: Record<string, unknown>;
+  };
 }
 
 /**
@@ -30,13 +43,32 @@ export interface AuthorizationResponse {
 export const authApi = {
   /**
    * Login with username and password
-   * POST /api/auth
+   * GET /api/auth?requester_type=ui
+   * Uses Basic Authentication header
+   * 
+   * Based on Angular implementation in authentication-api.factory.js
    */
   async login(credentials: LoginCredentials): Promise<LoginResponse> {
     const client = getApiClient();
-    return client.post<LoginResponse>('/auth', {
-      auth: credentials,
+    
+    // Create Basic Auth header: base64(username:password)
+    const basicAuth = btoa(`${credentials.username}:${credentials.password}`);
+    
+    // Get the underlying axios instance to bypass the token interceptor
+    const axiosInstance = client.getAxiosInstance();
+    
+    const response = await axiosInstance.get<LoginResponse>('/auth', {
+      params: {
+        requester_type: 'ui',
+      },
+      headers: {
+        'Authorization': `Basic ${basicAuth}`,
+        'X-Auth-Token': undefined,
+        'X-Requested-With': 'XMLHttpRequest',
+      },
     });
+    
+    return response.data;
   },
 
   /**
@@ -53,14 +85,22 @@ export const authApi = {
    * GET /api?attributes=authorization
    *
    * Based on getUserAuthorizations() in session.service.js
+   * Response structure: { identity: {...}, authorization: { product_features: {...} } }
    */
   async getAuthorization(): Promise<AuthorizationResponse> {
     const client = getApiClient();
-    return client.get<AuthorizationResponse>('/', {
+    const axiosInstance = client.getAxiosInstance();
+    
+    const response = await axiosInstance.get<AuthorizationResponse>('/', {
       params: {
         attributes: 'authorization',
       },
+      headers: {
+        'X-Auth-Skip-Token-Renewal': 'true',
+      },
     });
+    
+    return response.data;
   },
 
   /**

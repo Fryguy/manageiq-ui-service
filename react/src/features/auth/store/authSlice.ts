@@ -70,14 +70,33 @@ const clearSessionFromStorage = (): void => {
 
 /**
  * Login with username and password
+ * First gets auth token, then fetches authorization data
  */
 export const login = createAsyncThunk<AuthResponse, LoginCredentials>(
   'auth/login',
-  async (credentials, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue, dispatch, getState }) => {
     try {
-      const response = await authApi.login(credentials);
-      return response;
+      // Step 1: Get auth token
+      const loginResponse = await authApi.login(credentials);
+      
+      // Step 2: Temporarily set the token so the next API call can use it
+      // This mimics Angular's Session.setAuthToken() before getUserAuthorizations()
+      dispatch(setToken(loginResponse.auth_token));
+      
+      // Step 3: Fetch authorization data (like Angular's getUserAuthorizations)
+      const authResponse = await authApi.getAuthorization();
+      
+      // Combine responses
+      // Note: authResponse has { identity: {...}, authorization: { product_features: {...} } }
+      return {
+        auth_token: loginResponse.auth_token,
+        expires_on: loginResponse.expires_on,
+        identity: authResponse.identity,
+        authorization: authResponse.authorization,
+      };
     } catch (error: any) {
+      // Clear token on error
+      dispatch(clearSession());
       return rejectWithValue(error.response?.data?.error || 'Login failed');
     }
   }
@@ -116,12 +135,19 @@ export const logout = createAsyncThunk<void, void>(
 /**
  * Refresh user authorization data
  */
-export const refreshAuthorization = createAsyncThunk<Authorization, void>(
+export const refreshAuthorization = createAsyncThunk<
+  { identity: any; product_features: Record<string, unknown> },
+  void
+>(
   'auth/refreshAuthorization',
   async (_, { rejectWithValue }) => {
     try {
       const response = await authApi.getAuthorization();
-      return response;
+      // Return the structure expected by the reducer
+      return {
+        identity: response.identity,
+        product_features: response.authorization.product_features,
+      };
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.error || 'Failed to refresh authorization');
     }
