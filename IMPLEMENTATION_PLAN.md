@@ -226,14 +226,14 @@ cd react && yarn type-check
 - [x] Write integration test for dashboard page
 
 ### 3.2 User Profile & Settings
-- [ ] Create `src/features/profile/types.ts`
-- [ ] Create `src/features/profile/store/profileSlice.ts`
-- [ ] Create `src/features/profile/components/ProfileInfo.tsx`
-- [ ] Create `src/features/profile/components/ProfileEditForm.tsx`
-- [ ] Create `src/features/profile/components/LanguageSettings.tsx`
-- [ ] Create `src/features/profile/components/NotificationSettings.tsx` (if in scope)
-- [ ] Create `src/features/profile/pages/ProfilePage.tsx`
-- [ ] Write tests for profile components
+- [x] Create `src/features/profile/types.ts`
+- [x] Create `src/features/profile/store/profileSlice.ts`
+- [x] Create `src/features/profile/components/ProfileInfo.tsx`
+- [x] Create `src/features/profile/components/ProfileEditForm.tsx`
+- [x] Create `src/features/profile/components/LanguageSettings.tsx`
+- [x] Create `src/features/profile/components/NotificationSettings.tsx` (if in scope)
+- [x] Create `src/features/profile/pages/ProfilePage.tsx`
+- [x] Write tests for profile components
 
 ### 3.3 About Page
 - [ ] Create `src/features/about/components/VersionInfo.tsx`
