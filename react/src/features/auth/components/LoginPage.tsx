@@ -1,6 +1,6 @@
 /**
  * LoginPage Component
- * 
+ *
  * Provides the login interface for the ManageIQ Service UI.
  * Supports both username/password authentication and OIDC.
  */
@@ -21,11 +21,11 @@ import type { LoginCredentials } from '../types';
 
 /**
  * LoginPage component
- * 
+ *
  * Renders a login form with username and password fields.
  * Handles authentication and redirects to the intended destination
  * or dashboard after successful login.
- * 
+ *
  * @example
  * ```tsx
  * <Route path="/login" element={<LoginPage />} />
@@ -42,7 +42,7 @@ export const LoginPage: React.FC = () => {
   const [validationError, setValidationError] = useState<string | null>(null);
 
   // Get the redirect path from location state, default to root
-  const from = (location.state as any)?.from?.pathname || '/';
+  const from = (location.state as { from?: { pathname?: string } })?.from?.pathname || '/';
 
   /**
    * Redirect to intended destination if already authenticated
@@ -184,7 +184,6 @@ export const LoginPage: React.FC = () => {
                   onChange={handleUsernameChange}
                   disabled={isLoading}
                   autoComplete="username"
-                  autoFocus
                   required
                 />
 

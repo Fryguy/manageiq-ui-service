@@ -10,7 +10,6 @@ import {
   Catalog,
   Application,
   ShoppingCart,
-  Document,
   VirtualMachine,
   UserAvatar,
 } from '@carbon/icons-react';
@@ -132,7 +131,7 @@ const Sidebar = ({ isExpanded }: SidebarProps) => {
     // If item has children, render as menu
     if (item.children && item.children.length > 0) {
       const visibleChildren = item.children.filter(isItemVisible);
-      
+
       if (visibleChildren.length === 0) {
         return null;
       }

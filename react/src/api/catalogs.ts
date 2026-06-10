@@ -1,5 +1,5 @@
 import { getApiClient } from './client';
-import { CollectionResponse, QueryParams, ActionRequest, ActionResponse, BaseResource } from './types';
+import { CollectionResponse, QueryParams, ActionResponse, BaseResource } from './types';
 
 /**
  * Catalogs API endpoints

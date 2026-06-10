@@ -22,27 +22,27 @@ const Breadcrumbs = ({ className = '' }: BreadcrumbsProps) => {
   const navigate = useNavigate();
 
   /**
-   * Route segment to label mapping
-   * This can be extended as new routes are added
-   */
-  const routeLabels: Record<string, string> = {
-    dashboard: 'Dashboard',
-    catalogs: 'Service Catalog',
-    services: 'My Services',
-    orders: 'My Orders',
-    vms: 'Virtual Machines',
-    profile: 'My Profile',
-    about: 'About',
-    settings: 'Settings',
-    details: 'Details',
-    edit: 'Edit',
-    new: 'New',
-  };
-
-  /**
    * Generate breadcrumb segments from current path
    */
   const breadcrumbs = useMemo((): BreadcrumbSegment[] => {
+    /**
+     * Route segment to label mapping
+     * This can be extended as new routes are added
+     */
+    const routeLabels: Record<string, string> = {
+      dashboard: 'Dashboard',
+      catalogs: 'Service Catalog',
+      services: 'My Services',
+      orders: 'My Orders',
+      vms: 'Virtual Machines',
+      profile: 'My Profile',
+      about: 'About',
+      settings: 'Settings',
+      details: 'Details',
+      edit: 'Edit',
+      new: 'New',
+    };
+
     const pathSegments = location.pathname
       .split('/')
       .filter((segment) => segment !== '');
@@ -54,7 +54,7 @@ const Breadcrumbs = ({ className = '' }: BreadcrumbsProps) => {
     const segments: BreadcrumbSegment[] = [{ label: 'Home', path: '/' }];
 
     let currentPath = '';
-    pathSegments.forEach((segment, index) => {
+    pathSegments.forEach((segment) => {
       currentPath += `/${segment}`;
 
       // Try to get a human-readable label, fallback to segment itself

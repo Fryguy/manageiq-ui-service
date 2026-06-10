@@ -16,7 +16,6 @@ import authReducer, {
   clearSession,
 } from './authSlice';
 import { authApi } from '../../../api/auth';
-import type { AuthState } from '../types';
 
 // Mock the auth API
 jest.mock('../../../api/auth', () => ({

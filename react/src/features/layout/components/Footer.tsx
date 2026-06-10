@@ -31,7 +31,7 @@ const Footer = ({ className = '' }: FooterProps) => {
             release: data.server_info?.release,
           });
         }
-      } catch (error) {
+      } catch {
         // Silently fail - version info is not critical
         // In production, this would be logged to a monitoring service
       }

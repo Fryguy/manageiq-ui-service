@@ -10,7 +10,6 @@ import {
   SkipToContent,
 } from '@carbon/react';
 import { UserAvatar, Notification, Switcher } from '@carbon/icons-react';
-import { useAuth } from '../../auth/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
 
@@ -20,14 +19,8 @@ interface HeaderProps {
 }
 
 const Header = ({ onMenuClick, isSideNavExpanded = false }: HeaderProps) => {
-  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
 
   const handleProfileClick = () => {
     navigate('/profile');

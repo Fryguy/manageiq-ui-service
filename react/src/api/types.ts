@@ -21,7 +21,7 @@ export interface CollectionResponse<T> {
 /**
  * Generic resource response structure
  */
-export interface ResourceResponse<T> {
+export interface ResourceResponse {
   href: string;
   id: string;
   [key: string]: unknown;

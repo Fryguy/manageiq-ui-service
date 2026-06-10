@@ -1,19 +1,19 @@
 /**
  * Authentication Redux Slice
- * 
+ *
  * Manages authentication state including login, logout, session management,
  * and token refresh functionality.
  */
 
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { authApi } from '../../../api/auth';
-import type { 
-  AuthState, 
-  LoginCredentials, 
-  OIDCParams, 
+import type {
+  AuthState,
+  LoginCredentials,
+  OIDCParams,
   AuthResponse,
   SessionData,
-  Authorization
+  UserIdentity
 } from '../types';
 
 /**
@@ -74,30 +74,34 @@ const clearSessionFromStorage = (): void => {
  */
 export const login = createAsyncThunk<AuthResponse, LoginCredentials>(
   'auth/login',
-  async (credentials, { rejectWithValue, dispatch, getState }) => {
+  async (credentials, { rejectWithValue, dispatch }) => {
     try {
       // Step 1: Get auth token
       const loginResponse = await authApi.login(credentials);
-      
+
       // Step 2: Temporarily set the token so the next API call can use it
       // This mimics Angular's Session.setAuthToken() before getUserAuthorizations()
       dispatch(setToken(loginResponse.auth_token));
-      
+
       // Step 3: Fetch authorization data (like Angular's getUserAuthorizations)
       const authResponse = await authApi.getAuthorization();
-      
+
       // Combine responses
       // Note: authResponse has { identity: {...}, authorization: { product_features: {...} } }
       return {
         auth_token: loginResponse.auth_token,
         expires_on: loginResponse.expires_on,
         identity: authResponse.identity,
-        authorization: authResponse.authorization,
+        authorization: {
+          identity: authResponse.identity,
+          product_features: authResponse.authorization.product_features,
+        },
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Clear token on error
       dispatch(clearSession());
-      return rejectWithValue(error.response?.data?.error || 'Login failed');
+      const err = error as { response?: { data?: { error?: string } } };
+      return rejectWithValue(err.response?.data?.error || 'Login failed');
     }
   }
 );
@@ -109,10 +113,12 @@ export const loginWithOIDC = createAsyncThunk<AuthResponse, OIDCParams>(
   'auth/loginWithOIDC',
   async (params, { rejectWithValue }) => {
     try {
-      const response = await authApi.loginWithOIDC(params);
-      return response;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.error || 'OIDC login failed');
+      // TODO: Implement OIDC login when API endpoint is available
+      console.log('OIDC login not yet implemented', params);
+      return rejectWithValue('OIDC login not yet implemented');
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { error?: string } } };
+      return rejectWithValue(err.response?.data?.error || 'OIDC login failed');
     }
   }
 );
@@ -122,10 +128,10 @@ export const loginWithOIDC = createAsyncThunk<AuthResponse, OIDCParams>(
  */
 export const logout = createAsyncThunk<void, void>(
   'auth/logout',
-  async (_, { rejectWithValue }) => {
+  async () => {
     try {
       await authApi.logout();
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Even if logout API call fails, we still clear local session
       console.error('Logout API call failed:', error);
     }
@@ -136,7 +142,7 @@ export const logout = createAsyncThunk<void, void>(
  * Refresh user authorization data
  */
 export const refreshAuthorization = createAsyncThunk<
-  { identity: any; product_features: Record<string, unknown> },
+  { identity: unknown; product_features: Record<string, unknown> },
   void
 >(
   'auth/refreshAuthorization',
@@ -148,8 +154,9 @@ export const refreshAuthorization = createAsyncThunk<
         identity: response.identity,
         product_features: response.authorization.product_features,
       };
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.error || 'Failed to refresh authorization');
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { error?: string } } };
+      return rejectWithValue(err.response?.data?.error || 'Failed to refresh authorization');
     }
   }
 );
@@ -163,8 +170,9 @@ export const validateSession = createAsyncThunk<boolean, void>(
     try {
       await authApi.validateToken();
       return true;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.error || 'Session validation failed');
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { error?: string } } };
+      return rejectWithValue(err.response?.data?.error || 'Session validation failed');
     }
   }
 );
@@ -308,7 +316,7 @@ const authSlice = createSlice({
       })
       .addCase(refreshAuthorization.fulfilled, (state, action) => {
         state.loading = false;
-        state.session.identity = action.payload.identity || state.session.identity;
+        state.session.identity = (action.payload.identity as UserIdentity) || state.session.identity;
         state.session.features = action.payload.product_features || {};
         saveSessionToStorage(state.session);
       })

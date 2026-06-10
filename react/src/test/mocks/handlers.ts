@@ -140,11 +140,11 @@ export const handlers = [
   http.get(`${API_BASE}`, ({ request }) => {
     const url = new URL(request.url);
     const attributes = url.searchParams.get('attributes');
-    
+
     if (attributes === 'authorization') {
       return HttpResponse.json(mockAuthorization);
     }
-    
+
     return HttpResponse.json({
       name: 'ManageIQ API',
       description: 'REST API',
@@ -156,7 +156,7 @@ export const handlers = [
   http.get(`${API_BASE}/services`, ({ request }) => {
     const url = new URL(request.url);
     const expand = url.searchParams.get('expand');
-    
+
     return HttpResponse.json({
       name: 'services',
       count: mockServices.length,
@@ -173,10 +173,10 @@ export const handlers = [
     return HttpResponse.json(service);
   }),
 
-  http.post(`${API_BASE}/services/:id`, async ({ params, request }) => {
-    const body = await request.json() as any;
+  http.post(`${API_BASE}/services/:id`, async ({ request }) => {
+    const body = await request.json() as { action: string };
     const action = body.action;
-    
+
     return HttpResponse.json({
       success: true,
       message: `Action ${action} initiated`,
@@ -188,7 +188,7 @@ export const handlers = [
   http.get(`${API_BASE}/service_catalogs`, ({ request }) => {
     const url = new URL(request.url);
     const expand = url.searchParams.get('expand');
-    
+
     return HttpResponse.json({
       name: 'service_catalogs',
       count: mockCatalogs.length,
@@ -208,7 +208,7 @@ export const handlers = [
   http.get(`${API_BASE}/service_templates`, ({ request }) => {
     const url = new URL(request.url);
     const expand = url.searchParams.get('expand');
-    
+
     return HttpResponse.json({
       name: 'service_templates',
       count: mockServiceTemplates.length,
@@ -225,10 +225,10 @@ export const handlers = [
     return HttpResponse.json(template);
   }),
 
-  http.post(`${API_BASE}/service_templates/:id`, async ({ params, request }) => {
-    const body = await request.json() as any;
+  http.post(`${API_BASE}/service_templates/:id`, async ({ request }) => {
+    const body = await request.json() as { action: string };
     const action = body.action;
-    
+
     if (action === 'order') {
       return HttpResponse.json({
         results: [{
@@ -237,7 +237,7 @@ export const handlers = [
         }],
       });
     }
-    
+
     return HttpResponse.json({
       success: true,
       message: `Action ${action} initiated`,
@@ -248,7 +248,7 @@ export const handlers = [
   http.get(`${API_BASE}/service_requests`, ({ request }) => {
     const url = new URL(request.url);
     const expand = url.searchParams.get('expand');
-    
+
     return HttpResponse.json({
       name: 'service_requests',
       count: mockOrders.length,
@@ -265,10 +265,10 @@ export const handlers = [
     return HttpResponse.json(order);
   }),
 
-  http.post(`${API_BASE}/service_requests/:id`, async ({ params, request }) => {
-    const body = await request.json() as any;
+  http.post(`${API_BASE}/service_requests/:id`, async ({ request }) => {
+    const body = await request.json() as { action: string };
     const action = body.action;
-    
+
     return HttpResponse.json({
       success: true,
       message: `Action ${action} completed`,
@@ -279,7 +279,7 @@ export const handlers = [
   http.get(`${API_BASE}/vms`, ({ request }) => {
     const url = new URL(request.url);
     const expand = url.searchParams.get('expand');
-    
+
     return HttpResponse.json({
       name: 'vms',
       count: mockVMs.length,
@@ -296,10 +296,10 @@ export const handlers = [
     return HttpResponse.json(vm);
   }),
 
-  http.post(`${API_BASE}/vms/:id`, async ({ params, request }) => {
-    const body = await request.json() as any;
+  http.post(`${API_BASE}/vms/:id`, async ({ request }) => {
+    const body = await request.json() as { action: string };
     const action = body.action;
-    
+
     return HttpResponse.json({
       success: true,
       message: `Action ${action} initiated`,

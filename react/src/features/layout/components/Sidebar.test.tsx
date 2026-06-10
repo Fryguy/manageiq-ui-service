@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
@@ -46,9 +46,9 @@ describe('Sidebar', () => {
       dashboard_view: true,
       service_view: true,
     };
-    
+
     renderSidebar({}, features);
-    
+
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('My Services')).toBeInTheDocument();
     expect(screen.queryByText('Service Catalog')).not.toBeInTheDocument();
@@ -62,9 +62,9 @@ describe('Sidebar', () => {
       miq_request_view: true,
       vm_explorer: true,
     };
-    
+
     renderSidebar({}, features);
-    
+
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Service Catalog')).toBeInTheDocument();
     expect(screen.getByText('My Services')).toBeInTheDocument();
@@ -81,9 +81,9 @@ describe('Sidebar', () => {
     const features = {
       dashboard_view: true,
     };
-    
+
     renderSidebar({}, features);
-    
+
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.queryByText('Service Catalog')).not.toBeInTheDocument();
     expect(screen.queryByText('My Services')).not.toBeInTheDocument();

@@ -16,7 +16,7 @@ export const formatDate = (
 
   try {
     const dateObj = typeof date === 'string' ? parseISO(date) : date;
-    
+
     if (!isValid(dateObj)) {
       return '';
     }
@@ -72,7 +72,7 @@ export const formatRelativeTime = (
 
   try {
     const dateObj = typeof date === 'string' ? parseISO(date) : date;
-    
+
     if (!isValid(dateObj)) {
       return '';
     }
@@ -97,7 +97,7 @@ export const formatRelativeDate = (
 
   try {
     const dateObj = typeof date === 'string' ? parseISO(date) : date;
-    
+
     if (!isValid(dateObj)) {
       return '';
     }
@@ -172,7 +172,7 @@ export const isValidDate = (date: string | Date | null | undefined): boolean => 
   try {
     const dateObj = typeof date === 'string' ? parseISO(date) : date;
     return isValid(dateObj);
-  } catch (error) {
+  } catch {
     return false;
   }
 };

@@ -1,5 +1,5 @@
 import { getApiClient } from './client';
-import { Authorization, SessionData, ActionResponse } from './types';
+import { ActionResponse } from './types';
 
 /**
  * Authentication API endpoints
@@ -45,18 +45,18 @@ export const authApi = {
    * Login with username and password
    * GET /api/auth?requester_type=ui
    * Uses Basic Authentication header
-   * 
+   *
    * Based on Angular implementation in authentication-api.factory.js
    */
   async login(credentials: LoginCredentials): Promise<LoginResponse> {
     const client = getApiClient();
-    
+
     // Create Basic Auth header: base64(username:password)
     const basicAuth = btoa(`${credentials.username}:${credentials.password}`);
-    
+
     // Get the underlying axios instance to bypass the token interceptor
     const axiosInstance = client.getAxiosInstance();
-    
+
     const response = await axiosInstance.get<LoginResponse>('/auth', {
       params: {
         requester_type: 'ui',
@@ -67,7 +67,7 @@ export const authApi = {
         'X-Requested-With': 'XMLHttpRequest',
       },
     });
-    
+
     return response.data;
   },
 
@@ -90,7 +90,7 @@ export const authApi = {
   async getAuthorization(): Promise<AuthorizationResponse> {
     const client = getApiClient();
     const axiosInstance = client.getAxiosInstance();
-    
+
     const response = await axiosInstance.get<AuthorizationResponse>('/', {
       params: {
         attributes: 'authorization',
@@ -99,7 +99,7 @@ export const authApi = {
         'X-Auth-Skip-Token-Renewal': 'true',
       },
     });
-    
+
     return response.data;
   },
 
