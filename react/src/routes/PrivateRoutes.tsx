@@ -1,15 +1,15 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useAppSelector } from '../store/hooks';
 
 export interface PrivateRoutesProps {
-  isAuthenticated?: boolean;
   redirectTo?: string;
 }
 
 export function PrivateRoutes({
-  isAuthenticated = false,
   redirectTo = '/login',
 }: PrivateRoutesProps) {
   const location = useLocation();
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   if (!isAuthenticated) {
     return <Navigate replace state={{ from: location }} to={redirectTo} />;

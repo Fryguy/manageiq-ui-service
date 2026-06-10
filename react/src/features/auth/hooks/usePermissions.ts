@@ -7,6 +7,7 @@
  */
 
 import { useCallback, useMemo } from 'react';
+import { shallowEqual } from 'react-redux';
 import { useAppSelector } from '../../../store/hooks';
 import type { FeatureId, RoleId, UserIdentity } from '../types';
 
@@ -79,11 +80,15 @@ const ALL_ROLES = '_ALL_';
  * ```
  */
 export const usePermissions = (): UsePermissionsReturn => {
-  // Select auth state from Redux store
-  const { identity, features } = useAppSelector((state) => ({
-    identity: state.auth.session.identity,
-    features: state.auth.session.features,
-  }));
+  // Select auth state from Redux store with shallow equality check
+  // to prevent unnecessary re-renders when object references change
+  const { identity, features } = useAppSelector(
+    (state) => ({
+      identity: state.auth.session.identity,
+      features: state.auth.session.features,
+    }),
+    shallowEqual
+  );
 
   /**
    * Check if user has a specific feature permission

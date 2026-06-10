@@ -109,6 +109,9 @@ describe('authSlice', () => {
     });
 
     it('should handle invalid JSON in localStorage', () => {
+      // Suppress expected console.error output
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+
       localStorageMock.setItem('manageiq_session', 'invalid-json');
 
       store.dispatch(initializeSession());
@@ -116,6 +119,14 @@ describe('authSlice', () => {
       const state = store.getState().auth;
       expect(state.session.token).toBeNull();
       expect(state.isAuthenticated).toBe(false);
+
+      // Verify error was logged (but suppressed from output)
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        'Failed to load session from storage:',
+        expect.any(Error)
+      );
+
+      consoleErrorSpy.mockRestore();
     });
   });
 
@@ -312,6 +323,9 @@ describe('authSlice', () => {
     });
 
     it('should clear session even if logout API fails', async () => {
+      // Suppress expected console.error output
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+
       store = configureStore({
         reducer: { auth: authReducer },
         preloadedState: {
@@ -331,6 +345,14 @@ describe('authSlice', () => {
       const state = store.getState().auth;
       expect(state.session.token).toBeNull();
       expect(state.isAuthenticated).toBe(false);
+
+      // Verify error was logged (but suppressed from output)
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        'Logout API call failed:',
+        expect.any(Error)
+      );
+
+      consoleErrorSpy.mockRestore();
     });
   });
 

@@ -1,12 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PrivateRoutes from './PrivateRoutes';
+import { LoginPage } from '../features/auth/components/LoginPage';
 
 function DashboardPage() {
   return <div>Dashboard</div>;
-}
-
-function LoginPage() {
-  return <div>Login</div>;
 }
 
 function NotFoundPage() {
@@ -16,7 +13,7 @@ function NotFoundPage() {
 export const appRoutes = [
   {
     path: '/',
-    element: <PrivateRoutes isAuthenticated={false} />,
+    element: <PrivateRoutes />,
     children: [
       {
         index: true,
