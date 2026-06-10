@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Search } from '@carbon/react';
 import { debounce } from 'lodash';
 
@@ -10,7 +10,6 @@ export interface SearchBarProps {
   debounceMs?: number;
   disabled?: boolean;
   size?: 'sm' | 'md' | 'lg';
-  light?: boolean;
   labelText?: string;
   closeButtonLabelText?: string;
 }
@@ -23,17 +22,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   debounceMs = 300,
   disabled = false,
   size = 'md',
-  light = false,
   labelText = 'Search',
   closeButtonLabelText = 'Clear search input',
 }) => {
   const [internalValue, setInternalValue] = useState(controlledValue || '');
 
   // Create debounced onChange handler
-  const debouncedOnChange = useCallback(
-    debounce((value: string) => {
-      onChange(value);
-    }, debounceMs),
+  const debouncedOnChange = useMemo(
+    () =>
+      debounce((value: string) => {
+        onChange(value);
+      }, debounceMs),
     [onChange, debounceMs]
   );
 
@@ -62,7 +61,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       onClear={handleClear}
       disabled={disabled}
       size={size}
-      light={light}
       labelText={labelText}
       closeButtonLabelText={closeButtonLabelText}
     />

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Modal as CarbonModal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from '@carbon/react';
+import { Modal as CarbonModal } from '@carbon/react';
 
 export interface ModalProps {
   open: boolean;
@@ -19,7 +14,6 @@ export interface ModalProps {
   secondaryButtonDisabled?: boolean;
   danger?: boolean;
   size?: 'xs' | 'sm' | 'md' | 'lg';
-  preventCloseOnClickOutside?: boolean;
   hasScrollingContent?: boolean;
   modalHeading?: string;
   modalLabel?: string;
@@ -37,10 +31,9 @@ export const Modal: React.FC<ModalProps> = ({
   onPrimaryClick,
   onSecondaryClick,
   primaryButtonDisabled = false,
-  secondaryButtonDisabled = false,
+  secondaryButtonDisabled: _secondaryButtonDisabled = false,
   danger = false,
   size = 'md',
-  preventCloseOnClickOutside = false,
   hasScrollingContent = false,
   modalHeading,
   modalLabel,
@@ -72,10 +65,9 @@ export const Modal: React.FC<ModalProps> = ({
       onRequestSubmit={handlePrimaryClick}
       onSecondarySubmit={handleSecondaryClick}
       primaryButtonDisabled={primaryButtonDisabled || loading}
-      secondaryButtonDisabled={secondaryButtonDisabled || loading}
       danger={danger}
       size={size}
-      preventCloseOnClickOutside={preventCloseOnClickOutside}
+      preventCloseOnClickOutside={!passiveModal}
       hasScrollingContent={hasScrollingContent}
       passiveModal={passiveModal}
     >

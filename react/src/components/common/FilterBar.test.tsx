@@ -49,8 +49,8 @@ describe('FilterBar', () => {
       />
     );
     
-    expect(screen.getByText('Status')).toBeInTheDocument();
-    expect(screen.getByText('Type')).toBeInTheDocument();
+    expect(screen.getAllByText('Status')[0]).toBeInTheDocument();
+    expect(screen.getAllByText('Type')[0]).toBeInTheDocument();
   });
 
   it('displays active filters as tags', () => {
@@ -74,7 +74,7 @@ describe('FilterBar', () => {
       />
     );
     
-    const closeButton = screen.getByRole('button', { name: /clear filter/i });
+    const closeButton = screen.getByRole('button', { name: /dismiss/i });
     fireEvent.click(closeButton);
     
     expect(mockOnFilterChange).toHaveBeenCalledWith([]);

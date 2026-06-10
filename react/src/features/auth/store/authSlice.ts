@@ -111,12 +111,26 @@ export const login = createAsyncThunk<AuthResponse, LoginCredentials>(
  */
 export const loginWithOIDC = createAsyncThunk<AuthResponse, OIDCParams>(
   'auth/loginWithOIDC',
-  async (params, { rejectWithValue }) => {
+  async (params, { dispatch, rejectWithValue }) => {
     try {
-      // TODO: Implement OIDC login when API endpoint is available
-      console.log('OIDC login not yet implemented', params);
-      return rejectWithValue('OIDC login not yet implemented');
+      const response = await authApi.loginWithOIDC(params);
+
+      // Store token in localStorage
+      if (response.auth_token) {
+        localStorage.setItem('miq_token', response.auth_token);
+        dispatch(setToken(response.auth_token));
+      }
+
+      // Return the full response including identity and authorization
+      return {
+        auth_token: response.auth_token,
+        expires_on: response.expires_on,
+        identity: response.identity,
+        authorization: response.authorization,
+      } as AuthResponse;
     } catch (error: unknown) {
+      // Clear token on error
+      dispatch(clearSession());
       const err = error as { response?: { data?: { error?: string } } };
       return rejectWithValue(err.response?.data?.error || 'OIDC login failed');
     }

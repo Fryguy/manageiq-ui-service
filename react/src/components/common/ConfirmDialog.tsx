@@ -40,6 +40,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
       danger={danger}
       size="sm"
       loading={loading}
+      passiveModal={false}
     >
       <div style={{ padding: '1rem 0' }}>
         {typeof message === 'string' ? <p>{message}</p> : message}

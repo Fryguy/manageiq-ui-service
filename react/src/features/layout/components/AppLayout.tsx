@@ -40,7 +40,6 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         />
         <Sidebar
           isExpanded={isSideNavExpanded}
-          onToggle={handleMenuClick}
         />
         <Content className="app-layout__content">
           <div className="app-layout__breadcrumbs">

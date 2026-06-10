@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   DataTable as CarbonDataTable,
   Table,
@@ -25,7 +25,7 @@ export interface Column {
 }
 
 export interface DataTableProps {
-  rows: Array<Record<string, any>>;
+  rows: Array<Record<string, unknown>>;
   columns: Column[];
   title?: string;
   description?: string;
@@ -34,7 +34,7 @@ export interface DataTableProps {
   searchable?: boolean;
   paginated?: boolean;
   pageSize?: number;
-  onRowSelect?: (selectedRows: Array<Record<string, any>>) => void;
+  onRowSelect?: (selectedRows: Array<Record<string, unknown>>) => void;
   onSearch?: (searchTerm: string) => void;
   emptyStateMessage?: string;
 }
@@ -84,8 +84,8 @@ export const DataTable: React.FC<DataTableProps> = ({
     }
 
     return [...filteredRows].sort((a, b) => {
-      const aValue = a[sortState.columnKey!];
-      const bValue = b[sortState.columnKey!];
+      const aValue = a[sortState.columnKey!] as string | number;
+      const bValue = b[sortState.columnKey!] as string | number;
 
       if (aValue === bValue) return 0;
 
@@ -103,12 +103,12 @@ export const DataTable: React.FC<DataTableProps> = ({
     return sortedRows.slice(startIndex, endIndex);
   }, [sortedRows, currentPage, itemsPerPage, paginated]);
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setSearchTerm(value);
+  const handleSearch = (_event: unknown, value?: string) => {
+    const searchValue = value || '';
+    setSearchTerm(searchValue);
     setCurrentPage(1); // Reset to first page on search
     if (onSearch) {
-      onSearch(value);
+      onSearch(searchValue);
     }
   };
 
@@ -141,17 +141,23 @@ export const DataTable: React.FC<DataTableProps> = ({
     return null;
   };
 
-  const handleSelectionChange = (selectedRows: any) => {
-    if (onRowSelect) {
-      const selectedData = selectedRows.map((row: any) => row.cells);
+  const selectedRowsRef = useRef<unknown[]>([]);
+
+  const handleSelectionChange = (selectedRows: unknown[]) => {
+    selectedRowsRef.current = selectedRows;
+  };
+
+  useEffect(() => {
+    if (selectable && onRowSelect && selectedRowsRef.current.length > 0) {
+      const selectedData = selectedRowsRef.current.map((row) => row as Record<string, unknown>);
       onRowSelect(selectedData);
     }
-  };
+  }, [selectable, onRowSelect]);
 
   return (
     <CarbonDataTable
       rows={paginatedRows.map((row, index) => ({
-        id: row.id || `row-${index}`,
+        id: String(row.id || `row-${index}`),
         ...row,
       }))}
       headers={columns.map((col) => ({
@@ -168,13 +174,11 @@ export const DataTable: React.FC<DataTableProps> = ({
         getTableProps,
         getTableContainerProps,
         selectedRows,
-      }: any) => {
-        // Call onRowSelect when selection changes
-        React.useEffect(() => {
-          if (selectable && onRowSelect) {
-            handleSelectionChange(selectedRows);
-          }
-        }, [selectedRows]);
+      }) => {
+        // Update selection ref when selection changes
+        if (selectable && selectedRows !== selectedRowsRef.current) {
+          handleSelectionChange(selectedRows);
+        }
 
         return (
           <TableContainer
@@ -197,7 +201,7 @@ export const DataTable: React.FC<DataTableProps> = ({
               <TableHead>
                 <TableRow>
                   {selectable && <TableSelectAll {...getSelectionProps()} />}
-                  {headers.map((header: any) => {
+                  {headers.map((header) => {
                     const column = columns.find((col) => col.key === header.key);
                     const isSortable = sortable && column?.sortable !== false;
 
@@ -228,14 +232,18 @@ export const DataTable: React.FC<DataTableProps> = ({
                     </TableCell>
                   </TableRow>
                 ) : (
-                  tableRows.map((row: any) => (
-                    <TableRow key={row.id} {...getRowProps({ row })}>
-                      {selectable && <TableSelectRow {...getSelectionProps({ row })} />}
-                      {row.cells.map((cell: any) => (
-                        <TableCell key={cell.id}>{cell.value}</TableCell>
-                      ))}
-                    </TableRow>
-                  ))
+                  tableRows.map((row) => {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    const { key, ...rowPropsWithoutKey } = getRowProps({ row });
+                    return (
+                      <TableRow key={row.id} {...rowPropsWithoutKey}>
+                        {selectable && <TableSelectRow {...getSelectionProps({ row })} />}
+                        {row.cells.map((cell) => (
+                          <TableCell key={cell.id}>{String(cell.value ?? '')}</TableCell>
+                        ))}
+                      </TableRow>
+                    );
+                  })
                 )}
               </TableBody>
             </Table>
@@ -245,7 +253,7 @@ export const DataTable: React.FC<DataTableProps> = ({
                 pageSize={itemsPerPage}
                 pageSizes={[10, 20, 30, 40, 50]}
                 page={currentPage}
-                onChange={({ page, pageSize }: any) => {
+                onChange={({ page, pageSize }: { page: number; pageSize: number }) => {
                   setCurrentPage(page);
                   setItemsPerPage(pageSize);
                 }}

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FilterableMultiSelect,
   Dropdown,
   Button,
-  Tag,
+  DismissibleTag,
 } from '@carbon/react';
 import { Filter, Close } from '@carbon/icons-react';
 import './FilterBar.scss';
@@ -43,21 +43,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onClearAll,
   disabled = false,
 }) => {
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
-
-  const toggleCategory = (categoryId: string) => {
-    setExpandedCategories((prev) => {
-      const next = new Set(prev);
-      if (next.has(categoryId)) {
-        next.delete(categoryId);
-      } else {
-        next.add(categoryId);
-      }
-      return next;
-    });
-  };
-
-  const handleMultiSelectChange = (categoryId: string, categoryLabel: string, selectedItems: any[]) => {
+  const handleMultiSelectChange = (categoryId: string, categoryLabel: string, selectedItems: FilterOption[]) => {
     // Remove existing filters for this category
     const otherFilters = activeFilters.filter((f) => f.categoryId !== categoryId);
 
@@ -72,7 +58,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     onFilterChange([...otherFilters, ...newFilters]);
   };
 
-  const handleDropdownChange = (categoryId: string, categoryLabel: string, selectedItem: any) => {
+  const handleDropdownChange = (categoryId: string, categoryLabel: string, selectedItem: FilterOption | null) => {
     // Remove existing filters for this category
     const otherFilters = activeFilters.filter((f) => f.categoryId !== categoryId);
 
@@ -120,7 +106,6 @@ export const FilterBar: React.FC<FilterBarProps> = ({
       <div className="filter-bar__controls">
         <div className="filter-bar__categories">
           {categories.map((category) => {
-            const isExpanded = expandedCategories.has(category.id);
             const type = category.type || 'multiselect';
 
             return (
@@ -132,7 +117,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                     items={category.options}
                     itemToString={(item: FilterOption) => item?.label || ''}
                     selectedItems={getSelectedItemsForCategory(category.id)}
-                    onChange={({ selectedItems }: any) =>
+                    onChange={({ selectedItems }: { selectedItems: FilterOption[] }) =>
                       handleMultiSelectChange(category.id, category.label, selectedItems || [])
                     }
                     disabled={disabled}
@@ -141,10 +126,11 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                   <Dropdown
                     id={`filter-${category.id}`}
                     titleText={category.label}
+                    label={category.label}
                     items={category.options}
                     itemToString={(item: FilterOption) => item?.label || ''}
                     selectedItem={getSelectedItemForCategory(category.id)}
-                    onChange={({ selectedItem }: any) =>
+                    onChange={({ selectedItem }: { selectedItem: FilterOption | null }) =>
                       handleDropdownChange(category.id, category.label, selectedItem)
                     }
                     disabled={disabled}
@@ -174,15 +160,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           </div>
           <div className="filter-bar__tags">
             {activeFilters.map((filter, index) => (
-              <Tag
+              <DismissibleTag
                 key={`${filter.categoryId}-${filter.optionId}-${index}`}
                 type="blue"
-                filter
+                text={`${filter.categoryLabel}: ${filter.optionLabel}`}
                 onClose={() => handleRemoveFilter(filter)}
                 disabled={disabled}
-              >
-                {filter.categoryLabel}: {filter.optionLabel}
-              </Tag>
+              />
             ))}
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, RouteObject } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PrivateRoutes from './PrivateRoutes';
 import { LoginPage } from '../features/auth/components/LoginPage';
 import { useAuth } from '../features/auth/hooks/useAuth';

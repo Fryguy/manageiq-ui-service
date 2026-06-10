@@ -120,4 +120,27 @@ export const authApi = {
     const client = getApiClient();
     return client.get<{ token_ttl: number }>('/auth');
   },
+
+  /**
+   * Login with OIDC provider
+   * POST /api/auth with OIDC token
+   */
+  async loginWithOIDC(params: { provider?: string; token?: string }): Promise<LoginResponse & { identity?: unknown; authorization?: unknown }> {
+    const client = getApiClient();
+    const axiosInstance = client.getAxiosInstance();
+
+    const response = await axiosInstance.post<LoginResponse & { identity?: unknown; authorization?: unknown }>('/auth', {
+      provider: params.provider,
+      token: params.token,
+    }, {
+      params: {
+        requester_type: 'ui',
+      },
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    });
+
+    return response.data;
+  },
 };

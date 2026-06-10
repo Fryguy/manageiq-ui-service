@@ -18,7 +18,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 interface SidebarProps {
   isExpanded: boolean;
-  onToggle?: () => void;
 }
 
 interface NavItem {
