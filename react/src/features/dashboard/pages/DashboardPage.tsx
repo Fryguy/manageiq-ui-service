@@ -34,7 +34,7 @@ export const DashboardPage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="dashboard-page">
+      <div className="dashboard-page" data-testid="dashboard-page">
         <div className="dashboard-page__header">
           <h1 className="dashboard-page__title">{__('Dashboard')}</h1>
         </div>
@@ -49,7 +49,7 @@ export const DashboardPage: React.FC = () => {
   }
 
   return (
-    <div className="dashboard-page">
+    <div className="dashboard-page" data-testid="dashboard-page">
       <div className="dashboard-page__header">
         <h1 className="dashboard-page__title">{__('Dashboard')}</h1>
       </div>

@@ -135,6 +135,7 @@ export const LoginPage: React.FC = () => {
 
   return (
     <div
+      data-testid="login-page"
       style={{
         display: 'flex',
         justifyContent: 'center',
