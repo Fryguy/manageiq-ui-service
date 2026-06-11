@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   Header as CarbonHeader,
   HeaderContainer,
@@ -7,11 +7,11 @@ import {
   HeaderMenuButton,
   HeaderGlobalBar,
   HeaderGlobalAction,
-  SkipToContent,
+  HeaderPanel,
+  Theme,
 } from '@carbon/react';
-import { UserAvatar, Notification, Switcher } from '@carbon/icons-react';
-import { useNavigate } from 'react-router-dom';
-import LanguageSwitcher from './LanguageSwitcher';
+import { UserAvatar, Notification, ChevronDown } from '@carbon/icons-react';
+import { useAppSelector } from '../../../store/hooks';
 import './Header.css';
 
 interface HeaderProps {
@@ -20,20 +20,43 @@ interface HeaderProps {
 }
 
 const Header = ({ onMenuClick, isSideNavExpanded = false }: HeaderProps) => {
-  const navigate = useNavigate();
-  const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const identity = useAppSelector((state) => state.auth.session.identity);
+
+  const displayName = useMemo(() => {
+    if (!identity) {
+      return 'User';
+    }
+
+    const name = typeof identity.name === 'string' ? identity.name : undefined;
+    const userid = typeof identity.userid === 'string' ? identity.userid : undefined;
+    const username = typeof identity.username === 'string' ? identity.username : undefined;
+
+    return name || userid || username || 'User';
+  }, [identity]);
+
+  const roleLabel = useMemo(() => {
+    if (!identity) {
+      return null;
+    }
+
+    return typeof identity.role === 'string' ? identity.role : null;
+  }, [identity]);
 
   const handleProfileClick = () => {
-    navigate('/profile');
+    setIsProfileMenuOpen((current) => !current);
+  };
+
+  const handleCloseProfileMenu = () => {
+    setIsProfileMenuOpen(false);
   };
 
   return (
     <HeaderContainer
       render={() => (
         <CarbonHeader aria-label="ManageIQ Service UI">
-          <SkipToContent />
           <HeaderMenuButton
-            aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
+            aria-label={isSideNavExpanded ? 'Close navigation' : 'Open navigation'}
             onClick={onMenuClick}
             isActive={isSideNavExpanded}
           />
@@ -53,32 +76,37 @@ const Header = ({ onMenuClick, isSideNavExpanded = false }: HeaderProps) => {
               <Notification size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction
-              aria-label="Language"
-              tooltipAlignment="end"
-              onClick={() => setShowLanguageSwitcher(!showLanguageSwitcher)}
-            >
-              <Switcher size={20} />
-            </HeaderGlobalAction>
-            <HeaderGlobalAction
+              aria-controls="user-profile-panel"
+              aria-expanded={isProfileMenuOpen}
               aria-label="User Profile"
               tooltipAlignment="end"
               onClick={handleProfileClick}
             >
               <UserAvatar size={20} />
+              <ChevronDown size={16} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
-          {showLanguageSwitcher && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '48px',
-                right: '48px',
-                zIndex: 9999,
-              }}
-            >
-              <LanguageSwitcher onClose={() => setShowLanguageSwitcher(false)} />
-            </div>
-          )}
+          <HeaderPanel
+            aria-label="User profile panel"
+            expanded={isProfileMenuOpen}
+          >
+            <Theme theme="g100">
+              <div className="user-profile-menu">
+                <div className="user-profile-menu__header">
+                  <p className="user-profile-menu__eyebrow">Signed in as</p>
+                  <p className="user-profile-menu__name">{displayName}</p>
+                  {roleLabel && <p className="user-profile-menu__meta">{roleLabel}</p>}
+                </div>
+                <button
+                  className="user-profile-menu__item"
+                  onClick={handleCloseProfileMenu}
+                  type="button"
+                >
+                  User information
+                </button>
+              </div>
+            </Theme>
+          </HeaderPanel>
         </CarbonHeader>
       )}
     />

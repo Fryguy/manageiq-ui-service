@@ -298,10 +298,10 @@ cd react && yarn type-check
 ## Phase 5: Feature Parity True-Up & UX Alignment (Week 5)
 
 ### 5.1 Header Profile Menu Realignment
-- [ ] Remove the dedicated Profile page from the target UX
-- [ ] Remove the Profile entry from the side navigation
-- [ ] Replace profile-page behavior with a user information dropdown under the header profile icon
-- [ ] Align the profile dropdown with the IBM product header profile menu pattern
+- [x] Remove the dedicated Profile page from the target UX
+- [x] Remove the Profile entry from the side navigation
+- [x] Replace profile-page behavior with a user information dropdown under the header profile icon
+- [x] Align the profile dropdown with the IBM product header profile menu pattern
 
 ### 5.2 Logout & Language Switcher Consolidation
 - [ ] Remove Logout from the side navigation

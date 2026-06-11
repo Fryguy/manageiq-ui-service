@@ -5,17 +5,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import Header from './Header';
 import authReducer from '../../auth/store/authSlice';
 
-// Mock the LanguageSwitcher component
-jest.mock('./LanguageSwitcher', () => {
-  return function MockLanguageSwitcher({ onClose }: { onClose: () => void }) {
-    return (
-      <div data-testid="language-switcher">
-        <button onClick={onClose}>Close</button>
-      </div>
-    );
-  };
-});
-
 const createMockStore = (authState = {}) => {
   return configureStore({
     reducer: {
@@ -25,7 +14,7 @@ const createMockStore = (authState = {}) => {
       auth: {
         session: {
           token: 'test-token',
-          identity: { name: 'Test User', role: 'user' },
+          identity: { name: 'Test User', userid: 'testuser', role: 'user' },
           features: {},
         },
         loading: false,
@@ -54,75 +43,83 @@ describe('Header', () => {
     expect(screen.getByText('ManageIQ Service UI')).toBeInTheDocument();
   });
 
-  it('renders menu button', () => {
+  it('renders navigation toggle button', () => {
     renderHeader();
-    const menuButton = screen.getByLabelText(/menu/i);
-    expect(menuButton).toBeInTheDocument();
+    expect(screen.getByLabelText('Open navigation')).toBeInTheDocument();
   });
 
-  it('calls onMenuClick when menu button is clicked', () => {
+  it('calls onMenuClick when navigation toggle button is clicked', () => {
     const onMenuClick = jest.fn();
     renderHeader({ onMenuClick });
 
-    const menuButton = screen.getByLabelText(/menu/i);
-    fireEvent.click(menuButton);
+    fireEvent.click(screen.getByLabelText('Open navigation'));
 
     expect(onMenuClick).toHaveBeenCalledTimes(1);
   });
 
-  it('renders global action buttons', () => {
+  it('renders global action buttons for notifications and user profile', () => {
     renderHeader();
 
     expect(screen.getByLabelText('Notifications')).toBeInTheDocument();
-    expect(screen.getByLabelText('Language')).toBeInTheDocument();
     expect(screen.getByLabelText('User Profile')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Language')).not.toBeInTheDocument();
   });
 
-  it('shows language switcher when language button is clicked', () => {
+  it('shows the user profile panel with identity details when profile button is clicked', () => {
     renderHeader();
 
-    const languageButton = screen.getByLabelText('Language');
-    fireEvent.click(languageButton);
+    fireEvent.click(screen.getByLabelText('User Profile'));
 
-    expect(screen.getByTestId('language-switcher')).toBeInTheDocument();
+    expect(screen.getByLabelText('User profile panel')).toBeInTheDocument();
+    expect(screen.getByText('Signed in as')).toBeInTheDocument();
+    expect(screen.getByText('Test User')).toBeInTheDocument();
+    expect(screen.getByText('user')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'User information' })).toBeInTheDocument();
   });
 
-  it('hides language switcher when closed', () => {
+  it('keeps the user information action available after opening the profile panel', () => {
     renderHeader();
 
-    const languageButton = screen.getByLabelText('Language');
-    fireEvent.click(languageButton);
+    fireEvent.click(screen.getByLabelText('User Profile'));
 
-    expect(screen.getByTestId('language-switcher')).toBeInTheDocument();
-
-    const closeButton = screen.getByText('Close');
-    fireEvent.click(closeButton);
-
-    expect(screen.queryByTestId('language-switcher')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'User information' })).toBeInTheDocument();
   });
 
-  it('applies active state to menu button when expanded', () => {
+  it('falls back to userid when name is unavailable', () => {
+    renderHeader({}, {
+      session: {
+        token: 'test-token',
+        identity: { userid: 'fallback-user', role: 'admin' },
+        features: {},
+      },
+      loading: false,
+      error: null,
+      isAuthenticated: true,
+    });
+
+    fireEvent.click(screen.getByLabelText('User Profile'));
+
+    expect(screen.getByText('fallback-user')).toBeInTheDocument();
+    expect(screen.getByText('admin')).toBeInTheDocument();
+  });
+
+  it('applies active state to navigation toggle button when expanded', () => {
     renderHeader({ isSideNavExpanded: true });
 
-    const menuButton = screen.getByLabelText(/close menu/i);
-    expect(menuButton).toBeInTheDocument();
+    expect(screen.getByLabelText('Close navigation')).toBeInTheDocument();
   });
 
-  it('applies inactive state to menu button when collapsed', () => {
+  it('applies inactive state to navigation toggle button when collapsed', () => {
     renderHeader({ isSideNavExpanded: false });
 
-    const menuButton = screen.getByLabelText(/open menu/i);
-    expect(menuButton).toBeInTheDocument();
+    expect(screen.getByLabelText('Open navigation')).toBeInTheDocument();
   });
 
   it('hamburger menu button is always visible via CSS override', () => {
     const { container } = renderHeader();
 
-    // The hamburger menu button should have the cds--header__menu-toggle class
     const menuButton = container.querySelector('.cds--header__menu-toggle');
     expect(menuButton).toBeInTheDocument();
-
-    // Verify it's a button element
     expect(menuButton?.tagName).toBe('BUTTON');
   });
 });

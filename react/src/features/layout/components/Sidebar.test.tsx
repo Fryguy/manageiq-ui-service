@@ -55,7 +55,7 @@ describe('Sidebar', () => {
     expect(screen.queryByText('Service Catalog')).not.toBeInTheDocument();
   });
 
-  it('shows all items when user has all permissions', () => {
+  it('shows all feature-gated items when user has all permissions', () => {
     const features = {
       dashboard_view: true,
       svc_catalog_provision: true,
@@ -73,9 +73,9 @@ describe('Sidebar', () => {
     expect(screen.getByText('Virtual Machines')).toBeInTheDocument();
   });
 
-  it('always shows profile link regardless of permissions', () => {
+  it('does not render the profile link in the side navigation', () => {
     renderSidebar({}, {});
-    expect(screen.getByText('My Profile')).toBeInTheDocument();
+    expect(screen.queryByText('My Profile')).not.toBeInTheDocument();
   });
 
   it('hides items when user lacks permissions', () => {
@@ -100,9 +100,7 @@ describe('Sidebar', () => {
   it('renders with isFixedNav for persistent visibility', () => {
     const { container } = renderSidebar();
     const sideNav = container.querySelector('.cds--side-nav');
-    // Verify sidebar is rendered (isFixedNav makes it always present in DOM)
     expect(sideNav).toBeInTheDocument();
-    // When expanded, it should have the expanded class
     expect(sideNav).toHaveClass('cds--side-nav--expanded');
   });
 });

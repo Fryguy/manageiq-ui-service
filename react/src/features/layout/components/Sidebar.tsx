@@ -11,7 +11,6 @@ import {
   Application,
   ShoppingCart,
   VirtualMachine,
-  UserAvatar,
 } from '@carbon/icons-react';
 import { usePermissions } from '../../auth/hooks/usePermissions';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -35,7 +34,6 @@ const Sidebar = ({ isExpanded }: SidebarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Navigation structure with RBAC requirements
   const navItems: NavItem[] = [
     {
       id: 'dashboard',
@@ -72,30 +70,17 @@ const Sidebar = ({ isExpanded }: SidebarProps) => {
       icon: VirtualMachine,
       requiredFeature: 'vm_explorer',
     },
-    {
-      id: 'profile',
-      label: 'My Profile',
-      path: '/profile',
-      icon: UserAvatar,
-      // Profile is always accessible to authenticated users
-    },
   ];
 
-  /**
-   * Check if a navigation item should be visible based on RBAC
-   */
   const isItemVisible = (item: NavItem): boolean => {
-    // If no feature requirement, item is always visible
     if (!item.requiredFeature && !item.requiredFeatures) {
       return true;
     }
 
-    // Check single feature requirement
     if (item.requiredFeature) {
       return has(item.requiredFeature);
     }
 
-    // Check multiple feature requirements (any match)
     if (item.requiredFeatures) {
       return hasAny(item.requiredFeatures);
     }
@@ -103,23 +88,14 @@ const Sidebar = ({ isExpanded }: SidebarProps) => {
     return false;
   };
 
-  /**
-   * Check if current path matches the nav item
-   */
   const isActive = (path: string): boolean => {
     return location.pathname === path || location.pathname.startsWith(`${path}/`);
   };
 
-  /**
-   * Handle navigation click
-   */
   const handleNavClick = (path: string) => {
     navigate(path);
   };
 
-  /**
-   * Render a navigation item
-   */
   const renderNavItem = (item: NavItem) => {
     if (!isItemVisible(item)) {
       return null;
@@ -127,7 +103,6 @@ const Sidebar = ({ isExpanded }: SidebarProps) => {
 
     const Icon = item.icon;
 
-    // If item has children, render as menu
     if (item.children && item.children.length > 0) {
       const visibleChildren = item.children.filter(isItemVisible);
 
@@ -161,7 +136,6 @@ const Sidebar = ({ isExpanded }: SidebarProps) => {
       );
     }
 
-    // Render as simple link
     return (
       <SideNavLink
         key={item.id}
