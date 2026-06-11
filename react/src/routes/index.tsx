@@ -3,7 +3,6 @@ import PrivateRoutes from './PrivateRoutes';
 import { LoginPage } from '../features/auth/components/LoginPage';
 import { DashboardPage } from '../features/dashboard/pages/DashboardPage';
 import { ProfilePage } from '../features/profile/pages/ProfilePage';
-import { AboutPage } from '../features/about/pages/AboutPage';
 
 function NotFoundPage() {
   return <div>Page not found</div>;
@@ -21,10 +20,6 @@ export const appRoutes = [
       {
         path: 'profile',
         element: <ProfilePage />,
-      },
-      {
-        path: 'about',
-        element: <AboutPage />,
       },
     ],
   },

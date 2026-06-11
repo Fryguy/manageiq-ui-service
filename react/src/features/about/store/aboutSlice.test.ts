@@ -20,6 +20,7 @@ describe('aboutSlice', () => {
     const state = store.getState().about;
     expect(state).toEqual({
       appInfo: null,
+      modalInfo: null,
       loading: false,
       error: null,
     });
@@ -33,6 +34,7 @@ describe('aboutSlice', () => {
       preloadedState: {
         about: {
           appInfo: null,
+          modalInfo: null,
           loading: false,
           error: 'Some error',
         },

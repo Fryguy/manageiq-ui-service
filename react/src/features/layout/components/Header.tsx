@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import {
   Header as CarbonHeader,
   HeaderContainer,
@@ -11,9 +11,11 @@ import {
   Theme,
   Dropdown,
 } from '@carbon/react';
-import { UserAvatar, Notification, ChevronDown, Logout } from '@carbon/icons-react';
+import { UserAvatar, Notification, ChevronDown, Logout, Help } from '@carbon/icons-react';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { logout } from '../../auth/store/authSlice';
+import { fetchAboutModalInfo } from '../../about/store/aboutSlice';
+import { AboutModal } from '../../about/components/AboutModal';
 import { useNavigate } from 'react-router-dom';
 import {
   AVAILABLE_LOCALES,
@@ -32,7 +34,16 @@ interface HeaderProps {
 
 const Header = ({ onMenuClick, isSideNavExpanded = false }: HeaderProps) => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const identity = useAppSelector((state) => state.auth.session.identity);
+  const aboutModalInfo = useAppSelector((state) => state.about.modalInfo);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // Fetch about modal info on mount
+    dispatch(fetchAboutModalInfo());
+  }, [dispatch]);
 
   const displayName = useMemo(() => {
     if (!identity) {
@@ -62,7 +73,14 @@ const Header = ({ onMenuClick, isSideNavExpanded = false }: HeaderProps) => {
     setIsProfileMenuOpen(false);
   };
 
-  const dispatch = useAppDispatch();
+  const handleAboutClick = () => {
+    setIsAboutModalOpen(true);
+  };
+
+  const handleCloseAboutModal = () => {
+    setIsAboutModalOpen(false);
+  };
+
   const navigate = useNavigate();
   const [currentLocale, setCurrentLocale] = useState<LocaleCode>(getStoredLocale());
   const [isChangingLocale, setIsChangingLocale] = useState(false);
@@ -98,86 +116,100 @@ const Header = ({ onMenuClick, isSideNavExpanded = false }: HeaderProps) => {
   };
 
   return (
-    <HeaderContainer
-      render={() => (
-        <CarbonHeader aria-label="ManageIQ Service UI">
-          <HeaderMenuButton
-            aria-label={isSideNavExpanded ? 'Close navigation' : 'Open navigation'}
-            onClick={onMenuClick}
-            isActive={isSideNavExpanded}
-          />
-          <HeaderName href="/" prefix="">
-            ManageIQ Service UI
-          </HeaderName>
-          <HeaderNavigation aria-label="ManageIQ Service UI" />
-          <HeaderGlobalBar>
-            <HeaderGlobalAction
-              aria-label="Notifications"
-              tooltipAlignment="end"
-              onClick={() => {
-                // TODO: Implement notifications panel
-                console.log('Notifications clicked');
-              }}
+    <>
+      <HeaderContainer
+        render={() => (
+          <CarbonHeader aria-label="ManageIQ Service UI">
+            <HeaderMenuButton
+              aria-label={isSideNavExpanded ? 'Close navigation' : 'Open navigation'}
+              onClick={onMenuClick}
+              isActive={isSideNavExpanded}
+            />
+            <HeaderName href="/" prefix="">
+              ManageIQ Service UI
+            </HeaderName>
+            <HeaderNavigation aria-label="ManageIQ Service UI" />
+            <HeaderGlobalBar>
+              <HeaderGlobalAction
+                aria-label="Notifications"
+                tooltipAlignment="end"
+                onClick={() => {
+                  // TODO: Implement notifications panel
+                  console.log('Notifications clicked');
+                }}
+              >
+                <Notification size={20} />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction
+                aria-label="Help"
+                tooltipAlignment="end"
+                onClick={handleAboutClick}
+              >
+                <Help size={20} />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction
+                aria-controls="user-profile-panel"
+                aria-expanded={isProfileMenuOpen}
+                aria-label="User Profile"
+                tooltipAlignment="end"
+                onClick={handleProfileClick}
+              >
+                <UserAvatar size={20} />
+                <ChevronDown size={16} />
+              </HeaderGlobalAction>
+            </HeaderGlobalBar>
+            <HeaderPanel
+              aria-label="User profile panel"
+              expanded={isProfileMenuOpen}
             >
-              <Notification size={20} />
-            </HeaderGlobalAction>
-            <HeaderGlobalAction
-              aria-controls="user-profile-panel"
-              aria-expanded={isProfileMenuOpen}
-              aria-label="User Profile"
-              tooltipAlignment="end"
-              onClick={handleProfileClick}
-            >
-              <UserAvatar size={20} />
-              <ChevronDown size={16} />
-            </HeaderGlobalAction>
-          </HeaderGlobalBar>
-          <HeaderPanel
-            aria-label="User profile panel"
-            expanded={isProfileMenuOpen}
-          >
-            <Theme theme="g100">
-              <div className="user-profile-menu">
-                <div className="user-profile-menu__header">
-                  <p className="user-profile-menu__eyebrow">Signed in as</p>
-                  <p className="user-profile-menu__name">{displayName}</p>
-                  {roleLabel && <p className="user-profile-menu__meta">{roleLabel}</p>}
+              <Theme theme="g100">
+                <div className="user-profile-menu">
+                  <div className="user-profile-menu__header">
+                    <p className="user-profile-menu__eyebrow">Signed in as</p>
+                    <p className="user-profile-menu__name">{displayName}</p>
+                    {roleLabel && <p className="user-profile-menu__meta">{roleLabel}</p>}
+                  </div>
+                  <button
+                    className="user-profile-menu__item"
+                    onClick={handleCloseProfileMenu}
+                    type="button"
+                  >
+                    User information
+                  </button>
+                  <div className="user-profile-menu__divider" />
+                  <div className="user-profile-menu__section">
+                    <Dropdown
+                      id="language-switcher-profile"
+                      titleText={__('Language')}
+                      label={getLocaleName(currentLocale)}
+                      items={languageItems}
+                      itemToString={(item) => (item as { id: string; text: string } | null)?.text || ''}
+                      onChange={handleLocaleChange}
+                      disabled={isChangingLocale}
+                      size="sm"
+                    />
+                  </div>
+                  <div className="user-profile-menu__divider" />
+                  <button
+                    className="user-profile-menu__item user-profile-menu__item--logout"
+                    onClick={handleLogout}
+                    type="button"
+                  >
+                    <Logout size={16} />
+                    <span>{__('Logout')}</span>
+                  </button>
                 </div>
-                <button
-                  className="user-profile-menu__item"
-                  onClick={handleCloseProfileMenu}
-                  type="button"
-                >
-                  User information
-                </button>
-                <div className="user-profile-menu__divider" />
-                <div className="user-profile-menu__section">
-                  <Dropdown
-                    id="language-switcher-profile"
-                    titleText={__('Language')}
-                    label={getLocaleName(currentLocale)}
-                    items={languageItems}
-                    itemToString={(item) => (item as { id: string; text: string } | null)?.text || ''}
-                    onChange={handleLocaleChange}
-                    disabled={isChangingLocale}
-                    size="sm"
-                  />
-                </div>
-                <div className="user-profile-menu__divider" />
-                <button
-                  className="user-profile-menu__item user-profile-menu__item--logout"
-                  onClick={handleLogout}
-                  type="button"
-                >
-                  <Logout size={16} />
-                  <span>{__('Logout')}</span>
-                </button>
-              </div>
-            </Theme>
-          </HeaderPanel>
-        </CarbonHeader>
-      )}
-    />
+              </Theme>
+            </HeaderPanel>
+          </CarbonHeader>
+        )}
+      />
+      <AboutModal
+        open={isAboutModalOpen}
+        onClose={handleCloseAboutModal}
+        appInfo={aboutModalInfo || undefined}
+      />
+    </>
   );
 };
 
