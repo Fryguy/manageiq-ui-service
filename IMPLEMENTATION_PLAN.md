@@ -253,45 +253,45 @@ cd react && yarn type-check
 - [x] Write tests for layout integration
 
 ### 4.2 Add Missing Routes
-- [ ] Add `/profile` route to `src/routes/index.tsx` pointing to `ProfilePage`
-- [ ] Add `/about` route to `src/routes/index.tsx` pointing to `AboutPage`
-- [ ] Verify routes are protected by authentication
-- [ ] Test direct URL access to `/profile` and `/about`
-- [ ] Write tests for new routes
+- [x] Add `/profile` route to `src/routes/index.tsx` pointing to `ProfilePage`
+- [x] Add `/about` route to `src/routes/index.tsx` pointing to `AboutPage`
+- [x] Verify routes are protected by authentication
+- [x] Test direct URL access to `/profile` and `/about`
+- [x] Write tests for new routes
 
 ### 4.3 Connect Sidebar Navigation
-- [ ] Review `src/features/layout/components/Sidebar.tsx` navigation items
-- [ ] Ensure navigation items use React Router `Link` or `useNavigate`
-- [ ] Verify RBAC checks are applied to navigation items
-- [ ] Test navigation between Dashboard, Profile, and About
-- [ ] Write tests for navigation functionality
+- [x] Review `src/features/layout/components/Sidebar.tsx` navigation items
+- [x] Ensure navigation items use React Router `Link` or `useNavigate`
+- [x] Verify RBAC checks are applied to navigation items
+- [x] Test navigation between Dashboard, Profile, and About
+- [x] Write tests for navigation functionality
 
 ### 4.4 Verify Carbon Styling
-- [ ] Confirm Carbon theme is applied to all pages
-- [ ] Verify Carbon components render correctly
-- [ ] Check that Header, Sidebar, Footer styling is consistent
-- [ ] Test responsive behavior of layout
-- [ ] Run visual regression tests if available
+- [x] Confirm Carbon theme is applied to all pages
+- [x] Verify Carbon components render correctly
+- [x] Check that Header, Sidebar, Footer styling is consistent
+- [x] Test responsive behavior of layout
+- [-] Run visual regression tests if available
 
 ### 4.5 Integration Testing
-- [ ] Write integration test: Login → Dashboard (with layout)
-- [ ] Write integration test: Dashboard → Profile (via sidebar)
-- [ ] Write integration test: Dashboard → About (via sidebar or footer)
-- [ ] Write integration test: Breadcrumbs update correctly
-- [ ] Write integration test: Logout from any page
-- [ ] Verify all tests pass with `yarn test && yarn lint && yarn type-check`
+- [x] Write integration test: Login → Dashboard (with layout)
+- [x] Write integration test: Dashboard → Profile (via sidebar)
+- [x] Write integration test: Dashboard → About (via sidebar or footer)
+- [x] Write integration test: Breadcrumbs update correctly
+- [x] Write integration test: Logout from any page
+- [x] Verify all tests pass with `yarn test && yarn lint && yarn type-check`
 
 ### 4.6 Acceptance Criteria Verification
-- [ ] All authenticated pages render within AppLayout
-- [ ] Header, Sidebar, Footer visible on Dashboard, Profile, About
-- [ ] Profile page accessible via `/profile` route
-- [ ] About page accessible via `/about` route
-- [ ] Sidebar navigation links work correctly
-- [ ] Carbon styling applied consistently
-- [ ] Breadcrumbs reflect current location
-- [ ] RBAC checks applied to navigation items
-- [ ] All tests pass (unit, integration, type-check, lint)
-- [ ] No console errors or warnings
+- [x] All authenticated pages render within AppLayout
+- [x] Header, Sidebar, Footer visible on Dashboard, Profile, About
+- [x] Profile page accessible via `/profile` route
+- [x] About page accessible via `/about` route
+- [x] Sidebar navigation links work correctly
+- [x] Carbon styling applied consistently
+- [x] Breadcrumbs reflect current location
+- [x] RBAC checks applied to navigation items
+- [x] All tests pass (unit, integration, type-check, lint)
+- [x] No console errors or warnings
 
 ---
 

@@ -40,7 +40,7 @@ const Sidebar = ({ isExpanded }: SidebarProps) => {
     {
       id: 'dashboard',
       label: 'Dashboard',
-      path: '/dashboard',
+      path: '/',
       icon: Dashboard,
       requiredFeature: 'dashboard_view',
     },
