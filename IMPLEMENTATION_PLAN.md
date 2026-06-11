@@ -304,11 +304,11 @@ cd react && yarn type-check
 - [x] Align the profile dropdown with the IBM product header profile menu pattern
 
 ### 5.2 Logout & Language Switcher Consolidation
-- [ ] Remove Logout from the side navigation
-- [ ] Place Logout as the bottom-most entry in the header profile menu
-- [ ] Use a logout icon for the Logout menu action
-- [ ] Remove the standalone header language switcher entry
-- [ ] Embed the language switcher as a dropdown within the user profile menu, matching the Angular-side behavior
+- [x] Remove Logout from the side navigation
+- [x] Place Logout as the bottom-most entry in the header profile menu
+- [x] Use a logout icon for the Logout menu action
+- [x] Remove the standalone header language switcher entry
+- [x] Embed the language switcher as a dropdown within the user profile menu, matching the Angular-side behavior
 
 ### 5.3 About Experience Realignment
 - [ ] Remove the dedicated About page and route from the target UX
