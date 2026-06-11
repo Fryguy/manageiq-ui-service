@@ -2,7 +2,11 @@
   background-color: var(--cds-layer-01, #f4f4f4);
   border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
   padding: 1rem 2rem;
-  margin-top: auto;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 8000;
 }
 
 .app-footer__content {
@@ -10,6 +14,7 @@
   justify-content: space-between;
   align-items: center;
   max-width: 1584px;
+  width: 100%;
   margin: 0 auto;
   font-size: 0.875rem;
   color: var(--cds-text-secondary, #525252);

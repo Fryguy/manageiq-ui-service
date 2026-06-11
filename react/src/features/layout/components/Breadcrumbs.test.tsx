@@ -89,4 +89,18 @@ describe('Breadcrumbs', () => {
     expect(wrapper).toBeInTheDocument();
     expect(wrapper?.querySelector('.cds--breadcrumb')).toBeInTheDocument();
   });
+
+  it('includes app-layout__breadcrumbs class in wrapper', () => {
+    const { container } = renderBreadcrumbs('/dashboard');
+
+    const wrapper = container.querySelector('.app-layout__breadcrumbs');
+    expect(wrapper).toBeInTheDocument();
+    expect(wrapper?.querySelector('.cds--breadcrumb')).toBeInTheDocument();
+  });
+
+  it('does not render wrapper div when on home page', () => {
+    const { container } = renderBreadcrumbs('/');
+
+    expect(container.querySelector('.app-layout__breadcrumbs')).not.toBeInTheDocument();
+  });
 });

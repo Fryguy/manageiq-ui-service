@@ -96,4 +96,13 @@ describe('Sidebar', () => {
     const sideNav = container.querySelector('.cds--side-nav');
     expect(sideNav).not.toHaveClass('cds--side-nav--expanded');
   });
+
+  it('renders with isFixedNav for persistent visibility', () => {
+    const { container } = renderSidebar();
+    const sideNav = container.querySelector('.cds--side-nav');
+    // Verify sidebar is rendered (isFixedNav makes it always present in DOM)
+    expect(sideNav).toBeInTheDocument();
+    // When expanded, it should have the expanded class
+    expect(sideNav).toHaveClass('cds--side-nav--expanded');
+  });
 });

@@ -13,19 +13,19 @@ interface AppLayoutProps {
 
 /**
  * AppLayout Component
- * 
+ *
  * Main application layout that composes:
  * - Header with navigation and user actions
  * - Sidebar with RBAC-aware navigation menu
  * - Breadcrumbs for navigation context
  * - Content area for page content
  * - Footer with version and copyright info
- * 
+ *
  * Uses Carbon Design System components and follows
  * the IBM Carbon layout patterns.
  */
 const AppLayout = ({ children }: AppLayoutProps) => {
-  const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
+  const [isSideNavExpanded, setIsSideNavExpanded] = useState(true);
 
   const handleMenuClick = () => {
     setIsSideNavExpanded(!isSideNavExpanded);
@@ -42,14 +42,12 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           isExpanded={isSideNavExpanded}
         />
         <Content className="app-layout__content">
-          <div className="app-layout__breadcrumbs">
-            <Breadcrumbs />
-          </div>
+          <Breadcrumbs />
           <div className="app-layout__main">
             {children || <Outlet />}
           </div>
-          <Footer />
         </Content>
+        <Footer />
       </div>
     </Theme>
   );

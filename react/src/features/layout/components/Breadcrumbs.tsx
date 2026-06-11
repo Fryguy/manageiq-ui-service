@@ -80,13 +80,13 @@ const Breadcrumbs = ({ className = '' }: BreadcrumbsProps) => {
     navigate(path);
   };
 
-  // Don't render breadcrumbs on login page or if only home
-  if (location.pathname === '/login' || breadcrumbs.length <= 1) {
+  // Don't render breadcrumbs on login page, home page, or if only home
+  if (location.pathname === '/login' || location.pathname === '/' || breadcrumbs.length <= 1) {
     return null;
   }
 
   return (
-    <div className={className}>
+    <div className={`app-layout__breadcrumbs ${className}`}>
       <Breadcrumb noTrailingSlash aria-label="Breadcrumb navigation">
         {breadcrumbs.map((crumb, index) => {
           const isCurrentPage = index === breadcrumbs.length - 1;

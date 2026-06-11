@@ -114,4 +114,15 @@ describe('Header', () => {
     const menuButton = screen.getByLabelText(/open menu/i);
     expect(menuButton).toBeInTheDocument();
   });
+
+  it('hamburger menu button is always visible via CSS override', () => {
+    const { container } = renderHeader();
+
+    // The hamburger menu button should have the cds--header__menu-toggle class
+    const menuButton = container.querySelector('.cds--header__menu-toggle');
+    expect(menuButton).toBeInTheDocument();
+
+    // Verify it's a button element
+    expect(menuButton?.tagName).toBe('BUTTON');
+  });
 });

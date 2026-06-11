@@ -26,7 +26,7 @@ jest.mock('./Footer', () => {
 
 jest.mock('./Breadcrumbs', () => {
   return function MockBreadcrumbs() {
-    return <div data-testid="breadcrumbs">Breadcrumbs</div>;
+    return <div data-testid="breadcrumbs" className="app-layout__breadcrumbs">Breadcrumbs</div>;
   };
 });
 

@@ -1,0 +1,4 @@
+/* Force hamburger menu to always be visible regardless of screen size */
+.cds--header__menu-toggle {
+  display: flex !important;
+}

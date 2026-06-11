@@ -12,6 +12,7 @@ import {
 import { UserAvatar, Notification, Switcher } from '@carbon/icons-react';
 import { useNavigate } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
+import './Header.css';
 
 interface HeaderProps {
   onMenuClick?: () => void;

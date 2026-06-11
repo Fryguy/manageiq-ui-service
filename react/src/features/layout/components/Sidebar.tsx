@@ -178,7 +178,7 @@ const Sidebar = ({ isExpanded }: SidebarProps) => {
     <SideNav
       aria-label="Side navigation"
       expanded={isExpanded}
-      isPersistent={false}
+      isRail
     >
       <SideNavItems>
         {navItems.map(renderNavItem)}
