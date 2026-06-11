@@ -11,7 +11,11 @@ export const profileApi = {
    */
   getProfile: async (): Promise<UserProfile> => {
     const apiClient = getApiClient();
-    const response = await apiClient.get<{ identity: UserProfile }>('/api?attributes=identity');
+    const response = await apiClient.get<{ identity: UserProfile }>('/', {
+      params: {
+        attributes: 'identity',
+      },
+    });
     return response.identity;
   },
 
