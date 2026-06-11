@@ -46,3 +46,24 @@
 .user-profile-menu__item:hover {
   background: var(--cds-layer-hover);
 }
+
+.user-profile-menu__divider {
+  height: 1px;
+  margin: 0.5rem 0;
+  background: var(--cds-border-subtle);
+}
+
+.user-profile-menu__section {
+  padding: 0.5rem 1rem;
+}
+
+.user-profile-menu__item--logout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--cds-text-primary);
+}
+
+.user-profile-menu__item--logout:hover {
+  background: var(--cds-layer-hover);
+}

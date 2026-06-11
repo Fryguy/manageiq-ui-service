@@ -70,7 +70,6 @@ describe('Sidebar', () => {
     expect(screen.getByText('Service Catalog')).toBeInTheDocument();
     expect(screen.getByText('My Services')).toBeInTheDocument();
     expect(screen.getByText('My Orders')).toBeInTheDocument();
-    expect(screen.getByText('Virtual Machines')).toBeInTheDocument();
   });
 
   it('does not render the profile link in the side navigation', () => {

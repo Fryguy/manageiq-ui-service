@@ -10,7 +10,6 @@ import {
   Catalog,
   Application,
   ShoppingCart,
-  VirtualMachine,
 } from '@carbon/icons-react';
 import { usePermissions } from '../../auth/hooks/usePermissions';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -62,13 +61,6 @@ const Sidebar = ({ isExpanded }: SidebarProps) => {
       path: '/orders',
       icon: ShoppingCart,
       requiredFeature: 'miq_request_view',
-    },
-    {
-      id: 'vms',
-      label: 'Virtual Machines',
-      path: '/vms',
-      icon: VirtualMachine,
-      requiredFeature: 'vm_explorer',
     },
   ];
 
