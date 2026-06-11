@@ -7,7 +7,6 @@ import PrivateRoutes from './PrivateRoutes';
 import { LoginPage } from '../features/auth/components/LoginPage';
 import { DashboardPage } from '../features/dashboard/pages/DashboardPage';
 import { ProfilePage } from '../features/profile/pages/ProfilePage';
-import { AboutPage } from '../features/about/pages/AboutPage';
 
 // Mock AppLayout to avoid complex layout dependencies
 jest.mock('../features/layout/components/AppLayout', () => ({
@@ -73,7 +72,6 @@ describe('Layout & Navigation Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -99,7 +97,6 @@ describe('Layout & Navigation Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -130,7 +127,6 @@ describe('Layout & Navigation Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -149,44 +145,12 @@ describe('Layout & Navigation Integration Tests', () => {
     });
   });
 
-  describe('Integration Test: Dashboard → About (via sidebar or footer)', () => {
-    it('renders about page with layout when navigating from dashboard', async () => {
-      const store = createAuthenticatedStore();
-
-      // Render about page directly (simulating navigation)
-      render(
-        <Provider store={store}>
-          <MemoryRouter initialEntries={['/about']}>
-            <Routes>
-              <Route element={<PrivateRoutes />}>
-                <Route path="/" element={<DashboardPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
-              </Route>
-              <Route path="/login" element={<LoginPage />} />
-            </Routes>
-          </MemoryRouter>
-        </Provider>
-      );
-
-      // Verify we're on about page with layout
-      await waitFor(() => {
-        expect(screen.getByTestId('about-page')).toBeInTheDocument();
-        expect(screen.getByTestId('app-layout')).toBeInTheDocument();
-        expect(screen.getByTestId('mock-header')).toBeInTheDocument();
-        expect(screen.getByTestId('mock-sidebar')).toBeInTheDocument();
-        expect(screen.getByTestId('mock-footer')).toBeInTheDocument();
-      });
-    });
-  });
-
   describe('Integration Test: Breadcrumbs update correctly', () => {
     it('renders correct page based on route', async () => {
       const store = createAuthenticatedStore();
       const routes = [
         { path: '/', testId: 'dashboard-page' },
         { path: '/profile', testId: 'profile-page' },
-        { path: '/about', testId: 'about-page' },
       ];
 
       // Test each route renders correctly with layout
@@ -198,7 +162,6 @@ describe('Layout & Navigation Integration Tests', () => {
                 <Route element={<PrivateRoutes />}>
                   <Route path="/" element={<DashboardPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
-                  <Route path="/about" element={<AboutPage />} />
                 </Route>
                 <Route path="/login" element={<LoginPage />} />
               </Routes>
@@ -227,7 +190,6 @@ describe('Layout & Navigation Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -250,7 +212,6 @@ describe('Layout & Navigation Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -277,7 +238,6 @@ describe('Layout & Navigation Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -300,7 +260,6 @@ describe('Layout & Navigation Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -321,7 +280,6 @@ describe('Layout & Navigation Integration Tests', () => {
       const pages = [
         { path: '/', testId: 'dashboard-page' },
         { path: '/profile', testId: 'profile-page' },
-        { path: '/about', testId: 'about-page' },
       ];
 
       for (const page of pages) {
@@ -332,7 +290,6 @@ describe('Layout & Navigation Integration Tests', () => {
                 <Route element={<PrivateRoutes />}>
                   <Route path="/" element={<DashboardPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
-                  <Route path="/about" element={<AboutPage />} />
                 </Route>
                 <Route path="/login" element={<LoginPage />} />
               </Routes>

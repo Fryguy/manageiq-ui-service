@@ -7,7 +7,6 @@ import PrivateRoutes from './PrivateRoutes';
 import { LoginPage } from '../features/auth/components/LoginPage';
 import { DashboardPage } from '../features/dashboard/pages/DashboardPage';
 import { ProfilePage } from '../features/profile/pages/ProfilePage';
-import { AboutPage } from '../features/about/pages/AboutPage';
 
 // Mock AppLayout to avoid complex layout dependencies
 jest.mock('../features/layout/components/AppLayout', () => ({
@@ -65,7 +64,6 @@ describe('Route Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -91,7 +89,6 @@ describe('Route Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -107,59 +104,6 @@ describe('Route Integration Tests', () => {
     });
   });
 
-  describe('About Route', () => {
-    it('renders AboutPage at /about for authenticated users', async () => {
-      const store = createAuthenticatedStore();
-
-      render(
-        <Provider store={store}>
-          <MemoryRouter initialEntries={['/about']}>
-            <Routes>
-              <Route element={<PrivateRoutes />}>
-                <Route path="/" element={<DashboardPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
-              </Route>
-              <Route path="/login" element={<LoginPage />} />
-            </Routes>
-          </MemoryRouter>
-        </Provider>
-      );
-
-      await waitFor(() => {
-        expect(screen.getByTestId('about-page')).toBeInTheDocument();
-      });
-
-      // Verify it's wrapped in AppLayout
-      expect(screen.getByTestId('app-layout')).toBeInTheDocument();
-    });
-
-    it('redirects to login when accessing /about as unauthenticated user', async () => {
-      const store = createUnauthenticatedStore();
-
-      render(
-        <Provider store={store}>
-          <MemoryRouter initialEntries={['/about']}>
-            <Routes>
-              <Route element={<PrivateRoutes />}>
-                <Route path="/" element={<DashboardPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
-              </Route>
-              <Route path="/login" element={<LoginPage />} />
-            </Routes>
-          </MemoryRouter>
-        </Provider>
-      );
-
-      await waitFor(() => {
-        expect(screen.getByTestId('login-page')).toBeInTheDocument();
-      });
-
-      expect(screen.queryByTestId('about-page')).not.toBeInTheDocument();
-    });
-  });
-
   describe('Dashboard Route', () => {
     it('renders DashboardPage at / for authenticated users', async () => {
       const store = createAuthenticatedStore();
@@ -171,7 +115,6 @@ describe('Route Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -199,7 +142,6 @@ describe('Route Integration Tests', () => {
               <Route element={<PrivateRoutes />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about" element={<AboutPage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -220,7 +162,7 @@ describe('Route Integration Tests', () => {
     it('protects all routes under PrivateRoutes', async () => {
       const store = createUnauthenticatedStore();
 
-      const routes = ['/', '/profile', '/about'];
+      const routes = ['/', '/profile'];
 
       for (const route of routes) {
         const { unmount } = render(
@@ -230,7 +172,6 @@ describe('Route Integration Tests', () => {
                 <Route element={<PrivateRoutes />}>
                   <Route path="/" element={<DashboardPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
-                  <Route path="/about" element={<AboutPage />} />
                 </Route>
                 <Route path="/login" element={<LoginPage />} />
               </Routes>
