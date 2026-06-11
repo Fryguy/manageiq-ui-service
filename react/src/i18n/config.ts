@@ -100,10 +100,13 @@ export async function loadTranslations(locale: LocaleCode): Promise<Record<strin
   }
 
   try {
-    // Dynamic import of translation JSON files
-    // These will be generated from .po files during build
-    const translations = await import(`../../public/locales/${locale}.json`);
-    return translations.default || translations;
+    const response = await fetch(`/locales/${locale}.json`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} while loading locale '${locale}'`);
+    }
+
+    return await response.json();
   } catch (error) {
     console.warn(`Failed to load translations for locale '${locale}':`, error);
     return {};
