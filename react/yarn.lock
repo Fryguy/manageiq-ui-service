@@ -10403,6 +10403,7 @@ __metadata:
     "@carbon/charts-react": "npm:^1.27.11"
     "@carbon/icons-react": "npm:^11.82.0"
     "@carbon/react": "npm:^1.109.0"
+    "@carbon/styles": "npm:^1.108.0"
     "@data-driven-forms/carbon-component-mapper": "npm:^4.1.18"
     "@data-driven-forms/react-form-renderer": "npm:^4.1.14"
     "@reduxjs/toolkit": "npm:^2.12.0"
