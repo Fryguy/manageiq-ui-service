@@ -344,40 +344,9 @@ cd react && yarn type-check
 
 ---
 
-## Phase 6: Forms & Dialog Platform (Weeks 5-6)
+## Phase 6: Catalogs & Ordering Foundations (Weeks 5-7)
 
-### 6.1 Data Driven Forms Integration
-- [ ] Install Data Driven Forms dependencies (@data-driven-forms/react-form-renderer, @data-driven-forms/carbon-component-mapper)
-- [ ] Create `src/features/forms/types.ts` for form types
-- [ ] Create `src/features/forms/components/FormRenderer.tsx` with Carbon mapper
-- [ ] Verify Carbon mapper compatibility with sample schema
-
-### 6.2 Schema Normalization
-- [ ] Create `src/features/forms/utils/schemaNormalizer.ts` for ManageIQ dialog → DDF conversion
-- [ ] Create `src/features/forms/utils/fieldAdapters.ts` for field metadata, validation, visibility
-- [ ] Document schema normalization in `docs/forms-schema.md`
-- [ ] Write tests for schema normalization
-
-### 6.3 Custom Field Adapters
-- [ ] Create `src/features/forms/components/fields/` directory
-- [ ] Create custom field adapters for ManageIQ-specific widgets
-- [ ] Create `src/features/forms/utils/submissionTransformer.ts`
-- [ ] Create `src/features/forms/utils/validation.ts`
-- [ ] Write tests for custom field adapters
-
-### 6.4 Dialog Runtime
-- [ ] Create `src/features/forms/components/DialogModal.tsx`
-- [ ] Create `src/features/forms/components/DialogPage.tsx`
-- [ ] Create `src/features/forms/hooks/useDialogForm.ts` for async fields and dependencies
-- [ ] Create `src/features/forms/utils/errorHandling.ts` for form errors
-- [ ] Write integration tests for dialog runtime
-- [ ] Create `src/features/forms/test/DialogTestHarness.tsx`
-
----
-
-## Phase 7: Catalogs & Ordering (Weeks 6-8)
-
-### 7.1 Catalog Explorer
+### 6.1 Catalog Explorer
 - [ ] Create `src/features/catalogs/types.ts`
 - [ ] Create `src/features/catalogs/store/catalogsSlice.ts`
 - [ ] Create `src/features/catalogs/components/CatalogList.tsx`
@@ -388,15 +357,15 @@ cd react && yarn type-check
 - [ ] Create `src/features/catalogs/pages/CatalogExplorerPage.tsx`
 - [ ] Write tests for catalog explorer
 
-### 7.2 Catalog Item Details
+### 6.2 Catalog Item Details Foundations
 - [ ] Create `src/features/catalogs/components/ServiceTemplateDetails.tsx`
 - [ ] Create `src/features/catalogs/components/TemplateInfo.tsx`
-- [ ] Create `src/features/catalogs/components/ProvisioningDialog.tsx` using Data Driven Forms
-- [ ] Create `src/features/catalogs/hooks/useProvisioningForm.ts`
 - [ ] Create `src/features/catalogs/pages/ServiceTemplatePage.tsx`
-- [ ] Write tests for catalog item details
+- [ ] Identify where dynamic provisioning dialogs will attach later without implementing them yet
+- [ ] Defer `src/features/catalogs/components/ProvisioningDialog.tsx` and `src/features/catalogs/hooks/useProvisioningForm.ts` until the late dynamic provisioning dialog phase
+- [ ] Write tests for non-dialog catalog item details
 
-### 7.3 Shopping Cart
+### 6.3 Shopping Cart
 - [ ] Create `src/features/catalogs/store/cartSlice.ts` with persistence
 - [ ] Create `src/features/catalogs/components/CartButton.tsx`
 - [ ] Create `src/features/catalogs/components/CartDrawer.tsx`
@@ -405,17 +374,18 @@ cd react && yarn type-check
 - [ ] Create `src/features/catalogs/components/CheckoutButton.tsx`
 - [ ] Create `src/features/catalogs/components/OrderConfirmation.tsx`
 - [ ] Implement cart persistence in localStorage
+- [ ] Build order submission scaffolding that can be completed without dynamic provisioning dialogs
 - [ ] Write tests for shopping cart
 
-### 7.4 Integration Tests
-- [ ] Write integration test for catalog browsing flow (browse → details → add to cart)
-- [ ] Write integration test for order submission flow (cart → checkout → confirmation)
+### 6.4 Integration Tests
+- [ ] Write integration test for catalog browsing flow (browse → details)
+- [ ] Write integration test for non-dialog cart flow foundations
 
 ---
 
-## Phase 8: Services Domain Migration (Weeks 8-11)
+## Phase 7: Services Domain Migration (Weeks 7-10)
 
-### 8.1 Services List & Filtering
+### 7.1 Services List & Filtering
 - [ ] Create `src/features/services/types.ts`
 - [ ] Create `src/features/services/store/servicesSlice.ts`
 - [ ] Create `src/features/services/components/ServiceList.tsx`
@@ -427,7 +397,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/pages/ServiceExplorerPage.tsx`
 - [ ] Write tests for services list and filtering
 
-### 8.2 Service Details & Resources
+### 7.2 Service Details & Resources
 - [ ] Create `src/features/services/components/ServiceDetails.tsx`
 - [ ] Create `src/features/services/components/ServiceInfo.tsx`
 - [ ] Create `src/features/services/components/ServiceResources.tsx`
@@ -437,7 +407,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/pages/ServiceDetailsPage.tsx`
 - [ ] Write tests for service details
 
-### 8.3 Permission-Aware Service Actions
+### 7.3 Permission-Aware Service Actions
 - [ ] Create `src/features/services/components/ServiceActions.tsx` with permission filtering
 - [ ] Create `src/features/services/components/PowerOperations.tsx` (start, stop, suspend)
 - [ ] Create `src/features/services/components/RetireService.tsx`
@@ -447,14 +417,14 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/components/ConfirmActionDialog.tsx`
 - [ ] Write tests for service actions with permission scenarios
 
-### 8.4 Custom Buttons & Dialog-Backed Actions
+### 7.4 Custom Buttons & Dialog-Backed Actions
 - [ ] Create `src/features/services/components/CustomButtonGroup.tsx` with role filtering
 - [ ] Create `src/features/services/components/CustomButton.tsx`
 - [ ] Create `src/features/services/hooks/useCustomButtonAction.ts`
-- [ ] Create `src/features/services/components/CustomButtonDialog.tsx` using Data Driven Forms
-- [ ] Write tests for custom buttons
+- [ ] Defer `src/features/services/components/CustomButtonDialog.tsx` until the late dynamic provisioning dialog phase if it depends on schema-driven dialog infrastructure
+- [ ] Write tests for custom buttons that do not depend on the late dialog platform
 
-### 8.5 VM & Console Capabilities
+### 7.5 VM & Console Capabilities
 - [ ] Create `src/features/services/components/VMDetails.tsx`
 - [ ] Create `src/features/services/components/ConsoleAccess.tsx` (noVNC, SPICE, WebMKS)
 - [ ] Create `src/features/services/components/SnapshotList.tsx`
@@ -462,27 +432,27 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/components/StorageDetails.tsx` (if in scope)
 - [ ] Write tests for VM and console capabilities
 
-### 8.6 Ansible & Orchestration
+### 7.6 Ansible & Orchestration
 - [ ] Create `src/features/services/components/AnsiblePlaybook.tsx`
 - [ ] Create `src/features/services/components/PlaybookExecution.tsx`
 - [ ] Create `src/features/services/components/PlaybookOutput.tsx`
 - [ ] Write tests for Ansible views
 
-### 8.7 Service State Management
+### 7.7 Service State Management
 - [ ] Implement polling mechanism in servicesSlice for long-running operations
 - [ ] Create `src/features/services/hooks/useServicePolling.ts`
 - [ ] Write tests for service state management and polling
 
-### 8.8 Integration Tests
+### 7.8 Integration Tests
 - [ ] Write integration test for service browsing flow (list → details → actions)
 - [ ] Write integration test for service power operations
 - [ ] Write integration test for custom button execution
 
 ---
 
-## Phase 9: Orders & Approval Workflows (Weeks 11-12)
+## Phase 8: Orders & Approval Workflows (Weeks 10-11)
 
-### 9.1 Order Explorer
+### 8.1 Order Explorer
 - [ ] Create `src/features/orders/types.ts`
 - [ ] Create `src/features/orders/store/ordersSlice.ts`
 - [ ] Create `src/features/orders/components/OrderList.tsx`
@@ -492,35 +462,36 @@ cd react && yarn type-check
 - [ ] Create `src/features/orders/pages/OrderExplorerPage.tsx`
 - [ ] Write tests for order explorer
 
-### 9.2 Order Details
+### 8.2 Order Details Foundations
 - [ ] Create `src/features/orders/components/OrderDetails.tsx`
 - [ ] Create `src/features/orders/components/OrderTimeline.tsx`
 - [ ] Create `src/features/orders/components/ApprovalWorkflow.tsx`
 - [ ] Create `src/features/orders/components/OrderItems.tsx`
 - [ ] Create `src/features/orders/pages/OrderDetailsPage.tsx`
-- [ ] Write tests for order details
+- [ ] Exclude dynamic provisioning dialog replay until the late dynamic provisioning dialog phase
+- [ ] Write tests for non-dialog order details
 
-### 9.3 Order Operations
+### 8.3 Order Operations
 - [ ] Create `src/features/orders/components/ApproveOrderButton.tsx`
 - [ ] Create `src/features/orders/components/DenyOrderButton.tsx`
 - [ ] Create `src/features/orders/components/CancelOrderButton.tsx`
 - [ ] Create `src/features/orders/components/ResubmitOrderButton.tsx`
 - [ ] Write tests for order operations
 
-### 9.4 Order State Management
+### 8.4 Order State Management
 - [ ] Implement order status polling in ordersSlice
 - [ ] Create `src/features/orders/hooks/useOrderPolling.ts`
 - [ ] Write tests for order state management
 
-### 9.5 Integration Tests
+### 8.5 Integration Tests
 - [ ] Write integration test for order approval workflow
-- [ ] Write integration test for order tracking
+- [ ] Write integration test for non-dialog order tracking
 
 ---
 
-## Phase 10: VM-Specific Gap Closure (Weeks 12-13)
+## Phase 9: VM-Specific Gap Closure (Weeks 11-12)
 
-### 10.1 VM Details
+### 9.1 VM Details
 - [ ] Create `src/features/vms/types.ts`
 - [ ] Create `src/features/vms/store/vmsSlice.ts`
 - [ ] Create `src/features/vms/components/VMInfo.tsx`
@@ -529,22 +500,62 @@ cd react && yarn type-check
 - [ ] Create `src/features/vms/pages/VMDetailsPage.tsx`
 - [ ] Write tests for VM details
 
-### 10.2 VM Snapshots
+### 9.2 VM Snapshots
 - [ ] Create `src/features/vms/components/SnapshotList.tsx`
 - [ ] Create `src/features/vms/components/CreateSnapshotDialog.tsx`
 - [ ] Create `src/features/vms/components/RevertSnapshotDialog.tsx`
 - [ ] Create `src/features/vms/components/DeleteSnapshotDialog.tsx`
 - [ ] Write tests for snapshot management
 
-### 10.3 VM Operations
+### 9.3 VM Operations
 - [ ] Create `src/features/vms/components/VMPowerOperations.tsx`
 - [ ] Create `src/features/vms/components/VMConsoleAccess.tsx`
 - [ ] Create `src/features/vms/components/RetireVMDialog.tsx`
 - [ ] Write tests for VM operations
 
-### 10.4 Gap Analysis
+### 9.4 Gap Analysis
 - [ ] Document any remaining VM gaps not covered by Services domain
 - [ ] Confirm no VM-specific features are missing
+
+---
+
+## Phase 10: Dynamic Provisioning Dialog Platform (Weeks 12-13)
+
+### 10.1 Data Driven Forms Integration
+- [ ] Install Data Driven Forms dependencies (@data-driven-forms/react-form-renderer, @data-driven-forms/carbon-component-mapper)
+- [ ] Create `src/features/forms/types.ts` for form types
+- [ ] Create `src/features/forms/components/FormRenderer.tsx` with Carbon mapper
+- [ ] Verify Carbon mapper compatibility with sample schema
+
+### 10.2 Schema Normalization
+- [ ] Create `src/features/forms/utils/schemaNormalizer.ts` for ManageIQ dialog → DDF conversion
+- [ ] Create `src/features/forms/utils/fieldAdapters.ts` for field metadata, validation, visibility
+- [ ] Document schema normalization in `docs/forms-schema.md`
+- [ ] Write tests for schema normalization
+
+### 10.3 Custom Field Adapters
+- [ ] Create `src/features/forms/components/fields/` directory
+- [ ] Create custom field adapters for ManageIQ-specific widgets
+- [ ] Create `src/features/forms/utils/submissionTransformer.ts`
+- [ ] Create `src/features/forms/utils/validation.ts`
+- [ ] Write tests for custom field adapters
+
+### 10.4 Dynamic Provisioning Dialog Runtime
+- [ ] Create `src/features/forms/components/DialogModal.tsx`
+- [ ] Create `src/features/forms/components/DialogPage.tsx`
+- [ ] Create `src/features/forms/hooks/useDialogForm.ts` for async fields and dependencies
+- [ ] Create `src/features/forms/utils/errorHandling.ts` for form errors
+- [ ] Write integration tests for dialog runtime
+- [ ] Create `src/features/forms/test/DialogTestHarness.tsx`
+
+### 10.5 Catalog & Order Integration
+- [ ] Create `src/features/catalogs/components/ProvisioningDialog.tsx` using Data Driven Forms
+- [ ] Create `src/features/catalogs/hooks/useProvisioningForm.ts`
+- [ ] Integrate provisioning dialogs into catalog ordering flows
+- [ ] Add read-only rendering of provisioning dialog content to order details
+- [ ] Implement `src/features/services/components/CustomButtonDialog.tsx` if still required by the schema-driven dialog platform
+- [ ] Write integration test for order submission flow (cart → checkout → confirmation)
+- [ ] Write integration test for provisioning dialog replay in order details
 
 ---
 

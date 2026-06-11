@@ -687,43 +687,9 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 6: Forms and Dialog Platform (Weeks 5-6)
+### Phase 6: Catalogs and Ordering Foundations (Weeks 5-7)
 
-**Goal**: Establish a reusable strategy for schema-driven dialogs and provisioning workflows.
-
-#### Tasks:
-1. **Data Driven Forms Integration**
-   - Add Data Driven Forms and Carbon component mapper
-   - Validate mapper compatibility with the selected Carbon version
-   - Establish form renderer composition patterns
-
-2. **Schema Normalization**
-   - Define how ManageIQ dialog payloads map to Data Driven Forms schema
-   - Create adapters for field metadata, validation, and conditional visibility
-   - Document unsupported or custom field types
-
-3. **Custom Field Adapters**
-   - Implement adapters for ManageIQ-specific widgets
-   - Standardize submission payload transformation
-   - Centralize validation and conditional logic
-
-4. **Dialog Runtime**
-   - Modal and full-page dialog rendering patterns
-   - Async field loading and dependent field updates
-   - Error handling and retry behavior
-   - Test harnesses for schema-driven forms
-
-**Deliverables**:
-- Data Driven Forms platform ready for feature use
-- Carbon mapper integrated
-- Schema normalization strategy documented
-- Reusable dialog runtime and tests
-
----
-
-### Phase 7: Catalogs and Ordering (Weeks 6-8)
-
-**Goal**: Migrate catalog browsing, ordering, and provisioning workflows.
+**Goal**: Migrate catalog browsing and ordering foundations that do not depend on dynamic provisioning dialogs.
 
 #### Tasks:
 1. **Catalog Explorer**
@@ -733,36 +699,34 @@ The migration should be executed as dependency-aware workstreams rather than as 
    - Search and filtering
    - Sorting options
 
-2. **Catalog Item Details**
+2. **Catalog Item Details Foundations**
    - Service template detail view
    - Template information display
-   - Provisioning dialog forms
-   - Dynamic form rendering through Data Driven Forms where schema-driven
-   - Form validation and submission handling
+   - Identify where dynamic provisioning dialogs will attach later without implementing them yet
+   - Defer schema-driven provisioning form rendering until the later dynamic provisioning dialog phase
 
 3. **Shopping Cart**
    - Cart component
    - Add/remove items
    - Cart persistence
-   - Order submission
+   - Order submission scaffolding that can be completed without dynamic provisioning dialogs
    - Order confirmation
 
 4. **Catalog State Management**
    - Redux slices for catalogs
    - Shopping cart state
-   - Form state management
+   - Non-dialog catalog state management
    - API integration
 
 **Deliverables**:
 - Complete catalog browsing experience
-- Working order submission flow
-- Shopping cart functionality
-- Provisioning dialogs rendered through the selected forms strategy
-- Integration tests
+- Shopping cart foundations
+- Catalog detail flows ready for later provisioning dialog integration
+- Integration tests for non-dialog catalog flows
 
 ---
 
-### Phase 8: Services Domain Migration (Weeks 8-11)
+### Phase 7: Services Domain Migration (Weeks 7-10)
 
 **Goal**: Migrate the most complex domain in smaller, testable work packages.
 
@@ -823,9 +787,9 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 9: Orders and Approval Workflows (Weeks 11-12)
+### Phase 8: Orders and Approval Workflows (Weeks 10-11)
 
-**Goal**: Migrate order tracking, request visibility, and approval flows.
+**Goal**: Migrate order tracking, request visibility, and approval flows that do not require the late dynamic provisioning dialog platform.
 
 #### Tasks:
 1. **Order Explorer**
@@ -834,11 +798,12 @@ The migration should be executed as dependency-aware workstreams rather than as 
    - Order search
    - Order status display
 
-2. **Order Details**
+2. **Order Details Foundations**
    - Order detail page
    - Order timeline
    - Approval workflow display
-   - Order item details
+   - Order item details excluding dynamic provisioning dialog replay
+   - Defer read-only rendering of provisioning dialog content until the later dynamic provisioning dialog phase
 
 3. **Order Operations**
    - Order approval / denial
@@ -851,13 +816,13 @@ The migration should be executed as dependency-aware workstreams rather than as 
    - API integration
 
 **Deliverables**:
-- Complete order management interface
+- Complete order management foundations
 - Order approval workflows
-- Integration tests
+- Integration tests for non-dialog order flows
 
 ---
 
-### Phase 10: VM-Specific Gap Closure (Weeks 12-13)
+### Phase 9: VM-Specific Gap Closure (Weeks 11-12)
 
 **Goal**: Close any VM-specific gaps that are not already satisfied through the Services domain.
 
@@ -883,6 +848,45 @@ The migration should be executed as dependency-aware workstreams rather than as 
 - Snapshot management
 - Console integration
 - Explicit confirmation that no remaining VM gaps exist outside Services
+
+---
+
+### Phase 10: Dynamic Provisioning Dialog Platform (Weeks 12-13)
+
+**Goal**: Implement the schema-driven dynamic provisioning dialogs used for service ordering and read-only order replay after the surrounding catalog and order flows are already in place.
+
+#### Tasks:
+1. **Data Driven Forms Integration**
+   - Add Data Driven Forms and Carbon component mapper
+   - Validate mapper compatibility with the selected Carbon version
+   - Establish form renderer composition patterns for dynamic provisioning dialogs
+
+2. **Schema Normalization**
+   - Define how ManageIQ dialog payloads map to Data Driven Forms schema
+   - Create adapters for field metadata, validation, and conditional visibility
+   - Document unsupported or custom field types
+
+3. **Custom Field Adapters**
+   - Implement adapters for ManageIQ-specific widgets
+   - Standardize submission payload transformation
+   - Centralize validation and conditional logic
+
+4. **Dynamic Provisioning Dialog Runtime**
+   - Modal and full-page rendering patterns for provisioning dialogs where required
+   - Async field loading and dependent field updates
+   - Error handling and retry behavior
+   - Test harnesses for schema-driven provisioning forms
+
+5. **Catalog and Order Integration**
+   - Attach dynamic provisioning dialogs to catalog ordering flows
+   - Support read-only rendering of provisioning dialog content in order details
+   - Validate end-to-end ordering and replay behavior once the dialog platform is integrated
+
+**Deliverables**:
+- Dynamic provisioning dialog platform ready for feature use
+- Catalog ordering flows integrated with schema-driven provisioning dialogs
+- Order details capable of replaying provisioning dialog content
+- Reusable provisioning dialog runtime and tests
 
 ---
 
