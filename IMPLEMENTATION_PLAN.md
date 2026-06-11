@@ -295,28 +295,77 @@ cd react && yarn type-check
 
 ---
 
-## Phase 5: Forms & Dialog Platform (Weeks 5-6)
+## Phase 5: Feature Parity True-Up & UX Alignment (Week 5)
 
-### 5.1 Data Driven Forms Integration
+### 5.1 Header Profile Menu Realignment
+- [ ] Remove the dedicated Profile page from the target UX
+- [ ] Remove the Profile entry from the side navigation
+- [ ] Replace profile-page behavior with a user information dropdown under the header profile icon
+- [ ] Align the profile dropdown with the IBM product header profile menu pattern
+
+### 5.2 Logout & Language Switcher Consolidation
+- [ ] Remove Logout from the side navigation
+- [ ] Place Logout as the bottom-most entry in the header profile menu
+- [ ] Use a logout icon for the Logout menu action
+- [ ] Remove the standalone header language switcher entry
+- [ ] Embed the language switcher as a dropdown within the user profile menu, matching the Angular-side behavior
+
+### 5.3 About Experience Realignment
+- [ ] Remove the dedicated About page and route from the target UX
+- [ ] Replace the page-based implementation with an About modal aligned to the IBM product About modal pattern
+- [ ] Ensure the About modal content matches the Angular About modal content
+- [ ] Add a header action that opens the About modal using a question-mark-in-a-circle style help icon
+
+### 5.4 Documentation, Website, and Footer Consolidation
+- [ ] Move the Documentation link into the About modal
+- [ ] Move the website link into the About modal
+- [ ] Remove the footer from the target application shell
+- [ ] Verify the resulting shell remains consistent with Carbon and IBM product guidance
+
+### 5.5 Dashboard Summary & Terminology Alignment
+- [ ] Align the dashboard service summary cards with the Angular dashboard categories: Retiring Soon, Current Services, Retired Services, and Monthly Charges - This Month To Date
+- [ ] Investigate and correct the React dashboard summary data mapping so the displayed values align with the Angular application rather than defaulting to incorrect zero values
+- [ ] Add the missing dashboard order summary section corresponding to Angular Requests, but label it as Orders
+- [ ] Keep the preferred Orders terminology on the dashboard to match the existing side navigation terminology
+- [ ] Preserve the Recent Services and Recent Orders sections from the React dashboard even though those features are not in the Angular dashboard.
+
+### 5.6 Dashboard Actions & Header Access Realignment
+- [ ] Remove the Quick Actions section from the dashboard
+- [ ] Add shopping cart access as a dedicated header action with a shopping-cart icon
+- [ ] Verify dashboard actions are not duplicating destinations already available in the primary navigation
+
+### 5.7 Virtual Machine Navigation Realignment
+- [ ] Remove the Virtual Machines side navigation entry
+- [ ] Remove any Virtual Machines placeholder routes or destinations that imply top-level navigation
+- [ ] Ensure Virtual Machines are not exposed as a directly navigable top-level area when that behavior does not exist in the Angular application
+- [ ] Treat VM visibility and access as part of the service details experience instead of standalone navigation
+- [ ] Defer VM-specific entry points until the service details work in Phase 8, especially the Service Details & Resources work package
+
+
+---
+
+## Phase 6: Forms & Dialog Platform (Weeks 5-6)
+
+### 6.1 Data Driven Forms Integration
 - [ ] Install Data Driven Forms dependencies (@data-driven-forms/react-form-renderer, @data-driven-forms/carbon-component-mapper)
 - [ ] Create `src/features/forms/types.ts` for form types
 - [ ] Create `src/features/forms/components/FormRenderer.tsx` with Carbon mapper
 - [ ] Verify Carbon mapper compatibility with sample schema
 
-### 5.2 Schema Normalization
+### 6.2 Schema Normalization
 - [ ] Create `src/features/forms/utils/schemaNormalizer.ts` for ManageIQ dialog → DDF conversion
 - [ ] Create `src/features/forms/utils/fieldAdapters.ts` for field metadata, validation, visibility
 - [ ] Document schema normalization in `docs/forms-schema.md`
 - [ ] Write tests for schema normalization
 
-### 5.3 Custom Field Adapters
+### 6.3 Custom Field Adapters
 - [ ] Create `src/features/forms/components/fields/` directory
 - [ ] Create custom field adapters for ManageIQ-specific widgets
 - [ ] Create `src/features/forms/utils/submissionTransformer.ts`
 - [ ] Create `src/features/forms/utils/validation.ts`
 - [ ] Write tests for custom field adapters
 
-### 5.4 Dialog Runtime
+### 6.4 Dialog Runtime
 - [ ] Create `src/features/forms/components/DialogModal.tsx`
 - [ ] Create `src/features/forms/components/DialogPage.tsx`
 - [ ] Create `src/features/forms/hooks/useDialogForm.ts` for async fields and dependencies
@@ -326,9 +375,9 @@ cd react && yarn type-check
 
 ---
 
-## Phase 6: Catalogs & Ordering (Weeks 6-8)
+## Phase 7: Catalogs & Ordering (Weeks 6-8)
 
-### 6.1 Catalog Explorer
+### 7.1 Catalog Explorer
 - [ ] Create `src/features/catalogs/types.ts`
 - [ ] Create `src/features/catalogs/store/catalogsSlice.ts`
 - [ ] Create `src/features/catalogs/components/CatalogList.tsx`
@@ -339,7 +388,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/catalogs/pages/CatalogExplorerPage.tsx`
 - [ ] Write tests for catalog explorer
 
-### 6.2 Catalog Item Details
+### 7.2 Catalog Item Details
 - [ ] Create `src/features/catalogs/components/ServiceTemplateDetails.tsx`
 - [ ] Create `src/features/catalogs/components/TemplateInfo.tsx`
 - [ ] Create `src/features/catalogs/components/ProvisioningDialog.tsx` using Data Driven Forms
@@ -347,7 +396,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/catalogs/pages/ServiceTemplatePage.tsx`
 - [ ] Write tests for catalog item details
 
-### 6.3 Shopping Cart
+### 7.3 Shopping Cart
 - [ ] Create `src/features/catalogs/store/cartSlice.ts` with persistence
 - [ ] Create `src/features/catalogs/components/CartButton.tsx`
 - [ ] Create `src/features/catalogs/components/CartDrawer.tsx`
@@ -358,15 +407,15 @@ cd react && yarn type-check
 - [ ] Implement cart persistence in localStorage
 - [ ] Write tests for shopping cart
 
-### 6.4 Integration Tests
+### 7.4 Integration Tests
 - [ ] Write integration test for catalog browsing flow (browse → details → add to cart)
 - [ ] Write integration test for order submission flow (cart → checkout → confirmation)
 
 ---
 
-## Phase 7: Services Domain Migration (Weeks 8-11)
+## Phase 8: Services Domain Migration (Weeks 8-11)
 
-### 7.1 Services List & Filtering
+### 8.1 Services List & Filtering
 - [ ] Create `src/features/services/types.ts`
 - [ ] Create `src/features/services/store/servicesSlice.ts`
 - [ ] Create `src/features/services/components/ServiceList.tsx`
@@ -378,7 +427,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/pages/ServiceExplorerPage.tsx`
 - [ ] Write tests for services list and filtering
 
-### 7.2 Service Details & Resources
+### 8.2 Service Details & Resources
 - [ ] Create `src/features/services/components/ServiceDetails.tsx`
 - [ ] Create `src/features/services/components/ServiceInfo.tsx`
 - [ ] Create `src/features/services/components/ServiceResources.tsx`
@@ -388,7 +437,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/pages/ServiceDetailsPage.tsx`
 - [ ] Write tests for service details
 
-### 7.3 Permission-Aware Service Actions
+### 8.3 Permission-Aware Service Actions
 - [ ] Create `src/features/services/components/ServiceActions.tsx` with permission filtering
 - [ ] Create `src/features/services/components/PowerOperations.tsx` (start, stop, suspend)
 - [ ] Create `src/features/services/components/RetireService.tsx`
@@ -398,14 +447,14 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/components/ConfirmActionDialog.tsx`
 - [ ] Write tests for service actions with permission scenarios
 
-### 7.4 Custom Buttons & Dialog-Backed Actions
+### 8.4 Custom Buttons & Dialog-Backed Actions
 - [ ] Create `src/features/services/components/CustomButtonGroup.tsx` with role filtering
 - [ ] Create `src/features/services/components/CustomButton.tsx`
 - [ ] Create `src/features/services/hooks/useCustomButtonAction.ts`
 - [ ] Create `src/features/services/components/CustomButtonDialog.tsx` using Data Driven Forms
 - [ ] Write tests for custom buttons
 
-### 7.5 VM & Console Capabilities
+### 8.5 VM & Console Capabilities
 - [ ] Create `src/features/services/components/VMDetails.tsx`
 - [ ] Create `src/features/services/components/ConsoleAccess.tsx` (noVNC, SPICE, WebMKS)
 - [ ] Create `src/features/services/components/SnapshotList.tsx`
@@ -413,27 +462,27 @@ cd react && yarn type-check
 - [ ] Create `src/features/services/components/StorageDetails.tsx` (if in scope)
 - [ ] Write tests for VM and console capabilities
 
-### 7.6 Ansible & Orchestration
+### 8.6 Ansible & Orchestration
 - [ ] Create `src/features/services/components/AnsiblePlaybook.tsx`
 - [ ] Create `src/features/services/components/PlaybookExecution.tsx`
 - [ ] Create `src/features/services/components/PlaybookOutput.tsx`
 - [ ] Write tests for Ansible views
 
-### 7.7 Service State Management
+### 8.7 Service State Management
 - [ ] Implement polling mechanism in servicesSlice for long-running operations
 - [ ] Create `src/features/services/hooks/useServicePolling.ts`
 - [ ] Write tests for service state management and polling
 
-### 7.8 Integration Tests
+### 8.8 Integration Tests
 - [ ] Write integration test for service browsing flow (list → details → actions)
 - [ ] Write integration test for service power operations
 - [ ] Write integration test for custom button execution
 
 ---
 
-## Phase 8: Orders & Approval Workflows (Weeks 11-12)
+## Phase 9: Orders & Approval Workflows (Weeks 11-12)
 
-### 8.1 Order Explorer
+### 9.1 Order Explorer
 - [ ] Create `src/features/orders/types.ts`
 - [ ] Create `src/features/orders/store/ordersSlice.ts`
 - [ ] Create `src/features/orders/components/OrderList.tsx`
@@ -443,7 +492,7 @@ cd react && yarn type-check
 - [ ] Create `src/features/orders/pages/OrderExplorerPage.tsx`
 - [ ] Write tests for order explorer
 
-### 8.2 Order Details
+### 9.2 Order Details
 - [ ] Create `src/features/orders/components/OrderDetails.tsx`
 - [ ] Create `src/features/orders/components/OrderTimeline.tsx`
 - [ ] Create `src/features/orders/components/ApprovalWorkflow.tsx`
@@ -451,27 +500,27 @@ cd react && yarn type-check
 - [ ] Create `src/features/orders/pages/OrderDetailsPage.tsx`
 - [ ] Write tests for order details
 
-### 8.3 Order Operations
+### 9.3 Order Operations
 - [ ] Create `src/features/orders/components/ApproveOrderButton.tsx`
 - [ ] Create `src/features/orders/components/DenyOrderButton.tsx`
 - [ ] Create `src/features/orders/components/CancelOrderButton.tsx`
 - [ ] Create `src/features/orders/components/ResubmitOrderButton.tsx`
 - [ ] Write tests for order operations
 
-### 8.4 Order State Management
+### 9.4 Order State Management
 - [ ] Implement order status polling in ordersSlice
 - [ ] Create `src/features/orders/hooks/useOrderPolling.ts`
 - [ ] Write tests for order state management
 
-### 8.5 Integration Tests
+### 9.5 Integration Tests
 - [ ] Write integration test for order approval workflow
 - [ ] Write integration test for order tracking
 
 ---
 
-## Phase 9: VM-Specific Gap Closure (Weeks 12-13)
+## Phase 10: VM-Specific Gap Closure (Weeks 12-13)
 
-### 9.1 VM Details
+### 10.1 VM Details
 - [ ] Create `src/features/vms/types.ts`
 - [ ] Create `src/features/vms/store/vmsSlice.ts`
 - [ ] Create `src/features/vms/components/VMInfo.tsx`
@@ -480,28 +529,28 @@ cd react && yarn type-check
 - [ ] Create `src/features/vms/pages/VMDetailsPage.tsx`
 - [ ] Write tests for VM details
 
-### 9.2 VM Snapshots
+### 10.2 VM Snapshots
 - [ ] Create `src/features/vms/components/SnapshotList.tsx`
 - [ ] Create `src/features/vms/components/CreateSnapshotDialog.tsx`
 - [ ] Create `src/features/vms/components/RevertSnapshotDialog.tsx`
 - [ ] Create `src/features/vms/components/DeleteSnapshotDialog.tsx`
 - [ ] Write tests for snapshot management
 
-### 9.3 VM Operations
+### 10.3 VM Operations
 - [ ] Create `src/features/vms/components/VMPowerOperations.tsx`
 - [ ] Create `src/features/vms/components/VMConsoleAccess.tsx`
 - [ ] Create `src/features/vms/components/RetireVMDialog.tsx`
 - [ ] Write tests for VM operations
 
-### 9.4 Gap Analysis
+### 10.4 Gap Analysis
 - [ ] Document any remaining VM gaps not covered by Services domain
 - [ ] Confirm no VM-specific features are missing
 
 ---
 
-## Phase 10: Quality, Accessibility & Performance (Weeks 13-14)
+## Phase 11: Quality, Accessibility & Performance (Weeks 13-14)
 
-### 10.1 Unit Testing
+### 11.1 Unit Testing
 - [ ] Ensure all components have unit tests
 - [ ] Ensure all hooks have unit tests
 - [ ] Ensure all utility functions have tests
@@ -509,26 +558,26 @@ cd react && yarn type-check
 - [ ] Verify reliable local test execution
 - [ ] Verify CI test execution
 
-### 10.2 Integration Testing
+### 11.2 Integration Testing
 - [ ] Write integration tests for all major feature flows
 - [ ] Write API integration tests
 - [ ] Write user flow tests
 - [ ] Ensure PR CI coverage meets requirements
 
-### 10.3 End-to-End Testing
+### 11.3 End-to-End Testing
 - [ ] Write E2E tests for critical paths
 - [ ] Perform cross-browser testing
 - [ ] Run accessibility testing with axe DevTools
 - [ ] Run performance testing with Lighthouse
 
-### 10.4 Bug Fixes & Hardening
+### 11.4 Bug Fixes & Hardening
 - [ ] Address all test failures
 - [ ] Fix identified bugs
 - [ ] Optimize performance bottlenecks
 - [ ] Fix accessibility issues
 - [ ] Complete security review
 
-### 10.5 Quality Gates
+### 11.5 Quality Gates
 - [ ] Verify all unit tests passing
 - [ ] Verify all integration tests passing
 - [ ] Verify E2E tests passing
@@ -538,23 +587,23 @@ cd react && yarn type-check
 
 ---
 
-## Phase 11: Deployment, Cutover & Documentation (Weeks 14-15)
+## Phase 12: Deployment, Cutover & Documentation (Weeks 14-15)
 
-### 11.1 Documentation
+### 12.1 Documentation
 - [ ] Update `README.md` with React setup instructions
 - [ ] Create migration guide in `docs/migration-guide.md`
 - [ ] Update API documentation
 - [ ] Document deployment process in `docs/deployment.md`
 - [ ] Document rollback procedures in `docs/rollback.md`
 
-### 11.2 Deployment Preparation
+### 12.2 Deployment Preparation
 - [ ] Optimize production build configuration
 - [ ] Optimize assets (images, fonts, etc.)
 - [ ] Run bundle size analysis with webpack-bundle-analyzer
 - [ ] Complete security audit
 - [ ] Perform performance tuning
 
-### 11.3 Cutover Planning
+### 12.3 Cutover Planning
 - [ ] Deploy to staging environment
 - [ ] Conduct user acceptance testing (UAT)
 - [ ] Create production deployment plan
@@ -562,13 +611,13 @@ cd react && yarn type-check
 - [ ] Set up monitoring and alerting
 - [ ] Obtain feature parity sign-off from stakeholders
 
-### 11.4 User & Support Resources
+### 12.4 User & Support Resources
 - [ ] Create user documentation
 - [ ] Create support documentation
 - [ ] Document known limitations
 - [ ] Create follow-up backlog for post-migration improvements
 
-### 11.5 Production Deployment
+### 12.5 Production Deployment
 - [ ] Execute production deployment
 - [ ] Verify application functionality in production
 - [ ] Monitor for errors and performance issues
@@ -579,7 +628,7 @@ cd react && yarn type-check
 ## Completion Criteria
 
 The migration is complete when:
-- [ ] All phases 1-11 tasks are checked off
+- [ ] All phases 1-12 tasks are checked off
 - [ ] All tests are passing (unit, integration, E2E)
 - [ ] CI/CD pipeline is green
 - [ ] Accessibility audit passed

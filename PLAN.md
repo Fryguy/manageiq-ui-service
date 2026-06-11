@@ -640,7 +640,54 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 5: Forms and Dialog Platform (Weeks 5-6)
+### Phase 5: Feature Parity True-Up and UX Alignment (Week 5)
+
+**Goal**: Reconcile the React implementation against the Angular application and the approved IBM UX patterns before deeper feature migration continues.
+
+#### Tasks:
+1. **Header Profile Menu Realignment**
+   - Remove the dedicated Profile page and corresponding side navigation entry from the target UX
+   - Replace profile-page behavior with a user information dropdown under the header profile icon
+   - Align the profile dropdown with the IBM product header profile menu pattern
+   - Move the language switcher into the profile menu rather than exposing it as a standalone header control
+
+2. **Logout and User Actions Consolidation**
+   - Remove Logout from the side navigation
+   - Place Logout as the bottom-most entry in the header profile menu
+   - Use a logout icon for that menu action
+   - Confirm user actions available in the Angular application are represented in the consolidated profile menu
+
+3. **About Experience Realignment**
+   - Remove the dedicated About page and route from the target UX
+   - Replace the page-based implementation with an About modal aligned to the IBM product About modal pattern
+   - Ensure the modal content matches the Angular About modal content
+   - Expose the About modal from a header action using a question-mark-in-a-circle style help icon
+
+4. **Documentation, Website, and Footer Consolidation**
+   - Move Documentation and website links into the About modal rather than exposing them as separate shell-level destinations
+   - Remove the footer from the target application shell when its informational content is covered by the About modal
+   - Verify the resulting shell remains consistent with Carbon and IBM product guidance
+
+5. **Dashboard Summary and Terminology Alignment**
+   - Align the dashboard service summary cards with the Angular dashboard categories: Retiring Soon, Current Services, Retired Services, and Monthly Charges - This Month To Date
+   - Investigate and correct the React dashboard summary data mapping so the displayed values align with the Angular application rather than defaulting to incorrect zero values
+   - Add the missing order/request summary section to the dashboard, but use the preferred Orders terminology instead of Requests
+   - Preserve the Recent Services and Recent Orders sections from the React dashboard as accepted improvements over the Angular presentation
+
+6. **Dashboard Actions and Header Access Realignment**
+   - Remove the Quick Actions section from the dashboard when those destinations are already available through the primary navigation
+   - Replace the shopping cart quick action with a dedicated header action using a shopping-cart icon
+   - Verify the resulting dashboard emphasizes summary information and recent activity rather than duplicating navigation affordances
+
+7. **Virtual Machine Navigation Realignment**
+   - Remove the Virtual Machines side navigation entry and any related placeholder destinations from the target UX
+   - Do not expose Virtual Machines as a directly navigable top-level area when that behavior does not exist in the Angular application
+   - Treat VM visibility and access as part of the service details experience rather than standalone navigation
+   - Defer VM-specific entry points until the service details work is implemented in Phase 8, especially the Service Details and Related Resources work package
+
+---
+
+### Phase 6: Forms and Dialog Platform (Weeks 5-6)
 
 **Goal**: Establish a reusable strategy for schema-driven dialogs and provisioning workflows.
 
@@ -674,7 +721,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 6: Catalogs and Ordering (Weeks 6-8)
+### Phase 7: Catalogs and Ordering (Weeks 6-8)
 
 **Goal**: Migrate catalog browsing, ordering, and provisioning workflows.
 
@@ -715,7 +762,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 7: Services Domain Migration (Weeks 8-11)
+### Phase 8: Services Domain Migration (Weeks 8-11)
 
 **Goal**: Migrate the most complex domain in smaller, testable work packages.
 
@@ -776,7 +823,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 8: Orders and Approval Workflows (Weeks 11-12)
+### Phase 9: Orders and Approval Workflows (Weeks 11-12)
 
 **Goal**: Migrate order tracking, request visibility, and approval flows.
 
@@ -810,7 +857,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 9: VM-Specific Gap Closure (Weeks 12-13)
+### Phase 10: VM-Specific Gap Closure (Weeks 12-13)
 
 **Goal**: Close any VM-specific gaps that are not already satisfied through the Services domain.
 
@@ -839,7 +886,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 10: Quality, Accessibility, and Performance (Weeks 13-14)
+### Phase 11: Quality, Accessibility, and Performance (Weeks 13-14)
 
 **Goal**: Validate the migrated application against functional, accessibility, and performance gates.
 
@@ -878,7 +925,7 @@ The migration should be executed as dependency-aware workstreams rather than as 
 
 ---
 
-### Phase 11: Deployment, Cutover, and Documentation (Weeks 14-15)
+### Phase 12: Deployment, Cutover, and Documentation (Weeks 14-15)
 
 **Goal**: Prepare for staged rollout, validate rollback, and complete repository transition planning.
 
