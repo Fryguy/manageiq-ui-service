@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import { Content, Theme } from '@carbon/react';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Footer from './Footer';
 import Breadcrumbs from './Breadcrumbs';
 import './AppLayout.css';
 
@@ -19,7 +18,6 @@ interface AppLayoutProps {
  * - Sidebar with RBAC-aware navigation menu
  * - Breadcrumbs for navigation context
  * - Content area for page content
- * - Footer with version and copyright info
  *
  * Uses Carbon Design System components and follows
  * the IBM Carbon layout patterns.
@@ -47,7 +45,6 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             {children || <Outlet />}
           </div>
         </Content>
-        <Footer />
       </div>
     </Theme>
   );

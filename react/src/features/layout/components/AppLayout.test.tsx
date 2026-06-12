@@ -18,12 +18,6 @@ jest.mock('./Sidebar', () => {
   };
 });
 
-jest.mock('./Footer', () => {
-  return function MockFooter() {
-    return <div data-testid="footer">Footer</div>;
-  };
-});
-
 jest.mock('./Breadcrumbs', () => {
   return function MockBreadcrumbs() {
     return <div data-testid="breadcrumbs" className="app-layout__breadcrumbs">Breadcrumbs</div>;
@@ -68,7 +62,6 @@ describe('AppLayout', () => {
     expect(screen.getByTestId('header')).toBeInTheDocument();
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();
     expect(screen.getByTestId('breadcrumbs')).toBeInTheDocument();
-    expect(screen.getByTestId('footer')).toBeInTheDocument();
   });
 
   it('renders children when provided', () => {

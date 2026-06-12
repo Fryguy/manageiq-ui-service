@@ -39,7 +39,7 @@ describe('PrivateRoutes', () => {
     expect(screen.getByText('Protected content')).toBeInTheDocument();
   });
 
-  it('renders AppLayout with Header, Sidebar, and Footer for authenticated users', () => {
+  it('renders AppLayout with Header and Sidebar for authenticated users', () => {
     const store = configureStore({
       reducer: rootReducer,
       preloadedState: {
@@ -72,7 +72,6 @@ describe('PrivateRoutes', () => {
     // Verify AppLayout components are rendered
     expect(screen.getByRole('banner')).toBeInTheDocument(); // Header
     expect(screen.getByRole('navigation', { name: 'Side navigation' })).toBeInTheDocument(); // Sidebar
-    expect(screen.getByRole('contentinfo')).toBeInTheDocument(); // Footer
     expect(screen.getByText('Protected content')).toBeInTheDocument();
   });
 
