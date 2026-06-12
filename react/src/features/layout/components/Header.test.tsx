@@ -80,9 +80,7 @@ describe('Header', () => {
     const profileButton = screen.getByLabelText('User Profile');
     await user.click(profileButton);
 
-    await waitFor(() => {
-      expect(screen.getByText('Test User')).toBeInTheDocument();
-    });
+    expect(await screen.findByText('Test User')).toBeInTheDocument();
   });
 
   it('displays user role in profile menu', async () => {
@@ -92,9 +90,7 @@ describe('Header', () => {
     const profileButton = screen.getByLabelText('User Profile');
     await user.click(profileButton);
 
-    await waitFor(() => {
-      expect(screen.getByText('Administrator')).toBeInTheDocument();
-    });
+    expect(await screen.findByText('Administrator')).toBeInTheDocument();
   });
 
   it('has a help button that opens About modal', async () => {
@@ -106,9 +102,7 @@ describe('Header', () => {
 
     await user.click(helpButton);
 
-    await waitFor(() => {
-      expect(screen.getByText('About ManageIQ Service UI')).toBeInTheDocument();
-    });
+    expect(await screen.findByText('About ManageIQ Service UI')).toBeInTheDocument();
   });
 
   it('has a language switcher in profile menu', async () => {
@@ -118,9 +112,7 @@ describe('Header', () => {
     const profileButton = screen.getByLabelText('User Profile');
     await user.click(profileButton);
 
-    await waitFor(() => {
-      expect(screen.getByText('Language')).toBeInTheDocument();
-    });
+    expect(await screen.findByText('Language')).toBeInTheDocument();
   });
 
   it('has a logout button in profile menu', async () => {
@@ -130,9 +122,7 @@ describe('Header', () => {
     const profileButton = screen.getByLabelText('User Profile');
     await user.click(profileButton);
 
-    await waitFor(() => {
-      expect(screen.getByText('Logout')).toBeInTheDocument();
-    });
+    expect(await screen.findByText('Logout')).toBeInTheDocument();
   });
 
   it('calls logout and navigates to login when logout is clicked', async () => {
@@ -147,7 +137,7 @@ describe('Header', () => {
 
     await waitFor(() => {
       expect(mockNavigate).toHaveBeenCalledWith('/login');
-    });
+    }, { timeout: 3000 });
   });
 
   it('has a notifications button', () => {

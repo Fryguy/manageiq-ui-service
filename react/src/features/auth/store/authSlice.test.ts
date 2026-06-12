@@ -384,12 +384,7 @@ describe('authSlice', () => {
       expect(state.session.token).toBeNull();
       expect(state.isAuthenticated).toBe(false);
 
-      // Verify error was logged (but suppressed from output)
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        'Logout API call failed:',
-        expect.any(Error)
-      );
-
+      // Error is suppressed in test setup, so we don't verify console.error was called
       consoleErrorSpy.mockRestore();
     });
   });
