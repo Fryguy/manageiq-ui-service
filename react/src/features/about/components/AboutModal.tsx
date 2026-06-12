@@ -87,14 +87,16 @@ export const AboutModal: React.FC<AboutModalProps> = ({
         </div>
 
         <div className="about-modal__links">
-          <a
-            href={documentationUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="about-modal__link"
-          >
-            {__('Documentation')}
-          </a>
+          {documentationUrl && (
+            <a
+              href={documentationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="about-modal__link"
+            >
+              {__('Documentation')}
+            </a>
+          )}
           {supportWebsite && (
             <a
               href={supportWebsite}

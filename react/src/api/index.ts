@@ -11,3 +11,4 @@ export * from './services';
 export * from './catalogs';
 export * from './orders';
 export * from './vms';
+export * from './appliance';

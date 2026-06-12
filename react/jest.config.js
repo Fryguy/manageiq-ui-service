@@ -10,6 +10,7 @@ module.exports = {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|gif|svg|woff|woff2|eot|ttf|otf)$': '<rootDir>/test/mocks/fileMock.js',
   },
+  setupFiles: ['<rootDir>/test/polyfills.js'],
   setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',

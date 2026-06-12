@@ -4,6 +4,7 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { AboutState } from '../types';
+import { getApplianceInfo, getDocumentationUrl } from '../../../api/appliance';
 
 export interface AboutModalInfo {
   version?: string;
@@ -35,19 +36,34 @@ const initialState: AboutStateExtended = {
 export const fetchAboutModalInfo = createAsyncThunk<AboutModalInfo>(
   'about/fetchAboutModalInfo',
   async () => {
-    // TODO: Replace with actual API call to fetch appliance info
-    // const response = await apiClient.get('/api/appliance_info');
-    // For now, return mock data that matches Angular structure
+    // Fetch both appliance info and documentation URL in parallel
+    const [applianceInfo, documentationUrl] = await Promise.all([
+      getApplianceInfo(),
+      getDocumentationUrl(),
+    ]);
+
+    // Get git commit hash from version.json if available
+    let suiVersion = 'N/A';
+    try {
+      const versionResponse = await fetch('/version.json');
+      if (versionResponse.ok) {
+        const versionData = await versionResponse.json();
+        suiVersion = versionData.gitCommit || 'N/A';
+      }
+    } catch (error) {
+      console.warn('Failed to fetch version.json:', error);
+    }
+
     return {
-      version: 'N/A',
-      suiVersion: 'N/A',
-      serverName: 'N/A',
-      userName: 'N/A',
-      userRole: 'N/A',
-      copyright: '',
-      supportWebsiteText: 'Support Website',
-      supportWebsite: '',
-      documentationUrl: '/support/index?support_tab=about',
+      version: `${applianceInfo.server_info.version}.${applianceInfo.server_info.build}`,
+      suiVersion,
+      serverName: applianceInfo.server_info.appliance,
+      userName: applianceInfo.identity.name,
+      userRole: applianceInfo.identity.role,
+      copyright: applianceInfo.product_info.copyright,
+      supportWebsiteText: applianceInfo.product_info.support_website_text,
+      supportWebsite: applianceInfo.product_info.support_website,
+      documentationUrl,
     };
   }
 );
