@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PrivateRoutes from './PrivateRoutes';
 import { LoginPage } from '../features/auth/components/LoginPage';
 import { DashboardPage } from '../features/dashboard/pages/DashboardPage';
-import { ProfilePage } from '../features/profile/pages/ProfilePage';
 
 function NotFoundPage() {
   return <div>Page not found</div>;
@@ -16,10 +15,6 @@ export const appRoutes = [
       {
         index: true,
         element: <DashboardPage />,
-      },
-      {
-        path: 'profile',
-        element: <ProfilePage />,
       },
     ],
   },

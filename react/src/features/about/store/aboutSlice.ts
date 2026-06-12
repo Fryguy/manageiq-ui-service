@@ -53,7 +53,7 @@ export const fetchAboutModalInfo = createAsyncThunk<AboutModalInfo>(
 );
 
 /**
- * Fetch application information (legacy - for AboutPage if still needed)
+ * Fetch application information for About modal
  */
 export const fetchAppInfo = createAsyncThunk(
   'about/fetchAppInfo',

@@ -145,9 +145,9 @@ export const logout = createAsyncThunk<void, void>(
   async () => {
     try {
       await authApi.logout();
-    } catch (error: unknown) {
+    } catch {
       // Even if logout API call fails, we still clear local session
-      console.error('Logout API call failed:', error);
+      // Silently handle the error as we'll clear the session anyway
     }
   }
 );
