@@ -311,16 +311,16 @@ cd react && yarn type-check
 - [x] Embed the language switcher as a dropdown within the user profile menu, matching the Angular-side behavior
 
 ### 5.3 About Experience Realignment
-- [ ] Remove the dedicated About page and route from the target UX
-- [ ] Replace the page-based implementation with an About modal aligned to the IBM product About modal pattern
-- [ ] Ensure the About modal content matches the Angular About modal content
-- [ ] Add a header action that opens the About modal using a question-mark-in-a-circle style help icon
+- [x] Remove the dedicated About page and route from the target UX
+- [x] Replace the page-based implementation with an About modal aligned to the IBM product About modal pattern
+- [x] Ensure the About modal content matches the Angular About modal content
+- [x] Add a header action that opens the About modal using a question-mark-in-a-circle style help icon
 
 ### 5.4 Documentation, Website, and Footer Consolidation
-- [ ] Move the Documentation link into the About modal
-- [ ] Move the website link into the About modal
-- [ ] Remove the footer from the target application shell
-- [ ] Verify the resulting shell remains consistent with Carbon and IBM product guidance
+- [x] Move the Documentation link into the About modal
+- [x] Move the website link into the About modal
+- [x] Remove the footer from the target application shell
+- [x] Verify the resulting shell remains consistent with Carbon and IBM product guidance
 
 ### 5.5 Dashboard Summary & Terminology Alignment
 - [ ] Align the dashboard service summary cards with the Angular dashboard categories: Retiring Soon, Current Services, Retired Services, and Monthly Charges - This Month To Date
