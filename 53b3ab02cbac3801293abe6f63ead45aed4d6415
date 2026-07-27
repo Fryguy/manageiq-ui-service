@@ -1,1 +1,10 @@
 {"id":"75c6ec76-6ebc-48e0-b110-b07cc8a70a26","ts":"2026-07-27T20:10:31.188Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/features/dashboard/store/dashboardSlice.ts","version":"1.0.0","taskID":"047e2f50-5560-4f62-bbb1-7f5c64702c55"}
+
+{"id":"1cd598ae-5a59-4c2f-9057-0cae8dc5ab75","ts":"2026-07-27T20:07:41.242Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/api/services.ts","version":"1.0.0","taskID":"047e2f50-5560-4f62-bbb1-7f5c64702c55"}
+{"id":"81f8a7a9-fa61-438c-9276-b3c78af81e2b","ts":"2026-07-27T20:07:46.182Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/api/services.ts","version":"1.0.0","taskID":"047e2f50-5560-4f62-bbb1-7f5c64702c55"}
+{"id":"e6a84b88-5111-44b6-b3fb-8453b312fc35","ts":"2026-07-27T20:08:02.933Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/utils/chargeback.ts","version":"1.0.0","taskID":"047e2f50-5560-4f62-bbb1-7f5c64702c55"}
+{"id":"441ba1bf-a490-4ddf-b68c-f785ad9a24a7","ts":"2026-07-27T20:08:23.414Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/utils/chargeback.test.ts","version":"1.0.0","taskID":"047e2f50-5560-4f62-bbb1-7f5c64702c55"}
+{"id":"1d0410fa-82a7-4675-9459-8b83000cba93","ts":"2026-07-27T20:08:30.657Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/features/dashboard/store/dashboardSlice.ts","version":"1.0.0","taskID":"047e2f50-5560-4f62-bbb1-7f5c64702c55"}
+{"id":"b884e676-ce9f-4c23-a99e-3469724427be","ts":"2026-07-27T20:08:37.781Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/features/dashboard/store/dashboardSlice.ts","version":"1.0.0","taskID":"047e2f50-5560-4f62-bbb1-7f5c64702c55"}
+{"id":"7f36a134-e22a-4305-8d8f-43419be70f22","ts":"2026-07-27T20:08:45.933Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/features/dashboard/store/dashboardSlice.ts","version":"1.0.0","taskID":"047e2f50-5560-4f62-bbb1-7f5c64702c55"}
+{"id":"ae6307a1-897d-49e2-a2c7-8aff66d87559","ts":"2026-07-27T20:09:06.321Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/utils/chargeback.ts","version":"1.0.0","taskID":"047e2f50-5560-4f62-bbb1-7f5c64702c55"}
