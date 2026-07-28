@@ -1,0 +1,4 @@
+{"id":"d68ac4c6-330e-4aa3-bcd9-ea5cb5a022c7","ts":"2026-07-28T13:24:43.090Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/api/catalogs.ts","version":"1.0.0","taskID":"e2931ab4-95aa-42cb-a5f1-fcca2185c1ff"}
+{"id":"904bd848-3f11-4d67-9f94-5b36b7e14fb6","ts":"2026-07-28T13:24:51.753Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/features/catalogs/store/catalogsSlice.ts","version":"1.0.0","taskID":"e2931ab4-95aa-42cb-a5f1-fcca2185c1ff"}
+{"id":"b6cb7666-a6ed-48a5-b72a-dd1263a6b7ba","ts":"2026-07-28T13:25:08.728Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/features/catalogs/components/ServiceTemplateCard.tsx","version":"1.0.0","taskID":"e2931ab4-95aa-42cb-a5f1-fcca2185c1ff"}
+{"id":"15ea5af9-3184-4058-9b14-87f8c0812c37","ts":"2026-07-28T13:25:15.037Z","path":"/Users/jfrey/dev/manageiq-ui-service/react/src/features/catalogs/components/ServiceTemplateCard.test.tsx","version":"1.0.0","taskID":"e2931ab4-95aa-42cb-a5f1-fcca2185c1ff"}
